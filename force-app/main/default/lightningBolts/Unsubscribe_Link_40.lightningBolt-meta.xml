@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningBolt xmlns="http://soap.sforce.com/2006/04/metadata">
+    <category>Nonprofits</category>
+    <lightningBoltFeatures>
+        <order>1</order>
+        <title>Unsubscribe Link</title>
+    </lightningBoltFeatures>
+    <lightningBoltImages>
+        <image>dog_wallpaper1</image>
+        <order>1</order>
+    </lightningBoltImages>
+    <lightningBoltItems>
+        <name>Unsubscribe_Link_4_0_020324</name>
+        <type>CommunityTemplateDefinition</type>
+    </lightningBoltItems>
+    <masterLabel>Unsubscribe Link 4.0</masterLabel>
+    <publisher>Jessie Rymph</publisher>
+    <summary>Unsubscribe Link from Salesforce Labs</summary>
+</LightningBolt>

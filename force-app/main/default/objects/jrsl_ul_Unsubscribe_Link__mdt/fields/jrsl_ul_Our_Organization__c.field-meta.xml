@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>jrsl_ul_Our_Organization__c</fullName>
+    <description>Fill in the text here to change the value of &quot;our organization&quot; in the Unsubscribe Link. If you do not provide a value, the default is &quot;our organization&quot; in the sentence &quot;Click here to unsubscribe from all emails from our organization.&quot;</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Text to replace &quot;our organization&quot; in unsubscribe link. Name of organization or department.</inlineHelpText>
+    <label>Our Organization</label>
+    <length>100</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
