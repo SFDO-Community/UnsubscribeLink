@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>End_with_a_slash</fullName>
+    <active>true</active>
+    <description>The url cannot start with HTML. it must end with a slash. It can be blank because of initial installation.</description>
+    <errorConditionFormula>IF(  
+							(NOT	(ISBLANK(	
+												jrsl_ul_Site_Domain__c
+								)
+			)	)
+&amp;&amp; (RIGHT(
+								    jrsl_ul_Site_Domain__c, 1
+				) 
+				!= &apos;/&apos;)
+							
+			
+				, TRUE,
+			false)</errorConditionFormula>
+    <errorMessage>The site domain must end with a / or be blank (for initial creation).</errorMessage>
+</ValidationRule>

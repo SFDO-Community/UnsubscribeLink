@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>how_to_start_the_site_domain</fullName>
+    <active>true</active>
+    <errorConditionFormula>LEFT(jrsl_ul_Site_Domain__c,7) = &apos;http://&apos;</errorConditionFormula>
+    <errorMessage>Do not include http:// at the beginning of the site domain</errorMessage>
+</ValidationRule>
