@@ -40,6 +40,22 @@
         <field>jrsl_ul_Unsubscribe__c.jrsl_ul_Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>jrsl_ul_Unsubscribe_Contacts</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>jrsl_ul_Unsubscribe_Leads</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>jrsl_ul_Unsubscribe_Link_Quick</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>jrsl_ul_recordIdBlankFlow</flow>
+    </flowAccesses>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Unsubscribe Link</label>
     <license>Salesforce</license>
