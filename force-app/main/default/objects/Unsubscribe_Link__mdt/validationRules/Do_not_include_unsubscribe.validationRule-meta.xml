@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Do_not_include_unsubscribe</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+				(RIGHT(Site_Domain__c, 12) = &apos;/Unsubscribe&apos;),
+				(RIGHT(Site_Domain__c, 12) = &apos;Unsubscribe/&apos;),
+				(RIGHT(Site_Domain__c, 12) = &apos;/unsubscribe&apos;),
+				(RIGHT(Site_Domain__c, 12) = &apos;unsubscribe/&apos;)
+				)</errorConditionFormula>
+    <errorMessage>The site domain should not end with the word unsubscribe or Unsubscribe/ or /Unsubscribe</errorMessage>
+</ValidationRule>

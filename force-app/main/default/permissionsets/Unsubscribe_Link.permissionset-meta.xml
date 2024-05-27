@@ -2,7 +2,7 @@
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <customMetadataTypeAccesses>
         <enabled>true</enabled>
-        <name>jrsl_ul_Unsubscribe_Link__mdt</name>
+        <name>Unsubscribe_Link__mdt</name>
     </customMetadataTypeAccesses>
     <description>Needed for Unsubscribe Link package</description>
     <fieldPermissions>
@@ -12,7 +12,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.jrsl_Unsubscribe_Link_Contact__c</field>
+        <field>Contact.Unsubscribe_Link_Contact__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -22,39 +22,39 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Lead.jrsl_ul_Unsubscribe_Link_Lead__c</field>
+        <field>Lead.Unsubscribe_Link_Lead__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>jrsl_ul_Unsubscribe__c.jrsl_ul_Contact__c</field>
+        <field>Unsubscribe__c.Contact__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>jrsl_ul_Unsubscribe__c.jrsl_ul_Lead__c</field>
+        <field>Unsubscribe__c.Lead__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>jrsl_ul_Unsubscribe__c.jrsl_ul_Status__c</field>
+        <field>Unsubscribe__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <flowAccesses>
         <enabled>true</enabled>
-        <flow>jrsl_ul_Unsubscribe_Contacts</flow>
+        <flow>Unsubscribe_Contacts</flow>
     </flowAccesses>
     <flowAccesses>
         <enabled>true</enabled>
-        <flow>jrsl_ul_Unsubscribe_Leads</flow>
+        <flow>Unsubscribe_Leads</flow>
     </flowAccesses>
     <flowAccesses>
         <enabled>true</enabled>
-        <flow>jrsl_ul_Unsubscribe_Link_Quick</flow>
+        <flow>Unsubscribe_Link_Quick</flow>
     </flowAccesses>
     <flowAccesses>
         <enabled>true</enabled>
-        <flow>jrsl_ul_recordIdBlankFlow</flow>
+        <flow>recordIdBlankFlow</flow>
     </flowAccesses>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Unsubscribe Link</label>
@@ -74,7 +74,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
-        <object>jrsl_ul_Unsubscribe__c</object>
+        <object>Unsubscribe__c</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
 </PermissionSet>

@@ -31,7 +31,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>flowName</name>
-                    <value>jrsl_ul_Unsubscribe_Link_Quick</value>
+                    <value>Unsubscribe_Link_Quick</value>
                 </componentInstanceProperties>
                 <componentName>forceCommunity:flowCommunity</componentName>
                 <identifier>forceCommunity_flowCommunity</identifier>

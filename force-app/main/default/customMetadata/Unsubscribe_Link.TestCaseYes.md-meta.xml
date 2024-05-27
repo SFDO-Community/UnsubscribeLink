@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>TestCaseYes</label>
+    <protected>false</protected>
+    <values>
+        <field>Test_Case__c</field>
+        <value xsi:type="xsd:string">Yes</value>
+    </values>
+    <values>
+        <field>Error_Email_Recipients__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>One_Click__c</field>
+        <value xsi:type="xsd:string">No</value>
+    </values>
+    <values>
+        <field>Our_Organization__c</field>
+        <value xsi:type="xsd:string">our organization</value>
+    </values>
+    <values>
+        <field>Send_Confirmation_Email__c</field>
+        <value xsi:type="xsd:string">No</value>
+    </values>
+    <values>
+        <field>Site_Domain__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>type_in_Unsubscribe__c</field>
+        <value xsi:type="xsd:string">No</value>
+    </values>
+</CustomMetadata>

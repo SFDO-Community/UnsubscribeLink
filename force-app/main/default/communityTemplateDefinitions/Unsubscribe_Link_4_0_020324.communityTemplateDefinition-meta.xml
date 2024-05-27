@@ -19,10 +19,6 @@
     <enableExtendedCleanUpOnDelete>true</enableExtendedCleanUpOnDelete>
     <masterLabel>Unsubscribe Link 4.0 020324</masterLabel>
     <pageSetting>
-        <page>Unsubscribe_Link_4_0_020324_Dog</page>
-        <themeLayout>Unsubscribe_Link_4_0_020324_themeLayout_Default</themeLayout>
-    </pageSetting>
-    <pageSetting>
         <page>Unsubscribe_Link_4_0_020324_Check_Password</page>
         <themeLayout>Unsubscribe_Link_4_0_020324_themeLayout_Login</themeLayout>
     </pageSetting>
