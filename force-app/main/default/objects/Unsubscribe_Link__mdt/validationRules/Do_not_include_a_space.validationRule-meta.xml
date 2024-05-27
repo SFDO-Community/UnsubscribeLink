@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Do_not_include_a_space</fullName>
+    <active>true</active>
+    <errorConditionFormula>CONTAINS( Site_Domain__c , &apos; &apos;)</errorConditionFormula>
+    <errorMessage>There is a space in your site domain. It is most likely between the end of the domain and the /. Please remove it.</errorMessage>
+</ValidationRule>

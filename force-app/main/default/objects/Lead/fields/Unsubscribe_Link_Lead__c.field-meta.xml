@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unsubscribe_Link_Lead__c</fullName>
+    <externalId>false</externalId>
+    <formula>/* This field comes with the unmanaged package &quot;Unsubscribe Link&quot; from the AppExchange.*/
+/* INSTRUCTIONS: For this formula to work, you need to create a record for the custom metadata type Unsubscribe Link */
+/* Fill in the field SiteDomain with the domain of your Salesforce Site used for this purpose. */
+/* You can optionally fill in the field Our Organization which will replace &quot;our organization&quot; in the formula results with the name of your org. */
+/*What the formula is doing:*//* Create a hyperlink of SiteDomain from the custom metadata record*/
+
+HYPERLINK((&quot;https://&quot;+$CustomMetadata.Unsubscribe_Link__mdt.Unsubscribe.Site_Domain__c
+
+/* append the experience site and the recordId*/
+
++&quot;Unsubscribe/s/unsubscribe?varRecId=&quot;+ CASESAFEID(Id)), &quot;Click here to unsubscribe from all email from &quot; +
+
+/* Look up the custom metadata type record to find a replacement for &quot;our organization&quot; if it exists.*/
+
+(IF(ISBLANK($CustomMetadata.Unsubscribe_Link__mdt.Unsubscribe.Our_Organization__c),&quot;our organization&quot;,$CustomMetadata.Unsubscribe_Link__mdt.Unsubscribe.Our_Organization__c) + &quot;.&quot;))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Unsubscribe Link Lead</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
