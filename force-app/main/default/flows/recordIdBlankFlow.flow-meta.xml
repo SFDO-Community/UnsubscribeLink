@@ -177,14 +177,6 @@
     <description>Part of Unsubscribe Link package from AppExchange 4/4</description>
     <environments>Default</environments>
     <formulas>
-        <description>the formula looks to see if the custom metadata type &quot;Unsubscribe Link&quot; has an alternative to &quot;our organization.&quot; If it does, then use that, otherwise use &quot;our organization.&quot; This is used on the &quot;are you sure screen&quot; and the confirmation email.
-
-IF(ISBLANK({!Get_custom_metadata.Our_Organization__c}),&quot;our organization&quot;,{!Get_custom_metadata.Our_Organization__c})</description>
-        <name>OurOrganizationFormula</name>
-        <dataType>String</dataType>
-        <expression>&quot;t&quot;</expression>
-    </formulas>
-    <formulas>
         <description>Formula resolves to Contact Id if the unsubscribe record is attached to a contact - the original record of the unsubscribe link was a contact.</description>
         <name>useContactId</name>
         <dataType>String</dataType>
@@ -287,7 +279,7 @@ This screen will appear if a matching record is not found in the database.</desc
         <name>Are_you_sure_0</name>
         <label>NoRecordsScreen</label>
         <locationX>642</locationX>
-        <locationY>172</locationY>
+        <locationY>171</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -296,7 +288,7 @@ This screen will appear if a matching record is not found in the database.</desc
         </connector>
         <fields>
             <name>confirmation_0</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: verdana; font-size: 18px;&quot;&gt;To unsubscribe from all further emails from {!ourOrganization}, enter your email address and click NEXT.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 18px; font-family: verdana; color: rgb(0, 0, 0);&quot;&gt;{!ourOrganization}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -383,32 +375,6 @@ This screen will appear if a matching record is not found in the database.</desc
         <isViewedAsPlainText>false</isViewedAsPlainText>
         <text>&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;Alert: there was an error in running the Flow Unsubscribe Link Blank or &lt;/span&gt;UnsubscribeLinkBlank.&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt; This flow is part of the unmanaged package Unsubscribe Link from the AppExchange.  https://wp.me/p9qPLI-eU.  &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;{!errorTextVar}&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;Here are the variables that were input from the link in the email. &lt;/span&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;recordId (the id passed in the URL)= {!recordId}, &lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;The email entered by the recipient was: {!Emailaddressscreen}.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;About this email: &lt;/strong&gt;&lt;/p&gt;&lt;p&gt;To modify this error email, open the Flow and edit the text template called &lt;strong&gt;errorBody&lt;/strong&gt;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;To modify who receives this email, open the custom metadata type called Unsubscribe Link and the record with Label of &quot;Unsubscribe.&quot; Change the value in &lt;strong&gt;Error Email Recipients. &lt;/strong&gt;&lt;/p&gt;</text>
     </textTemplates>
-    <textTemplates>
-        <description>This is the confirmation email that will be sent out after the flow runs if you have said yes you want a confirmation email in the custom metadata type called &quot;Unsubscribe Link.&quot;</description>
-        <name>RichTextEmailBody</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;You will no longer receive email from {!OurOrganizationFormula}.&lt;/p&gt;</text>
-    </textTemplates>
-    <variables>
-        <name>contactCollection</name>
-        <dataType>SObject</dataType>
-        <isCollection>true</isCollection>
-        <isInput>true</isInput>
-        <isOutput>true</isOutput>
-        <objectType>Contact</objectType>
-    </variables>
-    <variables>
-        <description>count1 if the record has already been through this part of the flow</description>
-        <name>countVar</name>
-        <dataType>Number</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <scale>0</scale>
-        <value>
-            <numberValue>0.0</numberValue>
-        </value>
-    </variables>
     <variables>
         <name>Email</name>
         <dataType>String</dataType>
@@ -464,42 +430,5 @@ This screen will appear if a matching record is not found in the database.</desc
         <isCollection>false</isCollection>
         <isInput>true</isInput>
         <isOutput>true</isOutput>
-    </variables>
-    <variables>
-        <description>collection of records updated in the process</description>
-        <name>RecordsUpdated</name>
-        <dataType>SObject</dataType>
-        <isCollection>true</isCollection>
-        <isInput>true</isInput>
-        <isOutput>true</isOutput>
-        <objectType>Contact</objectType>
-    </variables>
-    <variables>
-        <name>redirect</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>true</isOutput>
-        <value>
-            <stringValue>redirect</stringValue>
-        </value>
-    </variables>
-    <variables>
-        <description>Unsubscribe record variable to send to subflows.</description>
-        <name>UnsubscribeId</name>
-        <dataType>SObject</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>true</isOutput>
-        <objectType>Unsubscribe__c</objectType>
-    </variables>
-    <variables>
-        <description>custom metadata type record &quot;Unsubscribe Link&quot;</description>
-        <name>varOurOrganization</name>
-        <dataType>SObject</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <objectType>Unsubscribe_Link__mdt</objectType>
     </variables>
 </Flow>

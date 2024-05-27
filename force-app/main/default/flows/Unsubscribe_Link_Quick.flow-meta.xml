@@ -218,7 +218,7 @@
     </decisions>
     <decisions>
         <name>Quick_UnsubscribeDecision</name>
-        <label>Quick Unsubscrie</label>
+        <label>Quick Unsubscribe</label>
         <locationX>589</locationX>
         <locationY>929</locationY>
         <defaultConnector>
@@ -334,12 +334,6 @@
         <name>UseLeadId</name>
         <dataType>String</dataType>
         <expression>IF(BEGINS({!FoundId},&quot;00Q&quot;),{!FoundId},&quot;&quot;)</expression>
-    </formulas>
-    <formulas>
-        <description>18 digit id of the record. The email template only sends the 15 digit id.</description>
-        <name>x18DigitID</name>
-        <dataType>String</dataType>
-        <expression>Casesafeid({!varRecId})</expression>
     </formulas>
     <interviewLabel>Unsubscribe Link Quick {!$Flow.CurrentDateTime}</interviewLabel>
     <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
@@ -498,7 +492,7 @@
         </connector>
         <fields>
             <name>confirmation</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: verdana; font-size: 18px;&quot;&gt;To unsubscribe {!Email} from all further emails from {!OurOrganizationFormula}, click NEXT.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 18px;&quot;&gt;{!Get_custom_metadata.Screen_1_Part_1__c} {!Email} {!Get_custom_metadata.Screen_1_Part_2__c}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -507,14 +501,14 @@
     <screens>
         <name>screenConfirmationEmail</name>
         <label>screenConfirmationEmail</label>
-        <locationX>1946</locationX>
+        <locationX>1945</locationX>
         <locationY>1342</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>confirmationScreen</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;font-family: verdana; font-size: 18px;&quot;&gt;You have successfully unsubscribed from all email from {!OurOrganizationFormula}. You will receive a confirmation email shortly.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;{!Get_custom_metadata.Screen_2_Part_1__c} {!Get_custom_metadata.Screen_2_Part_2__c}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>false</showFooter>
@@ -530,7 +524,7 @@
         <allowPause>true</allowPause>
         <fields>
             <name>confirmationScreenNoEmail</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;font-family: verdana; font-size: 18px;&quot;&gt;You have successfully unsubscribed from all email from {!OurOrganizationFormula}.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;{!Get_custom_metadata.Screen_2_Part_1__c}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>false</showFooter>
@@ -604,7 +598,7 @@
         <inputAssignments>
             <name>ourOrganization</name>
             <value>
-                <elementReference>OurOrganizationFormula</elementReference>
+                <elementReference>Get_custom_metadata.Screen_3__c</elementReference>
             </value>
         </inputAssignments>
         <outputAssignments>
@@ -697,7 +691,7 @@
         <description>This is the confirmation email that will be sent out after the flow runs if you have said yes you want a confirmation email in the custom metadata type called &quot;Unsubscribe Link.&quot; This email is for people who updated their campaign preferences.</description>
         <name>UnsubscribeEmail</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;You have successfully unsubscribed from all email from {!OurOrganizationFormula}.&lt;/p&gt;</text>
+        <text>&lt;p&gt;{!Get_custom_metadata.Confirmation_Email__c}&lt;/p&gt;</text>
     </textTemplates>
     <variables>
         <name>contactCollection</name>
@@ -768,14 +762,6 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <description>id of the lead record from the unsubscribe link</description>
-        <name>LeadID</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>true</isOutput>
-    </variables>
-    <variables>
         <description>Lead list size</description>
         <name>lListsize</name>
         <dataType>Number</dataType>
@@ -808,23 +794,6 @@
         <isInput>true</isInput>
         <isOutput>true</isOutput>
         <objectType>Contact</objectType>
-    </variables>
-    <variables>
-        <name>redirect</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>true</isOutput>
-        <value>
-            <stringValue>redirect</stringValue>
-        </value>
-    </variables>
-    <variables>
-        <name>unsubscribeAllBoolean</name>
-        <dataType>Boolean</dataType>
-        <isCollection>false</isCollection>
-        <isInput>true</isInput>
-        <isOutput>false</isOutput>
     </variables>
     <variables>
         <description>Unsubscribe record variable to send to subflows.</description>
