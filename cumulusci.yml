@@ -1,0 +1,25 @@
+minimum_cumulusci_version: '3.86.1'
+project:
+    name: Unsubscribe-Link
+    package:
+        name: Unsubscribe-Link@
+        api_version: '60.0'
+    git:
+        default_branch: 'main'
+    source_format: sfdx
+
+tasks:
+    robot:
+        options:
+            suites: robot/Unsubscribe-Link/tests
+            options:
+                outputdir: robot/Unsubscribe-Link/results
+
+    robot_testdoc:
+        options:
+            path: robot/Unsubscribe-Link/tests
+            output: robot/Unsubscribe-Link/doc/Unsubscribe-Link_tests.html
+
+    run_tests:
+        options:
+            required_org_code_coverage_percent: 75
