@@ -3,8 +3,8 @@
     <label>TestCaseNone</label>
     <protected>false</protected>
     <values>
-        <field>Test_Case__c</field>
-        <value xsi:type="xsd:string">None</value>
+        <field>Confirmation_Email__c</field>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Error_Email_Recipients__c</field>
@@ -19,12 +19,36 @@
         <value xsi:type="xsd:string">our organization</value>
     </values>
     <values>
+        <field>Screen_1_Part_1__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Screen_1_Part_2__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Screen_2_Part_1__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Screen_2_Part_2__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Screen_3__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Send_Confirmation_Email__c</field>
         <value xsi:type="xsd:string">Yes</value>
     </values>
     <values>
         <field>Site_Domain__c</field>
         <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Test_Case__c</field>
+        <value xsi:type="xsd:string">None</value>
     </values>
     <values>
         <field>type_in_Unsubscribe__c</field>
