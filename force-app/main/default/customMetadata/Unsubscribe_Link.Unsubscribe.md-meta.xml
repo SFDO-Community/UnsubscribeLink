@@ -3,8 +3,8 @@
     <label>Unsubscribe</label>
     <protected>false</protected>
     <values>
-        <field>Test_Case__c</field>
-        <value xsi:nil="true"/>
+        <field>Confirmation_Email__c</field>
+        <value xsi:type="xsd:string">You have successfully unsubscribed from all email from our organization.</value>
     </values>
     <values>
         <field>Error_Email_Recipients__c</field>
@@ -12,11 +12,31 @@
     </values>
     <values>
         <field>One_Click__c</field>
-        <value xsi:type="xsd:string">Yes</value>
+        <value xsi:type="xsd:string">No</value>
     </values>
     <values>
         <field>Our_Organization__c</field>
         <value xsi:type="xsd:string">our organization</value>
+    </values>
+    <values>
+        <field>Screen_1_Part_1__c</field>
+        <value xsi:type="xsd:string">To unsubscribe</value>
+    </values>
+    <values>
+        <field>Screen_1_Part_2__c</field>
+        <value xsi:type="xsd:string">from all emails from our organization, click NEXT.</value>
+    </values>
+    <values>
+        <field>Screen_2_Part_1__c</field>
+        <value xsi:type="xsd:string">You have successfully unsubscribed from all email from our organization.</value>
+    </values>
+    <values>
+        <field>Screen_2_Part_2__c</field>
+        <value xsi:type="xsd:string">You will receive a confirmation email shortly.</value>
+    </values>
+    <values>
+        <field>Screen_3__c</field>
+        <value xsi:type="xsd:string">To unsubscribe from all further emails from our organization, enter your email address and click NEXT.</value>
     </values>
     <values>
         <field>Send_Confirmation_Email__c</field>
@@ -27,7 +47,11 @@
         <value xsi:nil="true"/>
     </values>
     <values>
-        <field>type_in_Unsubscribe__c</field>
+        <field>Test_Case__c</field>
         <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>type_in_Unsubscribe__c</field>
+        <value xsi:type="xsd:string">Yes</value>
     </values>
 </CustomMetadata>
