@@ -1,15 +1,15 @@
 //Test by Jessie Rymph included with unmanaged package Unsubscribe Link from AppExchange & Salesforce Labs.
-//February 2024
+//May 2024
     //test the Unsubscribe Lead flow that looks for all leads with an email address
     //and marks them Email Opt Out = true
     //How it actually works: Screen flow Unsubscribe Link launches the subflow, Unsubscribe Lead
     //Params passed: Email
     
 @istest
-public without sharing class UnsubscribeLeadsTest {
+global without sharing class UnsubscribeLeadsTest {
 
     
-    @isTest public static void testUnsubscribeLeadsFlow(){
+    @isTest global static void testUnsubscribeLeadsFlow(){
         //create Test Data
         String emailAdd = 'mfm@exactlyright.com';
         Lead karen = new Lead (LastName='Kilgarriff', Email= emailAdd, Company = 'Exactly Right');

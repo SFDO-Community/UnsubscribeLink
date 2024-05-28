@@ -1,14 +1,14 @@
 //Test by Jessie Rymph included with unmanaged package Unsubscribe Link from AppExchange & Salesforce Labs.
-//April 14, 2021
+//May 28, 2024
 //test the Unsubscribe Contacts flow that looks for all contacts with an email address
 //and marks them Email Opt Out = true
-//How it actually works: Screen flow Unsubscribe Link launches the subflow, Unsubscribe Contacts.
+//How it actually works: Screen flow Unsubscribe Link Quick launches the subflow, Unsubscribe Contacts.
 //Params passed: Email 
 
 @isTest
-public without sharing class UnsubscribeContactsTest {
+global without sharing class UnsubscribeContactsTest {
     
-    @isTest public static void testUnsubscribeContactsFlow(){
+    @isTest global static void testUnsubscribeContactsFlow(){
         //create Test Data
         String emailAdd = 'waitwait@npr.org';
         Account newA = new Account (Name= 'NPR.org');
@@ -40,7 +40,7 @@ public without sharing class UnsubscribeContactsTest {
         system.debug('list:' + contacts);
     }
     
-    @IsTest public static void UnsubscribeContactsBulkTest (){
+    @IsTest global static void UnsubscribeContactsBulkTest (){
         String emailAdd = 'waitwait@npr.org';
         Account newA = new Account (Name= 'NPR.org');
         insert newA;
