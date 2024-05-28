@@ -1,9 +1,9 @@
 //test by Jessie Rymph included with unmanaged package Unsubscribe Link from AppExchange & Salesforce Labs.
-// February 2024
+// May 2024
 @isTest
-public class UnsubscribeLinkTest {
+global class UnsubscribeLinkTest {
     
-    @isTest public static void findUnsubscribeRecord () {
+    @isTest global static void findUnsubscribeRecord () {
         //Look for Unsubscribe record. 
         //it exists. yay!
         
