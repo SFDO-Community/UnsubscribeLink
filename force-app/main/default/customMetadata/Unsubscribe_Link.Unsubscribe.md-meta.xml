@@ -11,6 +11,10 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>Link_Text__c</field>
+        <value xsi:type="xsd:string">Unsubscribe all</value>
+    </values>
+    <values>
         <field>One_Click__c</field>
         <value xsi:type="xsd:string">No</value>
     </values>
