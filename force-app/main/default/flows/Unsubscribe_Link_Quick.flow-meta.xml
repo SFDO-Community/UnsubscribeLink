@@ -4,8 +4,8 @@
         <description>Alert the person that they unsubscribed. Turn this off in the custom metadata type Unsubscribe Link.</description>
         <name>ConfirmationEmail</name>
         <label>ConfirmationEmail</label>
-        <locationX>1840</locationX>
-        <locationY>1136</locationY>
+        <locationX>314</locationX>
+        <locationY>1538</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
@@ -45,11 +45,12 @@
     <actionCalls>
         <name>Send_Error_Alert_Email_0</name>
         <label>Send Error Alert Email</label>
-        <locationX>1347</locationX>
-        <locationY>662</locationY>
+        <locationX>578</locationX>
+        <locationY>1754</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
+            <isGoTo>true</isGoTo>
             <targetReference>Something_went_wrong_0_0_0</targetReference>
         </connector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -85,8 +86,8 @@
         <description>Assign value to error message that is emailed to the error email recipient.</description>
         <name>ErrorMessageAssignment1</name>
         <label>No Record Found</label>
-        <locationX>968</locationX>
-        <locationY>607</locationY>
+        <locationX>1634</locationX>
+        <locationY>806</locationY>
         <assignmentItems>
             <assignToReference>errorTextVar</assignToReference>
             <operator>Assign</operator>
@@ -95,6 +96,7 @@
             </value>
         </assignmentItems>
         <connector>
+            <isGoTo>true</isGoTo>
             <targetReference>Something_went_wrong_0_0_0</targetReference>
         </connector>
     </assignments>
@@ -102,8 +104,8 @@
         <description>Assign value to error message that is emailed to the error email recipient.</description>
         <name>ErrorMessageAssignment1_0</name>
         <label>No Record Found</label>
-        <locationX>1161</locationX>
-        <locationY>402</locationY>
+        <locationX>50</locationX>
+        <locationY>458</locationY>
         <assignmentItems>
             <assignToReference>errorTextVar</assignToReference>
             <operator>Assign</operator>
@@ -119,8 +121,8 @@
         <description>Assign value to error message that is emailed to the error email recipient.</description>
         <name>ErrorMessageAssignment1_0_0_0</name>
         <label>Cannot create unsubscribe</label>
-        <locationX>1144</locationX>
-        <locationY>840</locationY>
+        <locationX>1106</locationX>
+        <locationY>1214</locationY>
         <assignmentItems>
             <assignToReference>errorTextVar</assignToReference>
             <operator>Assign</operator>
@@ -129,6 +131,7 @@
             </value>
         </assignmentItems>
         <connector>
+            <isGoTo>true</isGoTo>
             <targetReference>Send_Error_Alert_Email_0</targetReference>
         </connector>
     </assignments>
@@ -136,8 +139,8 @@
         <description>Assign value to error message that is emailed to the error email recipient.</description>
         <name>ErrorMessageAssignment1_0_0_0_0</name>
         <label>Cannot send confirmation email</label>
-        <locationX>1709</locationX>
-        <locationY>809</locationY>
+        <locationX>578</locationX>
+        <locationY>1646</locationY>
         <assignmentItems>
             <assignToReference>errorTextVar</assignToReference>
             <operator>Assign</operator>
@@ -153,8 +156,8 @@
         <description>Can we find the unsubscribe custom metadata type?</description>
         <name>CMDT_Record_Found</name>
         <label>CMDT Record Found</label>
-        <locationX>981</locationX>
-        <locationY>297</locationY>
+        <locationX>578</locationX>
+        <locationY>242</locationY>
         <defaultConnector>
             <targetReference>Contact_or_Lead</targetReference>
         </defaultConnector>
@@ -176,12 +179,13 @@
         </rules>
     </decisions>
     <decisions>
-        <description>Was the original email with an unsubscribe link sent from a contact or a lead?</description>
+        <description>Was the original email with an unsubscribe link sent to a contact or a lead record? The Unsubscribe Link contains the record id. We need to find whether it is a contact or lead so that the Unsubscribe Record can be properly linked to the record.</description>
         <name>Contact_or_Lead</name>
         <label>Contact or Lead</label>
-        <locationX>930</locationX>
-        <locationY>455</locationY>
+        <locationX>1106</locationX>
+        <locationY>350</locationY>
         <defaultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Blank_Values_Flow</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>No Record Found</defaultConnectorLabel>
@@ -219,8 +223,8 @@
     <decisions>
         <name>Quick_UnsubscribeDecision</name>
         <label>Quick Unsubscribe</label>
-        <locationX>589</locationX>
-        <locationY>929</locationY>
+        <locationX>578</locationX>
+        <locationY>806</locationY>
         <defaultConnector>
             <targetReference>Are_you_sure</targetReference>
         </defaultConnector>
@@ -245,8 +249,8 @@
         <description>The custom metadata type stores the yes/no answer to whether or not you want an email sent to confirm that the person unsubscribed.</description>
         <name>Send_Confirmation_Email</name>
         <label>Send Confirmation Email</label>
-        <locationX>1510</locationX>
-        <locationY>1027</locationY>
+        <locationX>578</locationX>
+        <locationY>1430</locationY>
         <defaultConnector>
             <targetReference>screenConfirmationNoEmail</targetReference>
         </defaultConnector>
@@ -268,11 +272,12 @@
         </rules>
     </decisions>
     <decisions>
-        <description>Was a record found that is either a lead or a contact? If so proceed to the next screen. If not, launch a subflow in which the recipient can enter their email address.</description>
+        <description>Was a record found that is either a lead or a contact? If so proceed to the next screen. 
+If not, check if the custom metadata type allows the user to type in their email address.</description>
         <name>Was_a_Record_Found</name>
         <label>Was a Record Found</label>
-        <locationX>224</locationX>
-        <locationY>494</locationY>
+        <locationX>1106</locationX>
+        <locationY>698</locationY>
         <defaultConnector>
             <targetReference>ErrorMessageAssignment1</targetReference>
         </defaultConnector>
@@ -347,7 +352,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
@@ -355,8 +360,8 @@
         <description>Create Unsubscribe record which stores details of this transaction.</description>
         <name>Create_Unsubscribe_Record</name>
         <label>Create Unsubscribe Record</label>
-        <locationX>982</locationX>
-        <locationY>1022</locationY>
+        <locationX>578</locationX>
+        <locationY>1106</locationY>
         <assignRecordIdToReference>UnsubscribeId.Id</assignRecordIdToReference>
         <connector>
             <targetReference>Unsubscribe_Contacts</targetReference>
@@ -391,16 +396,17 @@
         <object>Unsubscribe__c</object>
     </recordCreates>
     <recordLookups>
-        <description>Look for a contact record with ID and email address from the URL of the unsubscribe link.</description>
+        <description>Look for a contact record with ID passed into the flow. Assign the email address to an email variable and the ID to a text variable called FoundId that is passed to other flows.</description>
         <name>Get_Contact</name>
         <label>Get Contact</label>
-        <locationX>498</locationX>
-        <locationY>210</locationY>
+        <locationX>578</locationX>
+        <locationY>458</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Was_a_Record_Found</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>ErrorMessageAssignment1</targetReference>
         </faultConnector>
         <filterLogic>or</filterLogic>
@@ -422,16 +428,23 @@
         </outputAssignments>
     </recordLookups>
     <recordLookups>
-        <description>Get Unsubscribe Link custom metadata type. This object stores the name of the organization and a list of email addresses that should be alerted of errors in the flow.</description>
+        <description>Get Unsubscribe Link custom metadata type. This object stores many settings used throughout the Flow: 
+send confirmation email, 
+email error recipient (person who gets emailed when there is an error), 
+type-in email address, 
+1 click opt out,
+text used in the screens.
+Find only the one called Unsubscribe. The other custom metadata types are for testing.</description>
         <name>Get_custom_metadata</name>
         <label>Get custom metadata</label>
-        <locationX>851</locationX>
-        <locationY>253</locationY>
+        <locationX>578</locationX>
+        <locationY>134</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>CMDT_Record_Found</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Something_went_wrong_0_0_0_0</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -447,16 +460,17 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <description>Look for a lead record with ID and email address from the URL of the unsubscribe link.</description>
+        <description>Look for a lead record with ID passed into the flow. Assign the email address to an email variable and the ID to a text variable called FoundId that is passed to other flows.</description>
         <name>Get_Lead</name>
         <label>Get Lead</label>
-        <locationX>233</locationX>
-        <locationY>317</locationY>
+        <locationX>1106</locationX>
+        <locationY>458</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Was_a_Record_Found</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>ErrorMessageAssignment1</targetReference>
         </faultConnector>
         <filterLogic>or</filterLogic>
@@ -482,8 +496,8 @@
         <description>confirmation screen for person to confirm they want to unsubscribe. Update &quot;our organization&quot; in the custom metadata type &quot;Unsubscribe Link.&quot;</description>
         <name>Are_you_sure</name>
         <label>Are you sure</label>
-        <locationX>867</locationX>
-        <locationY>824</locationY>
+        <locationX>666</locationX>
+        <locationY>914</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -501,8 +515,8 @@
     <screens>
         <name>screenConfirmationEmail</name>
         <label>screenConfirmationEmail</label>
-        <locationX>1945</locationX>
-        <locationY>1342</locationY>
+        <locationX>314</locationX>
+        <locationY>1646</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -517,8 +531,8 @@
     <screens>
         <name>screenConfirmationNoEmail</name>
         <label>screenConfirmationNoEmail</label>
-        <locationX>1595</locationX>
-        <locationY>1333</locationY>
+        <locationX>842</locationX>
+        <locationY>1538</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -534,8 +548,8 @@
         <description>Generic error message</description>
         <name>Something_went_wrong_0_0_0</name>
         <label>Generic Error Message</label>
-        <locationX>1506</locationX>
-        <locationY>409</locationY>
+        <locationX>50</locationX>
+        <locationY>566</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -550,8 +564,8 @@
     <screens>
         <name>Something_went_wrong_0_0_0_0</name>
         <label>No CMDT Found</label>
-        <locationX>1193</locationX>
-        <locationY>248</locationY>
+        <locationX>50</locationX>
+        <locationY>350</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -560,15 +574,15 @@
         </connector>
         <fields>
             <name>wentwrong_0_0_0_0</name>
-            <fieldText>&lt;p&gt;Sorry, but we were not able to unsubscribe you at this time, but we have been alerted about the problem.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 8px;&quot;&gt;Error Message: No custom metadata type of Unsubscribe Link with MasterLabel of &quot;Unsubscribe&quot; found.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Sorry, but we were not able to unsubscribe you at this time, but we have been alerted about the problem.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>684</locationX>
-        <locationY>50</locationY>
+        <locationX>452</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_custom_metadata</targetReference>
         </connector>
@@ -577,9 +591,10 @@
     <subflows>
         <name>Blank_Values_Flow</name>
         <label>Blank Values Flow</label>
-        <locationX>194</locationX>
+        <locationX>1370</locationX>
         <locationY>806</locationY>
         <connector>
+            <isGoTo>true</isGoTo>
             <targetReference>Quick_UnsubscribeDecision</targetReference>
         </connector>
         <flowName>recordIdBlankFlow</flowName>
@@ -614,8 +629,8 @@
         <description>Launch this additional flow to find all contacts who have this email address and mark them as email opt out.</description>
         <name>Unsubscribe_Contacts</name>
         <label>Unsubscribe Contacts</label>
-        <locationX>1106</locationX>
-        <locationY>1022</locationY>
+        <locationX>578</locationX>
+        <locationY>1214</locationY>
         <connector>
             <targetReference>Unsubscribe_Leads</targetReference>
         </connector>
@@ -647,8 +662,8 @@
         <description>Part of the unmanaged packed Unsubscribe Link from Salesforce Labs and loops through all leads with a particular email address to mark them as email opt out. This flow is launched by the flow Unsubscribe Link.</description>
         <name>Unsubscribe_Leads</name>
         <label>Unsubscribe Leads</label>
-        <locationX>1269</locationX>
-        <locationY>932</locationY>
+        <locationX>578</locationX>
+        <locationY>1322</locationY>
         <connector>
             <targetReference>Send_Confirmation_Email</targetReference>
         </connector>
