@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Unsubscribe_Link_Contact__c</fullName>
+    <description>Insert this link into emails to allow contacts to unsubscribe from emails sent from Salesforce. This will work if you have followed the instructions for the Unsubscribe link app. Modify the text of the link in the Custom Metadata type Unsubscribe Link, the record called Unsubscribe, the field Link Text.</description>
     <externalId>false</externalId>
-    <formula>/* This field comes with the unmanaged package &quot;Unsubscribe Link&quot; from the AppExchange.*/
-/* INSTRUCTIONS: For this formula to work, you need to modify the Unsubscribe record for the custom metadata type Unsubscribe Link */
-/* You can optionally fill in the field Our Organization which will replace &quot;our organization&quot; in the formula results with the name of your org. */
-/*What the formula is doing:*//* Create a hyperlink of Experience SiteDomain from the custom metadata record*/
-
+    <formula>/* Get the link of the Unsubscribe Experience Site */
 HYPERLINK((&quot;https://&quot;+$CustomMetadata.Unsubscribe_Link__mdt.Unsubscribe.Site_Domain__c
 
 /* append the recordId of this record */
 
-+&quot;Unsubscribe/s/unsubscribe?varRecId=&quot;+ CASESAFEID(Id)), &quot;Click here to unsubscribe from all email from &quot; +
++&quot;Unsubscribe/s/unsubscribe?varRecId=&quot;+ CASESAFEID(Id)), 
 
-/* Look up the custom metadata type record to find a replacement for &quot;our organization&quot; if it exists.*/
+/* Look up the custom metadata type record to find the text for the link.*/
+$CustomMetadata.Unsubscribe_Link__mdt.Unsubscribe.Link_Text__c
 
-(IF(ISBLANK($CustomMetadata.Unsubscribe_Link__mdt.Unsubscribe.Our_Organization__c),&quot;our organization&quot;,$CustomMetadata.Unsubscribe_Link__mdt.Unsubscribe.Our_Organization__c) + &quot;.&quot;))</formula>
+ + &quot;.&quot;)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Unsubscribe Link Contact</label>
     <required>false</required>
