@@ -19,6 +19,10 @@
         <value xsi:type="xsd:string">No</value>
     </values>
     <values>
+        <field>Org_Wide_Email_Address__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Our_Organization__c</field>
         <value xsi:type="xsd:string">our organization</value>
     </values>
