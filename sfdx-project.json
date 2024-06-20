@@ -2,11 +2,18 @@
   "packageDirectories": [
     {
       "path": "force-app",
-      "default": true
+      "package": "Unsubscribe Link",
+      "versionName": "ver 0.1.NEXT",
+      "versionNumber": "0.1.0.NEXT",
+      "default": true,
+      "versionDescription": ""
     }
   ],
   "name": "unsubscribe",
-  "namespace": "",
+  "namespace": "UnsubscribeLnk",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "59.0"
+  "sourceApiVersion": "59.0",
+  "packageAliases": {
+    "Unsubscribe Link": "0Hoaj00000008FJCAY"
+  }
 }

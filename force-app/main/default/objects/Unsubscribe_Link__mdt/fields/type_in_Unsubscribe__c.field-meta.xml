@@ -4,7 +4,7 @@
     <defaultValue>&quot;No&quot;</defaultValue>
     <description>Allow email recipients to unsubscribe by typing in their email address if their recordId is not populated automatically.</description>
     <externalId>false</externalId>
-    <fieldManageability>DeveloperControlled</fieldManageability>
+    <fieldManageability>SubscriberControlled</fieldManageability>
     <inlineHelpText>Allow email recipients to unsubscribe by typing in their email address if their recordId is not populated automatically.</inlineHelpText>
     <label>Enable Type-in Email Address</label>
     <required>false</required>
