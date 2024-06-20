@@ -3,7 +3,7 @@
     <fullName>Error_Email_Recipients__c</fullName>
     <description>Make a comma separated list of email addresses who should receive Error Messages from the Unsubscribe Link App, unmanaged package from AppExchange</description>
     <externalId>false</externalId>
-    <fieldManageability>DeveloperControlled</fieldManageability>
+    <fieldManageability>SubscriberControlled</fieldManageability>
     <inlineHelpText>comma separated email list.</inlineHelpText>
     <label>Error Email Recipients</label>
     <length>100</length>

@@ -4,7 +4,7 @@
     <defaultValue>&quot;Yes&quot;</defaultValue>
     <description>Do you want to send an email to the person who unsubscribed to confirm that they opted out?</description>
     <externalId>false</externalId>
-    <fieldManageability>DeveloperControlled</fieldManageability>
+    <fieldManageability>SubscriberControlled</fieldManageability>
     <inlineHelpText>Do you want to send an email to the person who unsubscribed to confirm that they opted out?</inlineHelpText>
     <label>Send Confirmation Email</label>
     <required>false</required>
