@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Test_Case__c</fullName>
     <externalId>false</externalId>
-    <fieldManageability>SubscriberControlled</fieldManageability>
+    <fieldManageability>DeveloperControlled</fieldManageability>
     <label>Test Case</label>
     <required>false</required>
     <type>Picklist</type>

@@ -13,5 +13,5 @@
       "files": "*.{cmp,page,component}",
       "options": { "parser": "html" }
     }
-  ]
-}
+  ],
+   "files": "*.{trigger,cls}", "options": { "parser": "apex-anonymous"} }
