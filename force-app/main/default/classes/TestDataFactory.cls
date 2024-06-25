@@ -61,7 +61,7 @@ public without sharing class TestDataFactory {
     }
   }
 
-  public static void create3Contacts() {
+  public static void createContacts() {
     String emailAdd = 'waitwait@npr.org';
     Account newA = new Account(Name = 'NPR.org');
     Account newB = new Account(Name = 'KUOW.org');
@@ -88,7 +88,7 @@ public without sharing class TestDataFactory {
     insert newContacts;
   }
 
-  /*public static void createBulkContacts() {
+  public static void createBulkContacts() {
     String emailAdd = 'waitwait@npr.org';
     Account newA = new Account(Name = 'NPR.org');
     insert newA;
@@ -103,5 +103,18 @@ public without sharing class TestDataFactory {
     }
     insert cons;
   }
-    */
+
+  public static void createBulkLeads() {
+    String emailAdd = 'waitwait@npr.org';
+    List<Lead> leads = new List<Lead>();
+    for (Integer i = 0; i < 200; i++) {
+      Lead l = new Lead(
+        LastName = 'Lead ' + i,
+        Email = emailadd,
+        Company = 'Top Pot Donuts'
+      );
+      leads.add(l);
+    }
+    insert leads;
+  }
 }
