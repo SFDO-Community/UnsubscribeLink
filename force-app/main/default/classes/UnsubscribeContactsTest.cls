@@ -3,7 +3,6 @@
 //test the Unsubscribe Contacts flow that looks for all contacts with an email address
 //and marks them Email Opt Out = true
 //How it actually works: Screen flow Unsubscribe Link Quick launches the subflow, Unsubscribe Contacts.
-//Params passed: Email
 
 @istest
 public without sharing class UnsubscribeContactsTest {
