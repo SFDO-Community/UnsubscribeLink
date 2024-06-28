@@ -1,3 +1,5 @@
+// This is currently only working for passing the organization name. it fails when passing all the variables. so something is breaking.
+//the flow is bypassing most of it to just pass the variables.
 public class unsubscribeInvocableMethod {
   //primary source https://www.biswajeetsamal.com/blog/create-or-update-custom-metadata-type-using-apex/
 
@@ -12,10 +14,11 @@ public class unsubscribeInvocableMethod {
   //the type of variable being passed is a record variable of a custom metadatatype
   public static void Unsubscribe(List<Unsubscribe_Link__mdt> recordPassed) {
     //declare a new map
+    system.debug(recordPassed);
 
     Map<String, Object> metadataFieldValueMap = new Map<String, Object>();
     //add values to the map of Field Name on CMT and value passed in from the Flow
-    metadataFieldValueMap.put(
+    /* metadataFieldValueMap.put(
       'Send_Confirmation_Email__c',
       recordPassed[0].Send_Confirmation_Email__c
     );
@@ -36,10 +39,12 @@ public class unsubscribeInvocableMethod {
       'Org_Wide_Email_Address__c',
       recordPassed[0].Org_Wide_Email_Address__c
     );
+    */
     metadataFieldValueMap.put(
       'Our_Organization__c',
       recordPassed[0].Our_Organization__c
     );
+    /*
     metadataFieldValueMap.put(
       'Screen_1_Part_1__c',
       recordPassed[0].Screen_1_Part_1__c
@@ -62,7 +67,8 @@ public class unsubscribeInvocableMethod {
       'Site_Domain__c',
       URL.getOrgDomainUrl().toExternalForm()
     );
-    /*      metadataFieldValueMap.put('Site_Domain__c', recordPassed[0].Site_Domain__c);
+    
+         metadataFieldValueMap.put('Site_Domain__c', recordPassed[0].Site_Domain__c);
             metadataFieldValueMap.put('type_in_Unsubscribe__c', recordPassed[0].type_in_Unsubscribe__c);
             metadataFieldValueMap.put('Error_Email_Recipients__c', recordPassed[0].Error_Email_Recipients__c);
             
