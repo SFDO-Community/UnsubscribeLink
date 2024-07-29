@@ -1,5 +1,4 @@
-// This is currently only working for passing the organization name. it fails when passing all the variables. so something is breaking.
-//the flow is bypassing most of it to just pass the variables.
+// This is currently working for org name and screen1part1. Keep adding in additional variables and seeing if it works.
 public class unsubscribeInvocableMethod {
   //primary source https://www.biswajeetsamal.com/blog/create-or-update-custom-metadata-type-using-apex/
 
@@ -18,10 +17,12 @@ public class unsubscribeInvocableMethod {
 
     Map<String, Object> metadataFieldValueMap = new Map<String, Object>();
     //add values to the map of Field Name on CMT and value passed in from the Flow
-    /* metadataFieldValueMap.put(
+    /*
+     metadataFieldValueMap.put(
       'Send_Confirmation_Email__c',
       recordPassed[0].Send_Confirmation_Email__c
     );
+    
     metadataFieldValueMap.put(
       'Confirmation_Email__c',
       recordPassed[0].Confirmation_Email__c
@@ -44,11 +45,12 @@ public class unsubscribeInvocableMethod {
       'Our_Organization__c',
       recordPassed[0].Our_Organization__c
     );
-    /*
+
     metadataFieldValueMap.put(
       'Screen_1_Part_1__c',
       recordPassed[0].Screen_1_Part_1__c
     );
+    /*
     metadataFieldValueMap.put(
       'Screen_1_Part_2__c',
       recordPassed[0].Screen_1_Part_2__c
