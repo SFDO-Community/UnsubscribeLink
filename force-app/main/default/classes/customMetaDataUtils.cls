@@ -35,7 +35,7 @@ public class customMetaDataUtils implements Metadata.DeployCallback {
 
     Metadata.DeployContainer mdContainer = new Metadata.DeployContainer();
     mdContainer.addMetadata(cMetadata);
-    jrsl_CustomMetadataUtils callback = new jrsl_CustomMetadataUtils();
+    CustomMetadataUtils callback = new CustomMetadataUtils();
     Id jobId = Metadata.Operations.enqueueDeployment(mdContainer, callback);
   }
 
@@ -59,7 +59,7 @@ public class customMetaDataUtils implements Metadata.DeployCallback {
 
     Metadata.DeployContainer mdContainer = new Metadata.DeployContainer();
     mdContainer.addMetadata(cMetadata);
-    jrsl_CustomMetadataUtils callback = new jrsl_CustomMetadataUtils();
+    CustomMetadataUtils callback = new CustomMetadataUtils();
     Id jobId = Metadata.Operations.enqueueDeployment(mdContainer, callback);
   }
 }
