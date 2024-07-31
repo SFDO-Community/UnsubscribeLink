@@ -8,7 +8,7 @@ HYPERLINK((&quot;https://&quot;+$CustomMetadata.Unsubscribe_Link__mdt.Unsubscrib
 
 /* append the recordId of this record */
 
-+&quot;Unsubscribe/s/unsubscribe?varRecId=&quot;+ CASESAFEID(Id)), 
++&quot;/Unsubscribe/s/unsubscribe?varRecId=&quot;+ CASESAFEID(Id)), 
 
 /* Look up the custom metadata type record to find the text for the link.*/
 $CustomMetadata.Unsubscribe_Link__mdt.Unsubscribe.Link_Text__c

@@ -50,6 +50,7 @@ public class unsubscribeInvocableMethod {
       'Screen_1_Part_1__c',
       recordPassed[0].Screen_1_Part_1__c
     );
+    metadataFieldValueMap.put('Site_Domain__c', recordPassed[0].Site_Domain__c);
     /*
     metadataFieldValueMap.put(
       'Screen_1_Part_2__c',
@@ -64,11 +65,6 @@ public class unsubscribeInvocableMethod {
       recordPassed[0].Screen_2_Part_2__c
     );
     metadataFieldValueMap.put('Screen_3__c', recordPassed[0].Screen_3__c);
-
-    metadataFieldValueMap.put(
-      'Site_Domain__c',
-      URL.getOrgDomainUrl().toExternalForm()
-    );
     
          metadataFieldValueMap.put('Site_Domain__c', recordPassed[0].Site_Domain__c);
             metadataFieldValueMap.put('type_in_Unsubscribe__c', recordPassed[0].type_in_Unsubscribe__c);

@@ -59,14 +59,14 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>Get_CMDT.Confirmation_Email__c</assignToReference>
+            <assignToReference>Get_CMDT.Confirmation_Email_Text__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>ConfirmEmailText</elementReference>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>EmailPreviewScreen</targetReference>
+            <targetReference>Assign_Value_0_0</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -114,6 +114,85 @@
             <operator>Assign</operator>
             <value>
                 <elementReference>OneClick.value</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Unsubscribe_Link</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Value_0_0</name>
+        <label>TEST Assignment</label>
+        <locationX>831</locationX>
+        <locationY>312</locationY>
+        <assignmentItems>
+            <assignToReference>Get_CMDT.Screen_1_Part_1__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ModifyScreen1Part1</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_CMDT.Screen_1_Part_2__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>screen1part2 a</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_CMDT.Screen_2_Part_1__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>screen2part1 a</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_CMDT.Screen_2_Part_2__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>screen2part2 a</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_CMDT.Screen_3__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>screen3 a</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_CMDT.type_in_Unsubscribe__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>No</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_CMDT.Send_Confirmation_Email__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Do_you_want_to_send_a_confirmation_email</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_CMDT.Error_Email_Recipients__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>errorEmailrecipient.value</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_CMDT.One_Click__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>OneClick.value</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_CMDT.Org_Wide_Email_Address__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>OrgWideEmail.value</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -223,7 +302,7 @@
     <formulas>
         <name>confirmationEmailFormula</name>
         <dataType>String</dataType>
-        <expression>SUBSTITUTE({!Get_CMDT.Confirmation_Email__c}, &quot;our organization&quot;, {!xxxxorgName})</expression>
+        <expression>SUBSTITUTE({!Get_CMDT.Confirmation_Email_Text__c}, &quot;our organization&quot;, {!xxxxorgName})</expression>
     </formulas>
     <formulas>
         <name>organizationNameFormula</name>
@@ -251,7 +330,7 @@
         <expression>SUBSTITUTE({!Get_CMDT.Screen_3__c}, &quot;our organization&quot;, {!xxxxorgName})</expression>
     </formulas>
     <interviewLabel>Unsubscribe Link Setup {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Unsubscribe Link Setup</label>
+    <label>Unsubscribe Link Setup test</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -737,7 +816,7 @@
                     <name>ConfirmEmailText</name>
                     <dataType>String</dataType>
                     <defaultValue>
-                        <elementReference>Get_CMDT.Confirmation_Email__c</elementReference>
+                        <elementReference>Get_CMDT.Confirmation_Email_Text__c</elementReference>
                     </defaultValue>
                     <fieldText>What should the email say?</fieldText>
                     <fieldType>InputField</fieldType>
