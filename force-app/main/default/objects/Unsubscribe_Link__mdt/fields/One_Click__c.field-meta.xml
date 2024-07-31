@@ -3,7 +3,7 @@
     <fullName>One_Click__c</fullName>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <label>Allow One Click</label>
+    <label>Enable One Click</label>
     <required>false</required>
     <type>Picklist</type>
     <valueSet>
