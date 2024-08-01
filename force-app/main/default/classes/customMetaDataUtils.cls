@@ -1,7 +1,6 @@
 public class customMetaDataUtils implements Metadata.DeployCallback {
   //https://www.biswajeetsamal.com/blog/create-or-update-custom-metadata-type-using-apex/
 
-
   //Interface method
   public void handleResult(
     Metadata.DeployResult result,
@@ -50,3 +49,5 @@ public class customMetaDataUtils implements Metadata.DeployCallback {
     Metadata.CustomMetadata cMetadata = new Metadata.CustomMetadata();
     cMetadata.fullName = metdataName + '.' + recordDevName;
     cMetadata.label = label;
+  }
+}
