@@ -14,6 +14,7 @@
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "59.0",
   "packageAliases": {
-    "Unsubscribe Link": "0Hoaj00000008FJCAY"
+    "Unsubscribe Link": "0Hoaj00000008FJCAY",
+     "Unsubscribe Link 4.0": "0Hoaj0000000BJdCAM"
   }
 }
