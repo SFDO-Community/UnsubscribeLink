@@ -31,6 +31,10 @@ public class unsubscribeInvocableMethod {
     metadataFieldValueMap.put('Link_Text__c', recordPassed[0].Link_Text__c);
 
     metadataFieldValueMap.put(
+      'Confirmation_Email_Text__c',
+      recordPassed[0].Confirmation_Email_Text__c
+    );
+    metadataFieldValueMap.put(
       'Org_Wide_Email_Address__c',
       recordPassed[0].Org_Wide_Email_Address__c
     );
