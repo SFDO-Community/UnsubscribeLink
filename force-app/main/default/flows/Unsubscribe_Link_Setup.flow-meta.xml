@@ -21,8 +21,8 @@
     <assignments>
         <name>Assign_Value</name>
         <label>Assign Value</label>
-        <locationX>665</locationX>
-        <locationY>203</locationY>
+        <locationX>788</locationX>
+        <locationY>228</locationY>
         <assignmentItems>
             <assignToReference>Get_CMDT.Our_Organization__c</assignToReference>
             <operator>Assign</operator>
@@ -41,14 +41,14 @@
             <assignToReference>Get_CMDT.Error_Email_Recipients__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>errorEmailrecipient.value</elementReference>
+                <elementReference>ErrorEmailList</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
             <assignToReference>Get_CMDT.Org_Wide_Email_Address__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>OrgWideEmail.value</elementReference>
+                <elementReference>OrgWideEmailQ</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -59,7 +59,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>EmailPreviewScreen</targetReference>
+            <targetReference>EmailModifyScreen</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -156,9 +156,6 @@
         <label>Send Confirmation Email?</label>
         <locationX>1374</locationX>
         <locationY>174</locationY>
-        <defaultConnector>
-            <targetReference>thatisItScreen2</targetReference>
-        </defaultConnector>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
             <name>YesSend</name>
@@ -201,31 +198,25 @@
             <label>IncludeScreen3</label>
         </rules>
     </decisions>
-    <decisions>
-        <name>Want_to_make_additional_changes</name>
-        <label>Want to make additional changes</label>
-        <locationX>930</locationX>
-        <locationY>652</locationY>
-        <defaultConnector>
-            <targetReference>EmailModifyScreen</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Make changes</defaultConnectorLabel>
-        <rules>
-            <name>NoMoreChanges</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>ModifyTextOrAddinConfirmationQ</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <elementReference>No_I_am_done</elementReference>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Assign_Value_0</targetReference>
-            </connector>
-            <label>No more changes</label>
-        </rules>
-    </decisions>
+    <dynamicChoiceSets>
+        <name>orgWideEmails</name>
+        <dataType>String</dataType>
+        <displayField>DisplayName</displayField>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>IsVerified</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>OrgWideEmailAddress</object>
+        <outputAssignments>
+            <assignToReference>orgWideEmailDisplayName</assignToReference>
+            <field>DisplayName</field>
+        </outputAssignments>
+        <valueField>Address</valueField>
+    </dynamicChoiceSets>
     <environments>Default</environments>
     <formulas>
         <name>FormulaConfirmationEmailText</name>
@@ -245,7 +236,7 @@
     <formulas>
         <name>screen1part2Formula</name>
         <dataType>String</dataType>
-        <expression>SUBSTITUTE({!Get_CMDT.Screen_1_Part_2__c}, &quot;our organization&quot;, {!xxxxorgName})</expression>
+        <expression>IF(OR({!Get_CMDT.Screen_1_Part_2__c}=&quot;from all further email from our organization, click NEXT.&quot;,{!Get_CMDT.Screen_1_Part_2__c}=null),&quot;from all further email from &quot; + {!OrganizationNameFINAL} + &quot;, click NEXT.&quot;, {!Get_CMDT.Screen_1_Part_2__c})</expression>
     </formulas>
     <formulas>
         <name>screen2part1Formula</name>
@@ -263,7 +254,7 @@
         <expression>SUBSTITUTE({!Get_CMDT.Screen_3__c}, &quot;our organization&quot;, {!xxxxorgName})</expression>
     </formulas>
     <interviewLabel>Unsubscribe Link Setup {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Unsubscribe Link Setup working well</label>
+    <label>Unsubscribe Link Setup rebuilding on tuesday</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -286,8 +277,8 @@
     <recordLookups>
         <name>Get_CMDT</name>
         <label>Get CMDT</label>
-        <locationX>223</locationX>
-        <locationY>73</locationY>
+        <locationX>218</locationX>
+        <locationY>67</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Experience_Site</targetReference>
@@ -307,8 +298,8 @@
     <recordLookups>
         <name>Get_Experience_Site</name>
         <label>Get Experience Site</label>
-        <locationX>161</locationX>
-        <locationY>223</locationY>
+        <locationX>218</locationX>
+        <locationY>230</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>my_domain</targetReference>
@@ -320,8 +311,8 @@
     <recordLookups>
         <name>my_domain</name>
         <label>my domain</label>
-        <locationX>453</locationX>
-        <locationY>342</locationY>
+        <locationX>389</locationX>
+        <locationY>229</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Set_Up_Unsubscribe_Link_0</targetReference>
@@ -341,7 +332,7 @@
     <screens>
         <name>ConfirmationEmailPreviewScreen</name>
         <label>ConfirmationEmailPreviewScreen</label>
-        <locationX>1499</locationX>
+        <locationX>1498</locationX>
         <locationY>450</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -351,7 +342,7 @@
         </connector>
         <fields>
             <name>confirmationEmailDisplayText</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;The email recipient receives an email. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;From: {!OrgWideEmail.value}&lt;/p&gt;&lt;p&gt;Email body: {!ConfirmEmailText}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;The email recipient receives an email. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;From: {!orgWideEmailDisplayName}, {!OrgWideEmailQ}&lt;/p&gt;&lt;p&gt;Email body: {!ConfirmEmailText}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -360,8 +351,8 @@
     <screens>
         <name>EmailModifyScreen</name>
         <label>EmailModifyScreen</label>
-        <locationX>702</locationX>
-        <locationY>483</locationY>
+        <locationX>1076</locationX>
+        <locationY>236</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -393,29 +384,10 @@
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <name>EmailPreviewScreen</name>
-        <label>EmailPreviewScreen</label>
-        <locationX>871</locationX>
-        <locationY>225</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <connector>
-            <targetReference>Screen1Preview_0</targetReference>
-        </connector>
-        <fields>
-            <name>SampleEmailDisplayText</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 22px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;Your email recipient gets an email with an unsubscribe link at the bottom. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;{!horizontalLine1}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Dear Friend,&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;If you order a pizza before 5, I&apos;ll also throw in some free drinks!&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Your friend,&lt;/p&gt;&lt;p&gt;Bob&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;u style=&quot;color: rgb(28, 3, 255);&quot;&gt;{!LinkTextFormula}&lt;/u&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
         <name>Screen1Preview</name>
         <label>Screen1Preview</label>
-        <locationX>555</locationX>
-        <locationY>637</locationY>
+        <locationX>1076</locationX>
+        <locationY>612</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -424,7 +396,7 @@
         </connector>
         <fields>
             <name>Screen1PreviewDisplayText</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;This page allows the recipient to confirm before opting out. This page is turned off by default.&lt;/em&gt;&lt;span style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;{!horizontalLine1}&lt;/span&gt;&lt;em style=&quot;font-size: 20px; font-family: var(--lwc-fontFamily,-apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Helvetica, Arial, sans-serif, &apos;Apple Color Emoji&apos;, &apos;Segoe UI Emoji&apos;, &apos;Segoe UI Symbol&apos;); color: var(--slds-g-color-neutral-base-30, var(--lwc-colorTextWeak,rgb(68, 68, 68))); background-color: var(--slds-g-color-neutral-base-100, var(--lwc-colorBackgroundInput,rgb(255, 255, 255)));&quot;&gt;﻿&lt;/em&gt;&lt;/p&gt;&lt;p&gt;To unsubscribe georgeB@bbbl.org {!screen1part2}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;This page allows the recipient to confirm before opting out. &lt;/em&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!horizontalLine1}&lt;/span&gt;&lt;em style=&quot;background-color: var(--slds-g-color-neutral-base-100, var(--lwc-colorBackgroundInput,rgb(255, 255, 255))); color: var(--slds-g-color-neutral-base-30, var(--lwc-colorTextWeak,rgb(68, 68, 68))); font-family: var(--lwc-fontFamily,-apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Helvetica, Arial, sans-serif, &apos;Apple Color Emoji&apos;, &apos;Segoe UI Emoji&apos;, &apos;Segoe UI Symbol&apos;); font-size: 20px;&quot;&gt;﻿&lt;/em&gt;&lt;/p&gt;&lt;p&gt;To unsubscribe georgeB@bbbl.org {!screen1part2Formula}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -515,44 +487,6 @@
                     </rightValue>
                 </conditions>
             </visibilityRule>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Screen1Preview_0</name>
-        <label>Screen1Preview</label>
-        <locationX>1070</locationX>
-        <locationY>164</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <connector>
-            <targetReference>Screen2PreviewScreen</targetReference>
-        </connector>
-        <fields>
-            <name>Screen1PreviewDisplayText_0</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;This page allows the recipient to confirm before opting out. This page is turned off by default.&lt;/em&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!horizontalLine1}&lt;/span&gt;&lt;em style=&quot;background-color: var(--slds-g-color-neutral-base-100, var(--lwc-colorBackgroundInput,rgb(255, 255, 255))); font-size: 20px; font-family: var(--lwc-fontFamily,-apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Helvetica, Arial, sans-serif, &apos;Apple Color Emoji&apos;, &apos;Segoe UI Emoji&apos;, &apos;Segoe UI Symbol&apos;); color: var(--slds-g-color-neutral-base-30, var(--lwc-colorTextWeak,rgb(68, 68, 68)));&quot;&gt;﻿&lt;/em&gt;&lt;/p&gt;&lt;p&gt;To unsubscribe georgeB@bbbl.org {!screen1part2}&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Screen2PreviewScreen</name>
-        <label>Screen2PreviewScreen</label>
-        <locationX>1220</locationX>
-        <locationY>74</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <connector>
-            <targetReference>Confirmation_EmailSend</targetReference>
-        </connector>
-        <fields>
-            <name>screen2previewDisplayText</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!horizontalLine1}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!screen2part1TextTemplate} {!screen2part2formula}&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -710,8 +644,8 @@
     <screens>
         <name>Set_Up_Unsubscribe_Link_0</name>
         <label>InitialSetUp</label>
-        <locationX>516</locationX>
-        <locationY>182</locationY>
+        <locationX>554</locationX>
+        <locationY>229</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -728,7 +662,7 @@
                     <name>OrganizationNameFINAL</name>
                     <dataType>String</dataType>
                     <defaultValue>
-                        <elementReference>organizationNameFormula</elementReference>
+                        <elementReference>Get_CMDT.Our_Organization__c</elementReference>
                     </defaultValue>
                     <fieldText>What is your organization or company name?</fieldText>
                     <fieldType>InputField</fieldType>
@@ -736,30 +670,15 @@
                     <isRequired>false</isRequired>
                 </fields>
                 <fields>
-                    <name>errorEmailrecipient</name>
-                    <extensionName>flowruntime:email</extensionName>
-                    <fieldType>ComponentInstance</fieldType>
-                    <inputParameters>
-                        <name>label</name>
-                        <value>
-                            <stringValue>What email address should receive error messages when something goes wrong?</stringValue>
-                        </value>
-                    </inputParameters>
-                    <inputParameters>
-                        <name>placeholder</name>
-                        <value>
-                            <stringValue>you@example.com</stringValue>
-                        </value>
-                    </inputParameters>
-                    <inputParameters>
-                        <name>value</name>
-                        <value>
-                            <elementReference>Get_CMDT.Error_Email_Recipients__c</elementReference>
-                        </value>
-                    </inputParameters>
+                    <name>ErrorEmailList</name>
+                    <dataType>String</dataType>
+                    <defaultValue>
+                        <elementReference>Get_CMDT.Error_Email_Recipients__c</elementReference>
+                    </defaultValue>
+                    <fieldText>Enter a comma separated list of emails that should receive alerts when there is an error.</fieldText>
+                    <fieldType>InputField</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>true</isRequired>
-                    <storeOutputAutomatically>true</storeOutputAutomatically>
+                    <isRequired>false</isRequired>
                 </fields>
                 <fields>
                     <name>confirmEmailQ</name>
@@ -778,7 +697,7 @@
                     <name>ConfirmEmailText</name>
                     <dataType>String</dataType>
                     <defaultValue>
-                        <elementReference>FormulaConfirmationEmailText</elementReference>
+                        <elementReference>Get_CMDT.Confirmation_Email_Text__c</elementReference>
                     </defaultValue>
                     <fieldText>What should the email say?</fieldText>
                     <fieldType>InputField</fieldType>
@@ -796,24 +715,13 @@
                     </visibilityRule>
                 </fields>
                 <fields>
-                    <name>OrgWideEmail</name>
-                    <extensionName>flowruntime:email</extensionName>
-                    <fieldType>ComponentInstance</fieldType>
-                    <inputParameters>
-                        <name>label</name>
-                        <value>
-                            <stringValue>Enter the organization wide email address that this email will appear to be from.</stringValue>
-                        </value>
-                    </inputParameters>
-                    <inputParameters>
-                        <name>value</name>
-                        <value>
-                            <elementReference>Get_CMDT.Org_Wide_Email_Address__c</elementReference>
-                        </value>
-                    </inputParameters>
+                    <name>OrgWideEmailQ</name>
+                    <choiceReferences>orgWideEmails</choiceReferences>
+                    <dataType>String</dataType>
+                    <fieldText>Choose the organization wide email address that this email will appear to be from.</fieldText>
+                    <fieldType>DropdownBox</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
-                    <storeOutputAutomatically>true</storeOutputAutomatically>
                     <visibilityRule>
                         <conditionLogic>and</conditionLogic>
                         <conditions>
@@ -851,11 +759,6 @@
             <fields>
                 <name>Set_Up_Unsubscribe_Link_0_Section1_Column2</name>
                 <fieldType>Region</fieldType>
-                <fields>
-                    <name>displaySite</name>
-                    <fieldText>&lt;p&gt;{!my_domain.Domain.Domain}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
-                    <fieldType>DisplayText</fieldType>
-                </fields>
                 <inputParameters>
                     <name>width</name>
                     <value>
@@ -923,14 +826,11 @@
     <screens>
         <name>thatisItScreen2</name>
         <label>thatisItScreen</label>
-        <locationX>979</locationX>
-        <locationY>408</locationY>
+        <locationX>1447</locationX>
+        <locationY>632</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
-        <connector>
-            <targetReference>Want_to_make_additional_changes</targetReference>
-        </connector>
         <fields>
             <name>ThatIsItScreenText</name>
             <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 18px;&quot;&gt;PREVIEW COMPLETE&lt;/strong&gt;&lt;/p&gt;</fieldText>
@@ -1158,6 +1058,13 @@
     </textTemplates>
     <variables>
         <name>orgNameVar</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>orgWideEmailDisplayName</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
