@@ -718,7 +718,7 @@ Find only the one called Unsubscribe. The other custom metadata types are for te
         <description>This is the confirmation email that will be sent out after the flow runs if you have said yes you want a confirmation email in the custom metadata type called &quot;Unsubscribe Link.&quot; This email is for people who updated their campaign preferences.</description>
         <name>UnsubscribeEmail</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;{!Get_custom_metadata.Confirmation_Email__c}&lt;/p&gt;</text>
+        <text>&lt;p&gt;{!Get_custom_metadata.Confirmation_Email_Text__c}&lt;/p&gt;</text>
     </textTemplates>
     <variables>
         <name>contactCollection</name>
