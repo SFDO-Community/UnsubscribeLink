@@ -3,12 +3,16 @@
     <label>Unsubscribe</label>
     <protected>false</protected>
     <values>
+        <field>Confirmation_Email_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Confirmation_Email__c</field>
-        <value xsi:type="xsd:string">You have successfully unsubscribed from all email from our organization.</value>
+        <value xsi:type="xsd:string">YOU HAVE UNSUBSCRIBED</value>
     </values>
     <values>
         <field>Error_Email_Recipients__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">ERROR EMAIL</value>
     </values>
     <values>
         <field>Link_Text__c</field>

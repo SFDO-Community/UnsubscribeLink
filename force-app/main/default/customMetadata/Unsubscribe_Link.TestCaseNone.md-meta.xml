@@ -3,6 +3,10 @@
     <label>TestCaseNone</label>
     <protected>true</protected>
     <values>
+        <field>Confirmation_Email_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Confirmation_Email__c</field>
         <value xsi:nil="true"/>
     </values>
@@ -11,8 +15,16 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>Link_Text__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>One_Click__c</field>
         <value xsi:type="xsd:string">Yes</value>
+    </values>
+    <values>
+        <field>Org_Wide_Email_Address__c</field>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Our_Organization__c</field>
