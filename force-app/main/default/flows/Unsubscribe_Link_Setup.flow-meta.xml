@@ -3,10 +3,13 @@
     <actionCalls>
         <name>Unsubscribe_Link</name>
         <label>Unsubscribe Link</label>
-        <locationX>675</locationX>
-        <locationY>912</locationY>
+        <locationX>182</locationX>
+        <locationY>1706</locationY>
         <actionName>unsubscribeInvocableMethod</actionName>
         <actionType>apex</actionType>
+        <connector>
+            <targetReference>completeScreen</targetReference>
+        </connector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
             <name>recordPassed</name>
@@ -21,20 +24,13 @@
     <assignments>
         <name>Assign_Value</name>
         <label>Assign Value</label>
-        <locationX>788</locationX>
-        <locationY>228</locationY>
+        <locationX>182</locationX>
+        <locationY>566</locationY>
         <assignmentItems>
-            <assignToReference>Get_CMDT.Our_Organization__c</assignToReference>
+            <assignToReference>Get_CMDT.Confirmation_Email_Text__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>OrganizationNameFINAL</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>Get_CMDT.Send_Confirmation_Email__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>confirmEmailQ</elementReference>
+                <elementReference>ConfirmEmailText</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -45,6 +41,20 @@
             </value>
         </assignmentItems>
         <assignmentItems>
+            <assignToReference>Get_CMDT.Our_Organization__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>OrganizationNameFINAL</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_CMDT.type_in_Unsubscribe__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>type_in_unsubscribe</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
             <assignToReference>Get_CMDT.Org_Wide_Email_Address__c</assignToReference>
             <operator>Assign</operator>
             <value>
@@ -52,10 +62,17 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>Get_CMDT.Confirmation_Email_Text__c</assignToReference>
+            <assignToReference>Get_CMDT.Send_Confirmation_Email__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>ConfirmEmailText</elementReference>
+                <elementReference>confirmEmailQ</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_CMDT.Site_Domain__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>my_domain.Domain.Domain</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -65,15 +82,8 @@
     <assignments>
         <name>Assign_Value_0</name>
         <label>Assign Value</label>
-        <locationX>497</locationX>
-        <locationY>854</locationY>
-        <assignmentItems>
-            <assignToReference>Get_CMDT.Screen_1_Part_1__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>ModifyScreen1Part1</elementReference>
-            </value>
-        </assignmentItems>
+        <locationX>182</locationX>
+        <locationY>1598</locationY>
         <assignmentItems>
             <assignToReference>Get_CMDT.Screen_1_Part_2__c</assignToReference>
             <operator>Assign</operator>
@@ -103,24 +113,24 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>Get_CMDT.type_in_Unsubscribe__c</assignToReference>
+            <assignToReference>Get_CMDT.Screen_1_Part_1__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>type_in_unsubscribe</elementReference>
+                <elementReference>ModifyScreen1Part1</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>Get_CMDT.Site_Domain__c</assignToReference>
+            <assignToReference>Get_CMDT.Link_Text__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>my_domain.Domain.Domain</elementReference>
+                <elementReference>LinkText</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
             <assignToReference>Get_CMDT.One_Click__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>EnableOneClick</elementReference>
+                <elementReference>EnableOneClickFormula</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -136,14 +146,6 @@
         </value>
     </choices>
     <choices>
-        <name>No_I_am_done</name>
-        <choiceText>No, I am done</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>No, I am done</stringValue>
-        </value>
-    </choices>
-    <choices>
         <name>Yes</name>
         <choiceText>Yes</choiceText>
         <dataType>String</dataType>
@@ -154,8 +156,11 @@
     <decisions>
         <name>Confirmation_EmailSend</name>
         <label>Send Confirmation Email?</label>
-        <locationX>1374</locationX>
-        <locationY>174</locationY>
+        <locationX>182</locationX>
+        <locationY>1298</locationY>
+        <defaultConnector>
+            <targetReference>Assign_Value_0</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
             <name>YesSend</name>
@@ -176,10 +181,10 @@
     <decisions>
         <name>IncludeScreen3Decision</name>
         <label>IncludeScreen3</label>
-        <locationX>175</locationX>
-        <locationY>645</locationY>
+        <locationX>182</locationX>
+        <locationY>998</locationY>
         <defaultConnector>
-            <targetReference>Assign_Value_0</targetReference>
+            <targetReference>Confirmation_EmailSend</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Skip Screen 3</defaultConnectorLabel>
         <rules>
@@ -219,9 +224,10 @@
     </dynamicChoiceSets>
     <environments>Default</environments>
     <formulas>
-        <name>FormulaConfirmationEmailText</name>
+        <description>The question asks &quot;Do you want to include this confirmation page?&quot; The field says &quot;do you want to enable one click?&quot; so the answers need to be reversed.</description>
+        <name>EnableOneClickFormula</name>
         <dataType>String</dataType>
-        <expression>IF({!Get_CMDT.Confirmation_Email_Text__c}=null,&apos;Click here to unsubscribe from all &apos;,{!Get_CMDT.Confirmation_Email_Text__c})</expression>
+        <expression>IF({!EnableOneClick}=&apos;Yes&apos;, &apos;No&apos;, &apos;Yes&apos;)</expression>
     </formulas>
     <formulas>
         <name>LinkTextFormula</name>
@@ -229,32 +235,17 @@
         <expression>IF({!Get_CMDT.Link_Text__c}=null, &apos;Click here to unsubscribe from all email from &apos; + {!OrganizationNameFINAL} + &apos;.&apos;, {!Get_CMDT.Link_Text__c})</expression>
     </formulas>
     <formulas>
-        <name>organizationNameFormula</name>
-        <dataType>String</dataType>
-        <expression>{!Get_CMDT.Our_Organization__c}</expression>
-    </formulas>
-    <formulas>
         <name>screen1part2Formula</name>
         <dataType>String</dataType>
-        <expression>IF(OR({!Get_CMDT.Screen_1_Part_2__c}=&quot;from all further email from our organization, click NEXT.&quot;,{!Get_CMDT.Screen_1_Part_2__c}=null),&quot;from all further email from &quot; + {!OrganizationNameFINAL} + &quot;, click NEXT.&quot;, {!Get_CMDT.Screen_1_Part_2__c})</expression>
-    </formulas>
-    <formulas>
-        <name>screen2part1Formula</name>
-        <dataType>String</dataType>
-        <expression>SUBSTITUTE({!Get_CMDT.Screen_2_Part_1__c}, &quot;our organization&quot;, {!xxxxorgName})</expression>
+        <expression>IF(OR({!Get_CMDT.Screen_1_Part_2__c}=&quot;from all emails from our organization, click NEXT.&quot;,{!Get_CMDT.Screen_1_Part_2__c}=null),&quot;from all emails from &quot; + {!Get_CMDT.Our_Organization__c}+ &quot;, click NEXT.&quot;, {!Get_CMDT.Screen_1_Part_2__c})</expression>
     </formulas>
     <formulas>
         <name>screen2part2formula</name>
         <dataType>String</dataType>
         <expression>IF({!confirmEmailQ}=&apos;Yes&apos;,&apos;You will receive a confirmation email shortly.&apos;,&apos;&apos;)</expression>
     </formulas>
-    <formulas>
-        <name>screen3formula</name>
-        <dataType>String</dataType>
-        <expression>SUBSTITUTE({!Get_CMDT.Screen_3__c}, &quot;our organization&quot;, {!xxxxorgName})</expression>
-    </formulas>
     <interviewLabel>Unsubscribe Link Setup {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Unsubscribe Link Setup rebuilding on tuesday</label>
+    <label>Unsubscribe Link Setup Final</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -264,7 +255,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -277,8 +268,8 @@
     <recordLookups>
         <name>Get_CMDT</name>
         <label>Get CMDT</label>
-        <locationX>218</locationX>
-        <locationY>67</locationY>
+        <locationX>182</locationX>
+        <locationY>134</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Experience_Site</targetReference>
@@ -298,8 +289,8 @@
     <recordLookups>
         <name>Get_Experience_Site</name>
         <label>Get Experience Site</label>
-        <locationX>218</locationX>
-        <locationY>230</locationY>
+        <locationX>182</locationX>
+        <locationY>242</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>my_domain</targetReference>
@@ -311,8 +302,8 @@
     <recordLookups>
         <name>my_domain</name>
         <label>my domain</label>
-        <locationX>389</locationX>
-        <locationY>229</locationY>
+        <locationX>182</locationX>
+        <locationY>350</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Set_Up_Unsubscribe_Link_0</targetReference>
@@ -330,29 +321,45 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <screens>
+        <name>completeScreen</name>
+        <label>completeScreen</label>
+        <locationX>182</locationX>
+        <locationY>1814</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>DonedisplayText</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;You are done!&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
         <name>ConfirmationEmailPreviewScreen</name>
         <label>ConfirmationEmailPreviewScreen</label>
-        <locationX>1498</locationX>
-        <locationY>450</locationY>
+        <locationX>50</locationX>
+        <locationY>1406</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>thatisItScreen2</targetReference>
+            <targetReference>Assign_Value_0</targetReference>
         </connector>
         <fields>
             <name>confirmationEmailDisplayText</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;The email recipient receives an email. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;From: {!orgWideEmailDisplayName}, {!OrgWideEmailQ}&lt;/p&gt;&lt;p&gt;Email body: {!ConfirmEmailText}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;The email recipient receives an email. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;From: {!orgWideEmailDisplayName}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Email body: {!ConfirmEmailText}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
     <screens>
         <name>EmailModifyScreen</name>
         <label>EmailModifyScreen</label>
-        <locationX>1076</locationX>
-        <locationY>236</locationY>
+        <locationX>182</locationX>
+        <locationY>674</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -361,11 +368,11 @@
         </connector>
         <fields>
             <name>SampleEmailDisplayText_0</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 22px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;Your email recipient gets an email like this with an unsubscribe link at the bottom. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Dear Friend,&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;It&apos;s Thursday! You love to order a pizza on Thursdays! If you order before 5, I&apos;ll also throw in some free drinks!&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Your friend,&lt;/p&gt;&lt;p&gt;Bob&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;u style=&quot;color: rgb(0, 43, 255);&quot;&gt;{!Get_CMDT.Link_Text__c}&lt;/u&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 22px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;Your email recipient gets an email like this with an unsubscribe link at the bottom. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Dear Friend,&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;It&apos;s Thursday! You love to order a pizza on Thursdays! If you order before 5, I&apos;ll also throw in some free drinks!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Your friend,&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Bob&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;u style=&quot;font-size: 20px; color: rgb(0, 43, 255);&quot;&gt;{!Get_CMDT.Link_Text__c}&lt;/u&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>yourturn</name>
+            <name>DisplayTextforHorizontalLine</name>
             <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!horizontalLine1}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
@@ -381,13 +388,13 @@
             <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
     <screens>
         <name>Screen1Preview</name>
         <label>Screen1Preview</label>
-        <locationX>1076</locationX>
-        <locationY>612</locationY>
+        <locationX>182</locationX>
+        <locationY>782</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -396,7 +403,7 @@
         </connector>
         <fields>
             <name>Screen1PreviewDisplayText</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;This page allows the recipient to confirm before opting out. &lt;/em&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!horizontalLine1}&lt;/span&gt;&lt;em style=&quot;background-color: var(--slds-g-color-neutral-base-100, var(--lwc-colorBackgroundInput,rgb(255, 255, 255))); color: var(--slds-g-color-neutral-base-30, var(--lwc-colorTextWeak,rgb(68, 68, 68))); font-family: var(--lwc-fontFamily,-apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Helvetica, Arial, sans-serif, &apos;Apple Color Emoji&apos;, &apos;Segoe UI Emoji&apos;, &apos;Segoe UI Symbol&apos;); font-size: 20px;&quot;&gt;﻿&lt;/em&gt;&lt;/p&gt;&lt;p&gt;To unsubscribe georgeB@bbbl.org {!screen1part2Formula}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;This page allows the recipient to confirm before opting out. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;{!horizontalLine1}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;em style=&quot;color: var(--slds-g-color-neutral-base-30, var(--lwc-colorTextWeak,rgb(68, 68, 68))); background-color: var(--slds-g-color-neutral-base-100, var(--lwc-colorBackgroundInput,rgb(255, 255, 255))); font-size: 20px; font-family: var(--lwc-fontFamily,-apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Helvetica, Arial, sans-serif, &apos;Apple Color Emoji&apos;, &apos;Segoe UI Emoji&apos;, &apos;Segoe UI Symbol&apos;);&quot;&gt;﻿&lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;{!Get_CMDT.Screen_1_Part_1__c} georgeB@bbbl.org {!screen1part2Formula}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -427,7 +434,7 @@
                     <name>ModifyScreen1Part1</name>
                     <dataType>String</dataType>
                     <defaultValue>
-                        <stringValue>To unsubscribe</stringValue>
+                        <elementReference>Get_CMDT.Screen_1_Part_1__c</elementReference>
                     </defaultValue>
                     <fieldText>You may modify the text of part 1 here:</fieldText>
                     <fieldType>InputField</fieldType>
@@ -449,7 +456,7 @@
                     <name>ModifyScreen1Part2</name>
                     <dataType>String</dataType>
                     <defaultValue>
-                        <elementReference>screen1part2</elementReference>
+                        <elementReference>screen1part2Formula</elementReference>
                     </defaultValue>
                     <fieldText>You may modify the text of part 2 here:</fieldText>
                     <fieldType>InputField</fieldType>
@@ -489,14 +496,14 @@
             </visibilityRule>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
     <screens>
         <name>Screen2PreviewScreen_0</name>
         <label>Screen2ModifyScreen</label>
-        <locationX>418</locationX>
-        <locationY>610</locationY>
-        <allowBack>false</allowBack>
+        <locationX>182</locationX>
+        <locationY>890</locationY>
+        <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
@@ -504,11 +511,11 @@
         </connector>
         <fields>
             <name>screen2previewDisplayText_0</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;{!screen2part1TextTemplate} {!screen2part2formula}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;{!screen2part1TextTemplate} {!screen2part2formula}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>yourturn2</name>
+            <name>displayTextHozLine</name>
             <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!horizontalLine1}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
@@ -563,22 +570,22 @@
             <regionContainerType>SectionWithoutHeader</regionContainerType>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
     <screens>
         <name>Screen3PreviewScreen</name>
         <label>Screen3PreviewScreen</label>
-        <locationX>190</locationX>
-        <locationY>849</locationY>
+        <locationX>50</locationX>
+        <locationY>1106</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Assign_Value_0</targetReference>
+            <targetReference>Confirmation_EmailSend</targetReference>
         </connector>
         <fields>
             <name>screen3previewDisplayText</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;If the email recipient&apos;s ID was not found, they can enter their email address here. You can turn off this feature. &lt;/em&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;If the email recipient&apos;s ID was not found, they can enter their email address here. You can turn off this feature. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -589,7 +596,7 @@
                 <fieldType>Region</fieldType>
                 <fields>
                     <name>screen3preview</name>
-                    <fieldText>&lt;p&gt;{!Screen3}&lt;/p&gt;</fieldText>
+                    <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;{!Screen3}&lt;/span&gt;&lt;/p&gt;</fieldText>
                     <fieldType>DisplayText</fieldType>
                 </fields>
                 <inputParameters>
@@ -639,13 +646,13 @@
             <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
     <screens>
         <name>Set_Up_Unsubscribe_Link_0</name>
         <label>InitialSetUp</label>
-        <locationX>554</locationX>
-        <locationY>229</locationY>
+        <locationX>182</locationX>
+        <locationY>458</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -718,6 +725,9 @@
                     <name>OrgWideEmailQ</name>
                     <choiceReferences>orgWideEmails</choiceReferences>
                     <dataType>String</dataType>
+                    <defaultValue>
+                        <elementReference>Get_CMDT.Org_Wide_Email_Address__c</elementReference>
+                    </defaultValue>
                     <fieldText>Choose the organization wide email address that this email will appear to be from.</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -821,211 +831,11 @@
         </fields>
         <nextOrFinishButtonLabel>Preview</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>thatisItScreen2</name>
-        <label>thatisItScreen</label>
-        <locationX>1447</locationX>
-        <locationY>632</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <fields>
-            <name>ThatIsItScreenText</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 18px;&quot;&gt;PREVIEW COMPLETE&lt;/strong&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>thatisItScreen2_Section1</name>
-            <fieldType>RegionContainer</fieldType>
-            <fields>
-                <name>thatisItScreen2_Section1_Column1</name>
-                <fieldType>Region</fieldType>
-                <fields>
-                    <name>ModifyTextOrAddinConfirmationQ</name>
-                    <choiceReferences>Yes</choiceReferences>
-                    <choiceReferences>No_I_am_done</choiceReferences>
-                    <dataType>String</dataType>
-                    <fieldText>Would you like to modify any of the text or add in the optional screen?</fieldText>
-                    <fieldType>DropdownBox</fieldType>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>false</isRequired>
-                </fields>
-                <inputParameters>
-                    <name>width</name>
-                    <value>
-                        <stringValue>4</stringValue>
-                    </value>
-                </inputParameters>
-                <isRequired>false</isRequired>
-            </fields>
-            <fields>
-                <name>thatisItScreen2_Section1_Column2</name>
-                <fieldType>Region</fieldType>
-                <inputParameters>
-                    <name>width</name>
-                    <value>
-                        <stringValue>8</stringValue>
-                    </value>
-                </inputParameters>
-                <isRequired>false</isRequired>
-            </fields>
-            <isRequired>false</isRequired>
-            <regionContainerType>SectionWithoutHeader</regionContainerType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>xxxSet_Up_Unsubscribe_Link</name>
-        <label>xxxxSet Up Unsubscribe Link</label>
-        <locationX>284</locationX>
-        <locationY>380</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>Do_you_want_to_send_a_confirmation_email</name>
-            <choiceReferences>Yes</choiceReferences>
-            <choiceReferences>No</choiceReferences>
-            <dataType>String</dataType>
-            <defaultSelectedChoiceReference>Yes</defaultSelectedChoiceReference>
-            <fieldText>Do you want to send a confirmation email?</fieldText>
-            <fieldType>DropdownBox</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>xxxxorgName</name>
-            <dataType>String</dataType>
-            <defaultValue>
-                <elementReference>organizationNameFormula</elementReference>
-            </defaultValue>
-            <fieldText>What is your organization/company name?</fieldText>
-            <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>xxxChangeName</name>
-            <extensionName>flowruntime:toggle</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>messageToggleActive</name>
-                <value>
-                    <stringValue>Change name</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>messageToggleInactive</name>
-                <value>
-                    <stringValue>Keep it</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>label</name>
-                <value>
-                    <stringValue>xxx</stringValue>
-                </value>
-            </inputParameters>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
-            <storeOutputAutomatically>true</storeOutputAutomatically>
-        </fields>
-        <fields>
-            <name>xxxScreen_1_Part_2</name>
-            <dataType>String</dataType>
-            <defaultValue>
-                <elementReference>screen1part2Formula</elementReference>
-            </defaultValue>
-            <fieldText>Screen 1 Part 2</fieldText>
-            <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>xxxxScreen_1_Part_1</name>
-            <dataType>String</dataType>
-            <defaultValue>
-                <stringValue>To unsubscribe</stringValue>
-            </defaultValue>
-            <fieldText>xxxxScreen 1 Part 1</fieldText>
-            <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>xxxxScreen_2_Part_1</name>
-            <dataType>String</dataType>
-            <defaultValue>
-                <elementReference>screen2part1TextTemplate</elementReference>
-            </defaultValue>
-            <fieldText>Screen 2 Part 1</fieldText>
-            <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>xxxxScreen_2_Part_2</name>
-            <dataType>String</dataType>
-            <defaultValue>
-                <stringValue>You will receive a confirmation email shortly.</stringValue>
-            </defaultValue>
-            <fieldText>xxxxScreen 2 Part 2</fieldText>
-            <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-            <visibilityRule>
-                <conditionLogic>and</conditionLogic>
-                <conditions>
-                    <leftValueReference>Do_you_want_to_send_a_confirmation_email</leftValueReference>
-                    <operator>EqualTo</operator>
-                    <rightValue>
-                        <elementReference>No</elementReference>
-                    </rightValue>
-                </conditions>
-            </visibilityRule>
-        </fields>
-        <fields>
-            <name>xxxxLxink_text</name>
-            <dataType>String</dataType>
-            <defaultValue>
-                <stringValue>Unsubscribe all.</stringValue>
-            </defaultValue>
-            <fieldText>Link text</fieldText>
-            <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>xxxxScreen_3</name>
-            <dataType>String</dataType>
-            <defaultValue>
-                <elementReference>Screen3</elementReference>
-            </defaultValue>
-            <fieldText>xxxxScreen 3</fieldText>
-            <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>xxxxxConfirmation_email</name>
-            <dataType>String</dataType>
-            <defaultValue>
-                <elementReference>LinkTextFormula</elementReference>
-            </defaultValue>
-            <fieldText>xxxxConfirmation email</fieldText>
-            <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>593</locationX>
-        <locationY>48</locationY>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_CMDT</targetReference>
         </connector>
