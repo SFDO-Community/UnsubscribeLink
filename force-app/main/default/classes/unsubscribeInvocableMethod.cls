@@ -23,11 +23,6 @@ public class unsubscribeInvocableMethod {
       recordPassed[0].type_in_Unsubscribe__c
     );
 
-    metadataFieldValueMap.put(
-      'Error_Email_Recipients__c',
-      recordPassed[0].Error_Email_Recipients__c
-    );
-
     metadataFieldValueMap.put('Link_Text__c', recordPassed[0].Link_Text__c);
 
     metadataFieldValueMap.put(
