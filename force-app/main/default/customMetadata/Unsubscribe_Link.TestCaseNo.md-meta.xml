@@ -7,10 +7,6 @@
         <value xsi:nil="true"/>
     </values>
     <values>
-        <field>Confirmation_Email__c</field>
-        <value xsi:nil="true"/>
-    </values>
-    <values>
         <field>Error_Email_Recipients__c</field>
         <value xsi:nil="true"/>
     </values>
