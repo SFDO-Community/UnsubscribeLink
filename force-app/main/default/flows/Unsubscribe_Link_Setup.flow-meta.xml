@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
-        <name>Unsubscribe_Link</name>
-        <label>Unsubscribe Link</label>
-        <locationX>182</locationX>
-        <locationY>1706</locationY>
-        <actionName>unsubscribeInvocableMethod</actionName>
+        <name>ContactsOnlyBatch</name>
+        <label>ContactsOnlyBatch</label>
+        <locationX>543</locationX>
+        <locationY>1867</locationY>
+        <actionName>generateAllRandomStrings</actionName>
         <actionType>apex</actionType>
         <connector>
             <targetReference>completeScreen</targetReference>
         </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <nameSegment>generateAllRandomStrings</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+        <versionSegment>1</versionSegment>
+    </actionCalls>
+    <actionCalls>
+        <description>Update the custom metadata used in the Unsubscribe Link Process.</description>
+        <name>Unsubscribe_Link</name>
+        <label>Unsubscribe Link</label>
+        <locationX>630</locationX>
+        <locationY>1754</locationY>
+        <actionName>unsubscribeInvocableMethod</actionName>
+        <actionType>apex</actionType>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
             <name>recordPassed</name>
@@ -24,8 +37,8 @@
     <assignments>
         <name>Assign_Value</name>
         <label>Assign Value</label>
-        <locationX>182</locationX>
-        <locationY>566</locationY>
+        <locationX>630</locationX>
+        <locationY>614</locationY>
         <assignmentItems>
             <assignToReference>Get_CMDT.Confirmation_Email_Text__c</assignToReference>
             <operator>Assign</operator>
@@ -82,8 +95,8 @@
     <assignments>
         <name>Assign_Value_0</name>
         <label>Assign Value</label>
-        <locationX>182</locationX>
-        <locationY>1598</locationY>
+        <locationX>630</locationX>
+        <locationY>1646</locationY>
         <assignmentItems>
             <assignToReference>Get_CMDT.Screen_1_Part_2__c</assignToReference>
             <operator>Assign</operator>
@@ -156,8 +169,8 @@
     <decisions>
         <name>Confirmation_EmailSend</name>
         <label>Send Confirmation Email?</label>
-        <locationX>182</locationX>
-        <locationY>1298</locationY>
+        <locationX>630</locationX>
+        <locationY>1346</locationY>
         <defaultConnector>
             <targetReference>Assign_Value_0</targetReference>
         </defaultConnector>
@@ -181,8 +194,8 @@
     <decisions>
         <name>IncludeScreen3Decision</name>
         <label>IncludeScreen3</label>
-        <locationX>182</locationX>
-        <locationY>998</locationY>
+        <locationX>630</locationX>
+        <locationY>1046</locationY>
         <defaultConnector>
             <targetReference>Confirmation_EmailSend</targetReference>
         </defaultConnector>
@@ -255,7 +268,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -268,8 +281,8 @@
     <recordLookups>
         <name>Get_CMDT</name>
         <label>Get CMDT</label>
-        <locationX>182</locationX>
-        <locationY>134</locationY>
+        <locationX>630</locationX>
+        <locationY>182</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Experience_Site</targetReference>
@@ -289,8 +302,8 @@
     <recordLookups>
         <name>Get_Experience_Site</name>
         <label>Get Experience Site</label>
-        <locationX>182</locationX>
-        <locationY>242</locationY>
+        <locationX>630</locationX>
+        <locationY>290</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>my_domain</targetReference>
@@ -302,8 +315,8 @@
     <recordLookups>
         <name>my_domain</name>
         <label>my domain</label>
-        <locationX>182</locationX>
-        <locationY>350</locationY>
+        <locationX>630</locationX>
+        <locationY>398</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Set_Up_Unsubscribe_Link_0</targetReference>
@@ -320,11 +333,53 @@
         <object>DomainSite</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordUpdates>
+        <name>Leads</name>
+        <label>Leads</label>
+        <locationX>171</locationX>
+        <locationY>668</locationY>
+        <connector>
+            <targetReference>Create_Public_Ids</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Public_Id__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Public_Id__c</field>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Remove_Public_Id</name>
+        <label>Remove Public Id</label>
+        <locationX>236</locationX>
+        <locationY>466</locationY>
+        <connector>
+            <targetReference>Leads</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Public_Id__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Public_Id__c</field>
+        </inputAssignments>
+        <object>Contact</object>
+    </recordUpdates>
     <screens>
         <name>completeScreen</name>
         <label>completeScreen</label>
-        <locationX>182</locationX>
-        <locationY>1814</locationY>
+        <locationX>895</locationX>
+        <locationY>1947</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -339,8 +394,8 @@
     <screens>
         <name>ConfirmationEmailPreviewScreen</name>
         <label>ConfirmationEmailPreviewScreen</label>
-        <locationX>50</locationX>
-        <locationY>1406</locationY>
+        <locationX>488</locationX>
+        <locationY>1395</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -356,10 +411,29 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
+        <name>Create_Public_Ids</name>
+        <label>Create Public Ids</label>
+        <locationX>50</locationX>
+        <locationY>1652</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>ContactsOnlyBatch</targetReference>
+        </connector>
+        <fields>
+            <name>displayPublicIds</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;Last step&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The Unsubscribe Link uses a 64 digit random id on each contact and lead, called Public_Id__c. &lt;/p&gt;&lt;p&gt;This may take a little while. You will receive an email when it is done. &lt;/p&gt;&lt;p&gt;After this, two record triggered flows will automatically create public ids when new contacts and leads are created.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;Click next to populate the public ids on all your records now.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
         <name>EmailModifyScreen</name>
         <label>EmailModifyScreen</label>
-        <locationX>182</locationX>
-        <locationY>674</locationY>
+        <locationX>630</locationX>
+        <locationY>722</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -393,8 +467,8 @@
     <screens>
         <name>Screen1Preview</name>
         <label>Screen1Preview</label>
-        <locationX>182</locationX>
-        <locationY>782</locationY>
+        <locationX>630</locationX>
+        <locationY>830</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -501,8 +575,8 @@
     <screens>
         <name>Screen2PreviewScreen_0</name>
         <label>Screen2ModifyScreen</label>
-        <locationX>182</locationX>
-        <locationY>890</locationY>
+        <locationX>630</locationX>
+        <locationY>938</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -575,8 +649,8 @@
     <screens>
         <name>Screen3PreviewScreen</name>
         <label>Screen3PreviewScreen</label>
-        <locationX>50</locationX>
-        <locationY>1106</locationY>
+        <locationX>498</locationX>
+        <locationY>1154</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -651,8 +725,8 @@
     <screens>
         <name>Set_Up_Unsubscribe_Link_0</name>
         <label>InitialSetUp</label>
-        <locationX>182</locationX>
-        <locationY>458</locationY>
+        <locationX>630</locationX>
+        <locationY>506</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -834,10 +908,10 @@
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>56</locationX>
-        <locationY>0</locationY>
+        <locationX>504</locationX>
+        <locationY>48</locationY>
         <connector>
-            <targetReference>Get_CMDT</targetReference>
+            <targetReference>Remove_Public_Id</targetReference>
         </connector>
     </start>
     <status>Draft</status>
