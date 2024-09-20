@@ -1,7 +1,9 @@
+
+// TO DO: this flow only works currently for contacts. make it work for leads as well.
 public class generateAllRandomStrings implements Database.Batchable<sObject> {
   public Integer emailLimits;
   public Integer recordsProcessed = 0;
-  public Integer len = 64;
+
   @InvocableMethod(
     label='Generate Random Text Strings for All in Batch'
     description='generates a random id for all contacts and leads'
@@ -11,37 +13,37 @@ public class generateAllRandomStrings implements Database.Batchable<sObject> {
     return input;
   }
 
-  public Database.QueryLocator start(
-    Database.BatchableContext bc,
-    boolean isContact
-  ) {
+  public Database.QueryLocator start(Database.BatchableContext bc) {
+    //,
+    //boolean isContact
+    //figure out how to make it work for boolean for both sobjects
+
     return Database.getQueryLocator(
       [
         SELECT Id
         FROM Contact
         WHERE Public_Id__c = NULL
-        //WITH SECURITY_ENFORCED
+        WITH SECURITY_ENFORCED
+
       ]
     );
   }
 
   public void execute(Database.BatchableContext bc, List<Contact> scope) {
-    final String chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
-    String randStr = '';
+
     List<Contact> updateCon = new List<Contact>();
     for (Contact c : scope) {
-      while (randStr.length() < len) {
-        Integer idx = Math.mod(
-          Math.abs(Crypto.getRandomInteger()),
-          chars.length()
-        );
-        randStr += chars.substring(idx, idx + 1);
-        System.debug('randomstringLead:' + randStr);
-      }
-
-      c.Public_Id__c = randStr;
+      String algorithmName = 'AES128';
+      Blob key = Crypto.generateAesKey(128);
+      Blob data = Blob.valueOf(c.Id);
+      Blob encrypted = Crypto.encryptWithManagedIV(algorithmName, key, data);
+      String encryptedString = EncodingUtil.base64Encode(encrypted);
+      String urlEncoded = EncodingUtil.urlEncode(encryptedString, 'UTF-8');
+      System.debug('urlencoded:' + urlEncoded);
+      System.debug('encryptedString' + encryptedString);
+      c.Public_Id__c = urlEncoded;
       updateCon.add(c);
-      randStr = '';
+
       recordsProcessed = recordsProcessed + 1;
     }
     database.update(updateCon, false);

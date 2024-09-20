@@ -237,6 +237,12 @@
     </dynamicChoiceSets>
     <environments>Default</environments>
     <formulas>
+        <description>Use currentUser or existing CMDT type value</description>
+        <name>currentUserOrExisting</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!Get_CMDT.Error_Email_Recipients__c}),{!$User.Email},{!Get_CMDT.Error_Email_Recipients__c})</expression>
+    </formulas>
+    <formulas>
         <description>The question asks &quot;Do you want to include this confirmation page?&quot; The field says &quot;do you want to enable one click?&quot; so the answers need to be reversed.</description>
         <name>EnableOneClickFormula</name>
         <dataType>String</dataType>
@@ -258,7 +264,7 @@
         <expression>IF({!confirmEmailQ}=&apos;Yes&apos;,&apos;You will receive a confirmation email shortly.&apos;,&apos;&apos;)</expression>
     </formulas>
     <interviewLabel>Unsubscribe Link Setup {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Unsubscribe Link Setup Final</label>
+    <label>Unsubscribe Link Setup</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -754,7 +760,7 @@
                     <name>ErrorEmailList</name>
                     <dataType>String</dataType>
                     <defaultValue>
-                        <elementReference>Get_CMDT.Error_Email_Recipients__c</elementReference>
+                        <elementReference>currentUserOrExisting</elementReference>
                     </defaultValue>
                     <fieldText>Enter a comma separated list of emails that should receive alerts when there is an error.</fieldText>
                     <fieldType>InputField</fieldType>
