@@ -63,4 +63,10 @@
         <field>type_in_Unsubscribe__c</field>
         <value xsi:type="xsd:string">Yes</value>
     </values>
+    <values>
+        <field>Confirmation_Email_Text__c</field>
+        <value xsi:type="xsd:string">You have successfully unsubscribed from all email from our organization.</value>
+    </values>
+
+
 </CustomMetadata>
