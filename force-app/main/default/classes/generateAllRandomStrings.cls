@@ -1,3 +1,4 @@
+
 // TO DO: this flow only works currently for contacts. make it work for leads as well.
 public class generateAllRandomStrings implements Database.Batchable<sObject> {
   public Integer emailLimits;
@@ -16,17 +17,20 @@ public class generateAllRandomStrings implements Database.Batchable<sObject> {
     //,
     //boolean isContact
     //figure out how to make it work for boolean for both sobjects
+
     return Database.getQueryLocator(
       [
         SELECT Id
         FROM Contact
         WHERE Public_Id__c = NULL
         WITH SECURITY_ENFORCED
+
       ]
     );
   }
 
   public void execute(Database.BatchableContext bc, List<Contact> scope) {
+
     List<Contact> updateCon = new List<Contact>();
     for (Contact c : scope) {
       String algorithmName = 'AES128';
@@ -39,6 +43,7 @@ public class generateAllRandomStrings implements Database.Batchable<sObject> {
       System.debug('encryptedString' + encryptedString);
       c.Public_Id__c = urlEncoded;
       updateCon.add(c);
+
       recordsProcessed = recordsProcessed + 1;
     }
     database.update(updateCon, false);
