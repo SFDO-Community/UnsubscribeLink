@@ -19,7 +19,7 @@
         </inputParameters>
         <nameSegment>GenerateRandomString</nameSegment>
         <outputParameters>
-            <assignToReference>$Record.UnsubscribeLnk__Public_Id__c</assignToReference>
+            <assignToReference>$Record.Public_Id__c</assignToReference>
             <name>out</name>
         </outputParameters>
         <versionSegment>1</versionSegment>
