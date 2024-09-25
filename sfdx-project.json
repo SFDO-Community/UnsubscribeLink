@@ -12,7 +12,7 @@
       "versionName": "ver 0.1",
       "versionNumber": "0.1.0.NEXT",
       "definitionFile": "config/scratch-org-def.json",
-      //"path": "unsubscribe",
+      "path": "unsubscribe",
       "default": false,
       "package": "Unsubscribe Link 4.0",
       "versionDescription": ""
@@ -24,9 +24,6 @@
   "sourceApiVersion": "59.0",
   "packageAliases": {
     "Unsubscribe Link": "0Hoaj00000008FJCAY",
-<<<<<<< Updated upstream
-     "Unsubscribe Link 4.0": "0Hoaj0000000BJdCAM"
-=======
     "Unsubscribe Link 4.0": "0Hoaj0000000BJdCAM"
 >>>>>>> Stashed changes
   }
