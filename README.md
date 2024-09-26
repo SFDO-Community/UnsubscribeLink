@@ -3,7 +3,7 @@ Send an email to anyone from inside Salesforce and include an unsubscribe link r
 
 Unsubscribe Link Resources:
 
-- [Installation instructions](https://docs.google.com/document/d/1HpiGV3vjMaNwZnnNywTvxBjcCBADAP_sHsJRNbukjLc/edit?usp=sharing)
+- [Installation instructions Updated 9/25/24](https://docs.google.com/document/d/1vevs5MKiTmHEtJXceSsenAm3sViQF38bAfoJ6WdATYA/edit#heading=h.3d7st1pta4ai)
 
 ## Community Sprints 
 
