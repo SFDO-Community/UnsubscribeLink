@@ -3,8 +3,8 @@
     <actionCalls>
         <name>ContactsOnlyBatch</name>
         <label>ContactsOnlyBatch</label>
-        <locationX>182</locationX>
-        <locationY>1922</locationY>
+        <locationX>772</locationX>
+        <locationY>1891</locationY>
         <actionName>generateAllRandomStrings</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -19,8 +19,8 @@
         <description>Update the custom metadata used in the Unsubscribe Link Process.</description>
         <name>Unsubscribe_Link</name>
         <label>Unsubscribe Link</label>
-        <locationX>182</locationX>
-        <locationY>1706</locationY>
+        <locationX>780</locationX>
+        <locationY>1640</locationY>
         <actionName>unsubscribeInvocableMethod</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -38,10 +38,10 @@
     </actionCalls>
     <apiVersion>61.0</apiVersion>
     <assignments>
-        <name>Assign_Value</name>
-        <label>Assign Value</label>
-        <locationX>182</locationX>
-        <locationY>566</locationY>
+        <name>Assign_Initial_Value</name>
+        <label>Assign Initial Value</label>
+        <locationX>787</locationX>
+        <locationY>614</locationY>
         <assignmentItems>
             <assignToReference>Get_CMDT.Confirmation_Email_Text__c</assignToReference>
             <operator>Assign</operator>
@@ -88,7 +88,7 @@
             <assignToReference>Get_CMDT.Site_Domain__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>my_domain.Domain.Domain</elementReference>
+                <elementReference>Get_My_Domain.Domain.Domain</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -96,10 +96,11 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Assign_Value_0</name>
-        <label>Assign Value</label>
-        <locationX>182</locationX>
-        <locationY>1598</locationY>
+        <description>Assign selections made on previous screens</description>
+        <name>Assign_Modified_Value</name>
+        <label>Assign Modified Value</label>
+        <locationX>780</locationX>
+        <locationY>1428</locationY>
         <assignmentItems>
             <assignToReference>Get_CMDT.Screen_1_Part_2__c</assignToReference>
             <operator>Assign</operator>
@@ -172,10 +173,10 @@
     <decisions>
         <name>Confirmation_EmailSend</name>
         <label>Send Confirmation Email?</label>
-        <locationX>182</locationX>
-        <locationY>1298</locationY>
+        <locationX>773</locationX>
+        <locationY>1281</locationY>
         <defaultConnector>
-            <targetReference>Assign_Value_0</targetReference>
+            <targetReference>Assign_Modified_Value</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
@@ -196,13 +197,13 @@
     </decisions>
     <decisions>
         <name>IncludeScreen3Decision</name>
-        <label>IncludeScreen3</label>
-        <locationX>182</locationX>
-        <locationY>998</locationY>
+        <label>Include Confirmation Screen?</label>
+        <locationX>777</locationX>
+        <locationY>1115</locationY>
         <defaultConnector>
             <targetReference>Confirmation_EmailSend</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>Skip Screen 3</defaultConnectorLabel>
+        <defaultConnectorLabel>Skip Confirmation Screen</defaultConnectorLabel>
         <rules>
             <name>IncludeScreen3Outcome</name>
             <conditionLogic>and</conditionLogic>
@@ -216,7 +217,7 @@
             <connector>
                 <targetReference>Screen3PreviewScreen</targetReference>
             </connector>
-            <label>IncludeScreen3</label>
+            <label>Include Confirmation Screen</label>
         </rules>
     </decisions>
     <dynamicChoiceSets>
@@ -233,7 +234,7 @@
         </filters>
         <object>OrgWideEmailAddress</object>
         <outputAssignments>
-            <assignToReference>orgWideEmailDisplayName</assignToReference>
+            <assignToReference>varT_OrgWideEmailDisplayName</assignToReference>
             <field>DisplayName</field>
         </outputAssignments>
         <valueField>Address</valueField>
@@ -277,7 +278,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -288,10 +289,11 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <recordLookups>
+        <description>Get the unsubscribe link to be used in communication</description>
         <name>Get_CMDT</name>
         <label>Get CMDT</label>
-        <locationX>182</locationX>
-        <locationY>134</locationY>
+        <locationX>788</locationX>
+        <locationY>182</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Experience_Site</targetReference>
@@ -309,23 +311,25 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
+        <description>Collect Experience Site informations</description>
         <name>Get_Experience_Site</name>
         <label>Get Experience Site</label>
-        <locationX>182</locationX>
-        <locationY>242</locationY>
+        <locationX>788</locationX>
+        <locationY>290</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>my_domain</targetReference>
+            <targetReference>Get_My_Domain</targetReference>
         </connector>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Site</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>my_domain</name>
-        <label>my domain</label>
-        <locationX>182</locationX>
-        <locationY>350</locationY>
+        <description>Collect URL from Experience Site</description>
+        <name>Get_My_Domain</name>
+        <label>Get My Domain</label>
+        <locationX>787</locationX>
+        <locationY>400</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Set_Up_Unsubscribe_Link_0</targetReference>
@@ -343,30 +347,12 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
-        <name>Leads</name>
-        <label>Leads</label>
-        <locationX>182</locationX>
-        <locationY>2246</locationY>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Public_Id__c</field>
-            <operator>IsNull</operator>
-            <value>
-                <booleanValue>false</booleanValue>
-            </value>
-        </filters>
-        <inputAssignments>
-            <field>Public_Id__c</field>
-        </inputAssignments>
-        <object>Lead</object>
-    </recordUpdates>
-    <recordUpdates>
-        <name>Remove_Public_Id</name>
-        <label>Remove Public Id</label>
-        <locationX>182</locationX>
-        <locationY>2138</locationY>
+        <name>Update_Contacts</name>
+        <label>Update Contacts</label>
+        <locationX>403</locationX>
+        <locationY>1675</locationY>
         <connector>
-            <targetReference>Leads</targetReference>
+            <targetReference>Update_Leads</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -381,16 +367,34 @@
         </inputAssignments>
         <object>Contact</object>
     </recordUpdates>
+    <recordUpdates>
+        <name>Update_Leads</name>
+        <label>Update Leads</label>
+        <locationX>403</locationX>
+        <locationY>1518</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Public_Id__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Public_Id__c</field>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
     <screens>
         <name>completeScreen</name>
         <label>completeScreen</label>
-        <locationX>182</locationX>
-        <locationY>2030</locationY>
+        <locationX>403</locationX>
+        <locationY>1889</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Remove_Public_Id</targetReference>
+            <targetReference>Update_Contacts</targetReference>
         </connector>
         <fields>
             <name>DonedisplayText</name>
@@ -402,18 +406,18 @@
     </screens>
     <screens>
         <name>ConfirmationEmailPreviewScreen</name>
-        <label>ConfirmationEmailPreviewScreen</label>
-        <locationX>50</locationX>
-        <locationY>1406</locationY>
+        <label>Email Confirmation Preview Screen</label>
+        <locationX>512</locationX>
+        <locationY>1354</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Assign_Value_0</targetReference>
+            <targetReference>Assign_Modified_Value</targetReference>
         </connector>
         <fields>
             <name>confirmationEmailDisplayText</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;The email recipient receives an email. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;From: {!orgWideEmailDisplayName}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Email body: {!ConfirmEmailText}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;The email recipient receives an email. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;From: {!varT_OrgWideEmailDisplayName}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Email body: {!ConfirmEmailText}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -422,8 +426,8 @@
     <screens>
         <name>Create_Public_Ids</name>
         <label>Create Public Ids</label>
-        <locationX>182</locationX>
-        <locationY>1814</locationY>
+        <locationX>638</locationX>
+        <locationY>1764</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -439,10 +443,11 @@
         <showHeader>true</showHeader>
     </screens>
     <screens>
+        <description>A preview of the email with the option to modify the text of the link</description>
         <name>EmailModifyScreen</name>
-        <label>EmailModifyScreen</label>
-        <locationX>182</locationX>
-        <locationY>674</locationY>
+        <label>Screen Email Preview</label>
+        <locationX>787</locationX>
+        <locationY>722</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -474,10 +479,11 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
+        <description>Give the option to have a not recommended  confirmation screen before Opt Out</description>
         <name>Screen1Preview</name>
-        <label>Screen1Preview</label>
-        <locationX>182</locationX>
-        <locationY>782</locationY>
+        <label>Screen Confirmation before OptOut</label>
+        <locationX>787</locationX>
+        <locationY>830</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -582,10 +588,11 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
+        <description>This screen will display the confirmation message you want the user to see</description>
         <name>Screen2PreviewScreen_0</name>
-        <label>Screen2ModifyScreen</label>
-        <locationX>182</locationX>
-        <locationY>890</locationY>
+        <label>Confirmation Msg Screen</label>
+        <locationX>789</locationX>
+        <locationY>968</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -656,10 +663,11 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
+        <description>This is an optional screen to allow user to enter their email if not found in the database.</description>
         <name>Screen3PreviewScreen</name>
-        <label>Screen3PreviewScreen</label>
-        <locationX>50</locationX>
-        <locationY>1106</locationY>
+        <label>Screen email ID not found</label>
+        <locationX>507</locationX>
+        <locationY>1123</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -732,15 +740,16 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
+        <description>Select informations to set up the unsubscribe link</description>
         <name>Set_Up_Unsubscribe_Link_0</name>
         <label>InitialSetUp</label>
-        <locationX>182</locationX>
-        <locationY>458</locationY>
+        <locationX>787</locationX>
+        <locationY>506</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Assign_Value</targetReference>
+            <targetReference>Assign_Initial_Value</targetReference>
         </connector>
         <fields>
             <name>Set_Up_Unsubscribe_Link_0_Section1</name>
@@ -917,13 +926,13 @@
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>56</locationX>
-        <locationY>0</locationY>
+        <locationX>661</locationX>
+        <locationY>48</locationY>
         <connector>
             <targetReference>Get_CMDT</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <textTemplates>
         <name>horizontalLine1</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
@@ -932,7 +941,7 @@
     <textTemplates>
         <name>questionChangeOrgName</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
-        <text>Would you like to change &quot;{!orgNameVar}&quot;?</text>
+        <text>Would you like to change &quot;{!varT_OrgName}&quot;?</text>
     </textTemplates>
     <textTemplates>
         <name>screen1part2</name>
@@ -950,14 +959,14 @@
         <text>To unsubscribe from all email from {!OrganizationNameFINAL}, enter your email address and click NEXT.</text>
     </textTemplates>
     <variables>
-        <name>orgNameVar</name>
+        <name>varT_OrgName</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>orgWideEmailDisplayName</name>
+        <name>varT_OrgWideEmailDisplayName</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
