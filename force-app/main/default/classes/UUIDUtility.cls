@@ -1,10 +1,10 @@
 public class UUIDUtility {
-
     public static void generateUUIDsForRecords(List<SObject> records, String uuidFieldName) {
         for (SObject record : records) {
             // Set the UUID field if it's null
             if (record.get(uuidFieldName) == null) {
-                record.put(uuidFieldName, generateUUID());
+                // Use EncodingUtil.urlDecode to prevent any automatic encoding
+                record.put(uuidFieldName, EncodingUtil.urlDecode(generateUUID(), 'UTF-8'));
             }
         }
     }
@@ -12,7 +12,7 @@ public class UUIDUtility {
     // Generates a UUID for a single record
     public static void generatedPublicUUIDForSingleRecord(SObject record, String uuidFieldName) {
         if (record.get(uuidFieldName) == null) {
-            record.put(uuidFieldName, generateUUID());
+            record.put(uuidFieldName, EncodingUtil.urlDecode(generateUUID(), 'UTF-8'));
         }
     }
 
