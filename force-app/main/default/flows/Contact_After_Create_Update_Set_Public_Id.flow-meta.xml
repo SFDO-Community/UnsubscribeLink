@@ -1,32 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
-        <name>Generate_Public_Id</name>
-        <label>Generate Public Id</label>
+        <name>Generate_UUID</name>
+        <label>Generate UUID</label>
         <locationX>176</locationX>
         <locationY>323</locationY>
-        <actionName>GenerateRandomString</actionName>
+        <actionName>SingleRecordUUIDInvocable</actionName>
         <actionType>apex</actionType>
         <connector>
             <targetReference>Update_the_Contact</targetReference>
         </connector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
-            <name>recordId</name>
+            <name>recordIds</name>
             <value>
-                <elementReference>$Record.Id</elementReference>
+                <elementReference>recordId</elementReference>
             </value>
         </inputParameters>
-        <nameSegment>GenerateRandomString</nameSegment>
+        <nameSegment>SingleRecordUUIDInvocable</nameSegment>
         <outputParameters>
-            <assignToReference>$Record.Public_Id__c</assignToReference>
-            <name>out</name>
+            <assignToReference>UUID</assignToReference>
+            <name>generatedUUID</name>
         </outputParameters>
         <versionSegment>1</versionSegment>
     </actionCalls>
     <apiVersion>61.0</apiVersion>
     <environments>Default</environments>
-    <interviewLabel>Contact || After Create/Update || Set Public Id {!$Flow.CurrentDateTime}</interviewLabel>
+    <interviewLabel
+  >Contact || After Create/Update || Set Public Id {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Contact || After Create/Update || Set Public Id</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -52,17 +53,19 @@
         <label>Update the Contact</label>
         <locationX>176</locationX>
         <locationY>431</locationY>
-        <faultConnector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Generate_Public_Id</targetReference>
-        </faultConnector>
+        <inputAssignments>
+            <field>Public_Id__c</field>
+            <value>
+                <elementReference>UUID</elementReference>
+            </value>
+        </inputAssignments>
         <inputReference>$Record</inputReference>
     </recordUpdates>
     <start>
         <locationX>50</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Generate_Public_Id</targetReference>
+            <targetReference>Generate_UUID</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -76,7 +79,7 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <variables>
         <name>recordId</name>
         <dataType>String</dataType>
@@ -86,5 +89,12 @@
         <value>
             <elementReference>$Record.Id</elementReference>
         </value>
+    </variables>
+    <variables>
+        <name>UUID</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
     </variables>
 </Flow>
