@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>49.0</apiVersion>
     <assignments>
-        <description
-    >Assign variables to the email variable from the screen and assign a null value to the recordId variable.</description>
+        <description>Assign variables to the email variable from the screen and assign a null value to the recordId variable.</description>
         <name>AssignEmailFromScreenToVar</name>
         <label>AssignEmailFromScreenToVar</label>
         <locationX>642</locationX>
@@ -19,7 +18,7 @@
             <assignToReference>recordId</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue />
+                <stringValue></stringValue>
             </value>
         </assignmentItems>
         <connector>
@@ -27,8 +26,7 @@
         </connector>
     </assignments>
     <assignments>
-        <description
-    >If the contact isn&apos;t found, it sets the email variable to null. If the contact was found, the sub flow goes back to the main flow.</description>
+        <description>If the contact isn&apos;t found, it sets the email variable to null. If the contact was found, the sub flow goes back to the main flow.</description>
         <name>reassignEmail</name>
         <label>ReassignEmail</label>
         <locationX>640</locationX>
@@ -45,8 +43,7 @@
         </connector>
     </assignments>
     <decisions>
-        <description
-    >Was the contact found when looking it up via email?</description>
+        <description>Was the contact found when looking it up via email?</description>
         <name>Contact_or_Lead_0_0</name>
         <label>Was Contact Found</label>
         <locationX>634</locationX>
@@ -68,36 +65,28 @@
             <label>ContactFound</label>
         </rules>
     </decisions>
-    <description
-  >Part of Unsubscribe Link package from AppExchange 4/4</description>
+    <description>Part of Unsubscribe Link package from AppExchange 4/4</description>
     <environments>Default</environments>
     <formulas>
-        <description
-    >Formula resolves to Contact Id if the unsubscribe record is attached to a contact - the original record of the unsubscribe link was a contact.</description>
+        <description>Formula resolves to Contact Id if the unsubscribe record is attached to a contact - the original record of the unsubscribe link was a contact.</description>
         <name>useContactId</name>
         <dataType>String</dataType>
-        <expression
-    >IF(BEGINS({!FoundId},&quot;003&quot;),{!FoundId},&quot;&quot;)</expression>
+        <expression>IF(BEGINS({!FoundId},&quot;003&quot;),{!FoundId},&quot;&quot;)</expression>
     </formulas>
     <formulas>
-        <description
-    >Formula resolves to Lead Id if the unsubscribe record is attached to a Lead - the original record of the unsubscribe link was a lead.</description>
+        <description>Formula resolves to Lead Id if the unsubscribe record is attached to a Lead - the original record of the unsubscribe link was a lead.</description>
         <name>UseLeadId</name>
         <dataType>String</dataType>
-        <expression
-    >IF(BEGINS({!FoundId},&quot;00Q&quot;),{!FoundId},&quot;&quot;)</expression>
+        <expression>IF(BEGINS({!FoundId},&quot;00Q&quot;),{!FoundId},&quot;&quot;)</expression>
     </formulas>
     <formulas>
-        <description
-    >18 digit id of the record. The email template only sends the 15 digit id.</description>
+        <description>18 digit id of the record. The email template only sends the 15 digit id.</description>
         <name>x18DigitID</name>
         <dataType>String</dataType>
         <expression>Casesafeid({!recordId})</expression>
     </formulas>
-    <interviewLabel
-  >Unsubscribe Link No RecordId {!$Flow.CurrentDateTime}</interviewLabel>
-    <isAdditionalPermissionRequiredToRun
-  >true</isAdditionalPermissionRequiredToRun>
+    <interviewLabel>Unsubscribe Link No RecordId {!$Flow.CurrentDateTime}</interviewLabel>
+    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
     <label>Unsubscribe Link No RecordId</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -113,14 +102,12 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <recordLookups>
-        <description
-    >Look for a contact record with email address from the screen.</description>
+        <description>Look for a contact record with email address from the screen.</description>
         <name>Get_Contact_0</name>
         <label>Get Contact</label>
         <locationX>642</locationX>
         <locationY>487</locationY>
-        <assignNullValuesIfNoRecordsFound
-    >true</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Contact_or_Lead_0_0</targetReference>
         </connector>
@@ -143,14 +130,12 @@
         </outputAssignments>
     </recordLookups>
     <recordLookups>
-        <description
-    >Look for a lead record email address from screen.</description>
+        <description>Look for a lead record email address from screen.</description>
         <name>Get_Lead_0</name>
         <label>Get Lead</label>
         <locationX>646</locationX>
         <locationY>1000</locationY>
-        <assignNullValuesIfNoRecordsFound
-    >true</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <filterLogic>or</filterLogic>
         <filters>
             <field>Email</field>
@@ -171,8 +156,7 @@
     </recordLookups>
     <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
-        <description
-    >confirmation screen for person to confirm they want to unsubscribe. Update &quot;our organization&quot; in the custom metadata type &quot;Unsubscribe Link.&quot;
+        <description>confirmation screen for person to confirm they want to unsubscribe. Update &quot;our organization&quot; in the custom metadata type &quot;Unsubscribe Link.&quot;
 This screen will appear if a matching record is not found in the database.</description>
         <name>Are_you_sure_0</name>
         <label>NoRecordsScreen</label>
@@ -186,8 +170,7 @@ This screen will appear if a matching record is not found in the database.</desc
         </connector>
         <fields>
             <name>confirmation_0</name>
-            <fieldText
-      >&lt;p&gt;&lt;span style=&quot;font-size: 18px; font-family: verdana; color: rgb(0, 0, 0);&quot;&gt;{!Screen3}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 18px; font-family: verdana; color: rgb(0, 0, 0);&quot;&gt;{!Screen3}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -201,8 +184,7 @@ This screen will appear if a matching record is not found in the database.</desc
                     <dataType>String</dataType>
                     <fieldText>Email</fieldText>
                     <fieldType>InputField</fieldType>
-                    <inputsOnNextNavToAssocScrn
-          >UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                 </fields>
                 <inputParameters>
@@ -250,12 +232,10 @@ This screen will appear if a matching record is not found in the database.</desc
     </start>
     <status>Active</status>
     <textTemplates>
-        <description
-    >Email sent to administrator(s) when the Flow experiences an error.</description>
+        <description>Email sent to administrator(s) when the Flow experiences an error.</description>
         <name>errorBody</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text
-    >&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;Alert: there was an error in running the Flow Unsubscribe Link Blank or &lt;/span&gt;UnsubscribeLinkBlank.&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt; This flow is part of the unmanaged package Unsubscribe Link from the AppExchange.  https://wp.me/p9qPLI-eU.  &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;{!errorTextVar}&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;Here are the variables that were input from the link in the email. &lt;/span&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;recordId (the id passed in the URL)= {!recordId}, &lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;The email entered by the recipient was: {!Emailaddressscreen}.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;About this email: &lt;/strong&gt;&lt;/p&gt;&lt;p&gt;To modify this error email, open the Flow and edit the text template called &lt;strong&gt;errorBody&lt;/strong&gt;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;To modify who receives this email, open the custom metadata type called Unsubscribe Link and the record with Label of &quot;Unsubscribe.&quot; Change the value in &lt;strong&gt;Error Email Recipients. &lt;/strong&gt;&lt;/p&gt;</text>
+        <text>&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;Alert: there was an error in running the Flow Unsubscribe Link Blank or &lt;/span&gt;UnsubscribeLinkBlank.&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt; This flow is part of the unmanaged package Unsubscribe Link from the AppExchange.  https://wp.me/p9qPLI-eU.  &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;{!errorTextVar}&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;Here are the variables that were input from the link in the email. &lt;/span&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;recordId (the id passed in the URL)= {!recordId}, &lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;The email entered by the recipient was: {!Emailaddressscreen}.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;About this email: &lt;/strong&gt;&lt;/p&gt;&lt;p&gt;To modify this error email, open the Flow and edit the text template called &lt;strong&gt;errorBody&lt;/strong&gt;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;To modify who receives this email, open the custom metadata type called Unsubscribe Link and the record with Label of &quot;Unsubscribe.&quot; Change the value in &lt;strong&gt;Error Email Recipients. &lt;/strong&gt;&lt;/p&gt;</text>
     </textTemplates>
     <variables>
         <name>Email</name>
@@ -265,8 +245,7 @@ This screen will appear if a matching record is not found in the database.</desc
         <isOutput>true</isOutput>
     </variables>
     <variables>
-        <description
-    >Update default below to user who should be alerted when this error occurs.</description>
+        <description>Update default below to user who should be alerted when this error occurs.</description>
         <name>ErrorRecipient</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
@@ -274,16 +253,14 @@ This screen will appear if a matching record is not found in the database.</desc
         <isOutput>true</isOutput>
     </variables>
     <variables>
-        <description
-    >Error message to send to error email recipient.</description>
+        <description>Error message to send to error email recipient.</description>
         <name>errorTextVar</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <value>
-            <stringValue
-      >Error in your custom metadata type of Unsubscribe_cmdt. Needs a label of Unsubscribe. </stringValue>
+            <stringValue>Error in your custom metadata type of Unsubscribe_cmdt. Needs a label of Unsubscribe. </stringValue>
         </value>
     </variables>
     <variables>
@@ -294,8 +271,7 @@ This screen will appear if a matching record is not found in the database.</desc
         <isOutput>true</isOutput>
     </variables>
     <variables>
-        <description
-    >id of the lead record from the unsubscribe link</description>
+        <description>id of the lead record from the unsubscribe link</description>
         <name>LeadID</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
