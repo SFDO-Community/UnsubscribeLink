@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <customMetadataTypeAccesses>
         <enabled>true</enabled>
@@ -122,27 +122,19 @@
     </fieldPermissions>
     <flowAccesses>
         <enabled>true</enabled>
-        <flow>
-Unsubscribe_Contacts;
-    </flow>
+        <flow>Unsubscribe_Contacts</flow>
     </flowAccesses>
     <flowAccesses>
         <enabled>true</enabled>
-        <flow>
-Unsubscribe_Leads;
-    </flow>
+        <flow>Unsubscribe_Leads</flow>
     </flowAccesses>
     <flowAccesses>
         <enabled>true</enabled>
-        <flow>
-Unsubscribe_Link_Quick;
-    </flow>
+        <flow>Unsubscribe_Link_Quick</flow>
     </flowAccesses>
     <flowAccesses>
         <enabled>true</enabled>
-        <flow>
-recordIdBlankFlow;
-    </flow>
+        <flow>recordIdBlankFlow</flow>
     </flowAccesses>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Unsubscribe Link</label>
