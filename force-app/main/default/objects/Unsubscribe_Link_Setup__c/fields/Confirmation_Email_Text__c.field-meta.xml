@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Confirmation_Email_Text__c</fullName>
+    <defaultValue
+  >&quot;You have successfully unsubscribed from all email from &quot; +
+ $Organization.Name + &quot;.&quot;</defaultValue>
     <externalId>false</externalId>
     <label>Confirmation Email Text</label>
-    <length>250</length>
+    <length>255</length>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Text</type>
