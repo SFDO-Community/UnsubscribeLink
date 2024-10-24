@@ -1,18 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomMetadata
+  xmlns="http://soap.sforce.com/2006/04/metadata"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
     <label>TestCaseNo</label>
     <protected>true</protected>
     <values>
         <field>Confirmation_Email_Text__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:nil="true" />
     </values>
     <values>
         <field>Error_Email_Recipients__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:nil="true" />
     </values>
     <values>
         <field>Link_Text__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:nil="true" />
     </values>
     <values>
         <field>One_Click__c</field>
@@ -20,7 +24,7 @@
     </values>
     <values>
         <field>Org_Wide_Email_Address__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:nil="true" />
     </values>
     <values>
         <field>Our_Organization__c</field>
@@ -28,23 +32,23 @@
     </values>
     <values>
         <field>Screen_1_Part_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:nil="true" />
     </values>
     <values>
         <field>Screen_1_Part_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:nil="true" />
     </values>
     <values>
         <field>Screen_2_Part_1__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:nil="true" />
     </values>
     <values>
         <field>Screen_2_Part_2__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:nil="true" />
     </values>
     <values>
         <field>Screen_3__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:nil="true" />
     </values>
     <values>
         <field>Send_Confirmation_Email__c</field>
@@ -52,7 +56,7 @@
     </values>
     <values>
         <field>Site_Domain__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:nil="true" />
     </values>
     <values>
         <field>Test_Case__c</field>

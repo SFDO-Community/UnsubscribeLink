@@ -8,7 +8,7 @@
         <actionName>SingleRecordUUIDInvocable</actionName>
         <actionType>apex</actionType>
         <connector>
-            <targetReference>Update_the_Contact</targetReference>
+            <targetReference>Get_Experience_Site</targetReference>
         </connector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
@@ -48,15 +48,65 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Experience_Site</name>
+        <label>Get Experience Site</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_My_Domain</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Unsubscribe</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Site</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_My_Domain</name>
+        <label>Get My Domain</label>
+        <locationX>176</locationX>
+        <locationY>539</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Update_the_Contact</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SiteId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Experience_Site.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>DomainSite</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordUpdates>
         <name>Update_the_Contact</name>
         <label>Update the Contact</label>
         <locationX>176</locationX>
-        <locationY>431</locationY>
+        <locationY>647</locationY>
         <inputAssignments>
             <field>Public_Id__c</field>
             <value>
                 <elementReference>UUID</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>UnsubscribeLinkContact__c</field>
+            <value>
+                <elementReference>txt_UnsubscribeLinkURL</elementReference>
             </value>
         </inputAssignments>
         <inputReference>$Record</inputReference>
@@ -80,6 +130,12 @@
         <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Draft</status>
+    <textTemplates>
+        <name>txt_UnsubscribeLinkURL</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text
+    >https://{!Get_My_Domain.Domain.Domain}/Unsubscribe/s/unsubscribe?varRecId=C{!UUID}</text>
+    </textTemplates>
     <variables>
         <name>recordId</name>
         <dataType>String</dataType>
