@@ -35,7 +35,7 @@ private class UUIDBatchJobTest {
         // Act: Run the batch job for Contacts
         UUIDBatchJob batchJob = new UUIDBatchJob('Contact', 'Public_Id__c');
         Test.startTest();
-        Database.executeBatch(batchJob, 200); // Simulate multiple batches
+        Database.executeBatch(batchJob, 200);
         Test.stopTest();
 
         // Assert: Check that all Contacts now have a generated UUID
