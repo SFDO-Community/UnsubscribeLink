@@ -3,18 +3,14 @@
     <fullName>Unsubscribe_Link_Contact__c</fullName>
     <description>Insert this link into emails to allow contacts to unsubscribe from emails sent from Salesforce. This will work if you have followed the instructions for the Unsubscribe link app. Modify the text of the link in the Custom Metadata type Unsubscribe Link, the record called Unsubscribe, the field Link Text.</description>
     <externalId>false</externalId>
-    <formula>/* Get the link of the Unsubscribe Experience Site */
-HYPERLINK((&quot;https://&quot;+$CustomMetadata.Unsubscribe_Link__mdt.Unsubscribe.Site_Domain__c
+    <formula>HYPERLINK(
 
-/* append the recordId of this record */
 
-+&quot;/Unsubscribe/s/unsubscribe?varRecId=&quot;+ &apos;C&apos;+ Public_Id__c ), 
-
-/* Look up the custom metadata type record to find the text for the link.*/
-$CustomMetadata.Unsubscribe_Link__mdt.Unsubscribe.Link_Text__c
-
- + &quot;.&quot;)</formula>
+LEFT(UnsubscribeLinkContact__c , FIND(&quot;+&quot;,UnsubscribeLinkContact__c ) - 1),
+				
+				RIGHT(UnsubscribeLinkContact__c,(LEN( UnsubscribeLinkContact__c )-FIND(&quot;+&quot;, UnsubscribeLinkContact__c ))))</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>UnsubscribeLnk__UnsubscribeLinkContact__c</inlineHelpText>
     <label>Unsubscribe Link Contact</label>
     <required>false</required>
     <type>Text</type>
