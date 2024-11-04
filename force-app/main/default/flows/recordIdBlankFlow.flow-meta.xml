@@ -170,7 +170,7 @@ This screen will appear if a matching record is not found in the database.</desc
         </connector>
         <fields>
             <name>confirmation_0</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 18px; font-family: verdana; color: rgb(0, 0, 0);&quot;&gt;{!Screen3}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-family: verdana; font-size: 18px;&quot;&gt;{!Screen3}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>

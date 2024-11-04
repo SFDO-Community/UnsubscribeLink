@@ -8,7 +8,7 @@
         <actionName>UUIDBatchInvocable</actionName>
         <actionType>apex</actionType>
         <connector>
-            <targetReference>completeScreen</targetReference>
+            <targetReference>LeadBatch</targetReference>
         </connector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
@@ -27,6 +27,38 @@
             <name>objectType</name>
             <value>
                 <stringValue>Contact</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>UUIDBatchInvocable</nameSegment>
+        <versionSegment>1</versionSegment>
+    </actionCalls>
+    <actionCalls>
+        <name>LeadBatch</name>
+        <label>Lead Batch</label>
+        <locationX>1845</locationX>
+        <locationY>2341</locationY>
+        <actionName>UUIDBatchInvocable</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>completeScreen</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>fieldName</name>
+            <value>
+                <stringValue>Public_Id__c</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>linkText</name>
+            <value>
+                <elementReference>LinkText</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>objectType</name>
+            <value>
+                <stringValue>Lead</stringValue>
             </value>
         </inputParameters>
         <nameSegment>UUIDBatchInvocable</nameSegment>
@@ -103,7 +135,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Create_Record</targetReference>
+            <targetReference>ExistingRecordSameName_0_0</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -400,6 +432,32 @@
         </rules>
     </decisions>
     <decisions>
+        <description>Does a setup record exist already</description>
+        <name>ExistingRecordSameName_0_0</name>
+        <label>Setup Record Exists?</label>
+        <locationX>1395</locationX>
+        <locationY>1898</locationY>
+        <defaultConnector>
+            <targetReference>Create_Record</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No record</defaultConnectorLabel>
+        <rules>
+            <name>RecordExists_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>getULSetup</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_existing_record</targetReference>
+            </connector>
+            <label>Record exists</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>IncludeScreen3Decision</name>
         <label>Include Email Type In Screen</label>
         <locationX>1703</locationX>
@@ -424,7 +482,7 @@
             <label>Include Confirmation Screen</label>
         </rules>
     </decisions>
-    <description>New contact batch to pass in the link text. Make sure the create records looks for duplicates!</description>
+    <description>New contact batch to pass in the link text. This version has an extra decision to check if record needs to be created or updated.</description>
     <dynamicChoiceSets>
         <name>orgWideEmails</name>
         <dataType>String</dataType>
@@ -558,6 +616,16 @@
         <object>Unsubscribe_Link_Setup__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordUpdates>
+        <name>Update_existing_record</name>
+        <label>Update existing record</label>
+        <locationX>1281</locationX>
+        <locationY>2031</locationY>
+        <connector>
+            <targetReference>Create_Public_Ids</targetReference>
+        </connector>
+        <inputReference>var_FinalRecord</inputReference>
+    </recordUpdates>
     <screens>
         <name>CompanyName</name>
         <label>CompanyName</label>
@@ -615,8 +683,8 @@
     <screens>
         <name>completeScreen</name>
         <label>completeScreen</label>
-        <locationX>1703</locationX>
-        <locationY>2402</locationY>
+        <locationX>1700</locationX>
+        <locationY>2441</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -1209,7 +1277,7 @@
             <targetReference>getULSetup</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <textTemplates>
         <name>horizontalLine1</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>

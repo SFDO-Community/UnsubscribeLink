@@ -362,7 +362,7 @@ If not, check if the custom metadata type allows the user to type in their email
         <description>confirmation screen for person to confirm they want to unsubscribe. Update &quot;our organization&quot; in the custom metadata type &quot;Unsubscribe Link.&quot;</description>
         <name>Are_you_sure</name>
         <label>Are you sure</label>
-        <locationX>852</locationX>
+        <locationX>853</locationX>
         <locationY>1373</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
@@ -372,7 +372,7 @@ If not, check if the custom metadata type allows the user to type in their email
         </connector>
         <fields>
             <name>Screen1</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 18px; color: rgb(0, 0, 0);&quot;&gt;{!Get_Unsubscribe_Link_Setup.Screen_1_Part_1__c} {!Email} {&lt;/span&gt;&lt;span style=&quot;font-size: 18px; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;!Get_Unsubscribe_Link_Setup&lt;/span&gt;&lt;span style=&quot;font-size: 18px; color: rgb(0, 0, 0);&quot;&gt;.UnsubscribeLnk__Screen_1_Part_2__c}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 18px;&quot;&gt;{!Get_Unsubscribe_Link_Setup.Screen_1_Part_1__c} {!Email} {!Get_Unsubscribe_Link_Setup.Screen_1_Part_2__c}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -381,14 +381,14 @@ If not, check if the custom metadata type allows the user to type in their email
     <screens>
         <name>screenConfirmationEmail</name>
         <label>screenConfirmationEmail</label>
-        <locationX>954</locationX>
+        <locationX>955</locationX>
         <locationY>1802</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>confirmationScreen</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;{!&lt;/span&gt;&lt;span style=&quot;font-size: 18px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;!Get_Unsubscribe_Link_Setup&lt;/span&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;.UnsubscribeLnk__Screen_2_Part_1__c} {!&lt;/span&gt;&lt;span style=&quot;font-size: 18px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;!Get_Unsubscribe_Link_Setup&lt;/span&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;.UnsubscribeLnk__Screen_2_Part_2__c}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;{!Get_Unsubscribe_Link_Setup.Screen_2_Part_1__c} {!Get_Unsubscribe_Link_Setup.Screen_2_Part_2__c}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>false</showFooter>
@@ -397,14 +397,14 @@ If not, check if the custom metadata type allows the user to type in their email
     <screens>
         <name>screenConfirmationNoEmail</name>
         <label>screenConfirmationNoEmail</label>
-        <locationX>1443</locationX>
+        <locationX>1444</locationX>
         <locationY>1703</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>confirmationScreenNoEmail</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 18px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;{!Get_Unsubscribe_Link_Setup&lt;/span&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;UnsubscribeLnk__Screen_2_Part_1__c}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;{!Get_Unsubscribe_Link_Setup.Screen_2_Part_1__c}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>false</showFooter>
