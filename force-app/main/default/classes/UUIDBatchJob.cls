@@ -33,10 +33,12 @@ public class UUIDBatchJob implements Database.Batchable<SObject> {
   private String siteBaseUrl;
   private static final String SITE_NAME = 'Unsubscribe';
   private String objectTypeLetter;
+  private String linkText;
 
-  public UUIDBatchJob(String objectType, String fieldName) {
+  public UUIDBatchJob(String objectType, String fieldName, String linkText) {
     this.objectType = objectType;
     this.fieldName = fieldName;
+    this.linkText = linkText;
 
     // Get the base URL for the experience site
     String partnerURL =
@@ -151,8 +153,12 @@ public class UUIDBatchJob implements Database.Batchable<SObject> {
   }
 
   private String generateUnsubscribeLink(String uuid) {
-    System.debug(objectTypeLetter + ' object type letter');
-    return siteBaseUrl + 'unsubscribe?varRecId=' + objectTypeLetter + uuid;
+    return siteBaseUrl +
+      'unsubscribe?varRecId=' +
+      objectTypeLetter +
+      uuid +
+      '+' +
+      linkText;
   }
 
   public class UUIDBatchException extends Exception {
