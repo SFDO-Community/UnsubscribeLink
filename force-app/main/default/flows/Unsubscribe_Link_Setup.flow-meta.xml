@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
-        <description>Contacts</description>
-        <name>Run_Contact_job</name>
-        <label>Run Contact job</label>
-        <locationX>1703</locationX>
-        <locationY>2294</locationY>
+        <name>Contact_Batch</name>
+        <label>Contact Batch</label>
+        <locationX>1770</locationX>
+        <locationY>2265</locationY>
         <actionName>UUIDBatchInvocable</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -13,54 +12,21 @@
         </connector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
-            <name>batchSize</name>
-            <value>
-                <numberValue>200.0</numberValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
             <name>fieldName</name>
             <value>
                 <stringValue>Public_Id__c</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>linkText</name>
+            <value>
+                <elementReference>LinkText</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
             <name>objectType</name>
             <value>
                 <stringValue>Contact</stringValue>
-            </value>
-        </inputParameters>
-        <nameSegment>UUIDBatchInvocable</nameSegment>
-        <versionSegment>1</versionSegment>
-    </actionCalls>
-    <actionCalls>
-        <description>Leads</description>
-        <name>Run_lead_job</name>
-        <label>Run Lead job</label>
-        <locationX>1703</locationX>
-        <locationY>2186</locationY>
-        <actionName>UUIDBatchInvocable</actionName>
-        <actionType>apex</actionType>
-        <connector>
-            <targetReference>Run_Contact_job</targetReference>
-        </connector>
-        <flowTransactionModel>Automatic</flowTransactionModel>
-        <inputParameters>
-            <name>batchSize</name>
-            <value>
-                <numberValue>200.0</numberValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>fieldName</name>
-            <value>
-                <stringValue>Public_Id__c</stringValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>objectType</name>
-            <value>
-                <stringValue>Lead</stringValue>
             </value>
         </inputParameters>
         <nameSegment>UUIDBatchInvocable</nameSegment>
@@ -458,7 +424,7 @@
             <label>Include Confirmation Screen</label>
         </rules>
     </decisions>
-    <description>Switch to using a custom object instead of a cmdt</description>
+    <description>New contact batch to pass in the link text. Make sure the create records looks for duplicates!</description>
     <dynamicChoiceSets>
         <name>orgWideEmails</name>
         <dataType>String</dataType>
@@ -690,7 +656,7 @@
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Run_lead_job</targetReference>
+            <targetReference>Contact_Batch</targetReference>
         </connector>
         <fields>
             <name>displayPublicIds</name>
@@ -1243,7 +1209,7 @@
             <targetReference>getULSetup</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <textTemplates>
         <name>horizontalLine1</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
