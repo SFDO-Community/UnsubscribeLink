@@ -44,7 +44,11 @@ private class UUIDBatchJobTest {
     );
 
     // Act: Run the batch job for Contacts
-    UUIDBatchJob batchJob = new UUIDBatchJob('Contact', 'Public_Id__c');
+    UUIDBatchJob batchJob = new UUIDBatchJob(
+      'Contact',
+      'Public_Id__c',
+      'Unsubscribe all'
+    );
     Test.startTest();
     Database.executeBatch(batchJob, 200);
     Test.stopTest();
@@ -95,7 +99,11 @@ private class UUIDBatchJobTest {
     );
 
     // Act: Run the batch job for Leads
-    UUIDBatchJob batchJob = new UUIDBatchJob('Lead', 'Public_Id__c');
+    UUIDBatchJob batchJob = new UUIDBatchJob(
+      'Lead',
+      'Public_Id__c',
+      'Unsubscribe all'
+    );
     Test.startTest();
     Database.executeBatch(batchJob, 200);
     Test.stopTest();
@@ -137,7 +145,8 @@ private class UUIDBatchJobTest {
     try {
       UUIDBatchJob invalidBatchJob = new UUIDBatchJob(
         'InvalidObject',
-        'Public_Id__c'
+        'Public_Id__c',
+        'Unsubscribe all'
       );
       Database.executeBatch(invalidBatchJob, 200);
       System.assert(
@@ -156,7 +165,11 @@ private class UUIDBatchJobTest {
   @isTest
   static void testUnsubscribeLinkGeneration() {
     // Arrange: Run the batch job and check unsubscribe link generation
-    UUIDBatchJob batchJob = new UUIDBatchJob('Contact', 'Public_Id__c');
+    UUIDBatchJob batchJob = new UUIDBatchJob(
+      'Contact',
+      'Public_Id__c',
+      'Unsubscribe all'
+    );
     Test.startTest();
     Database.executeBatch(batchJob, 200);
     Test.stopTest();
@@ -179,7 +192,11 @@ private class UUIDBatchJobTest {
   @isTest
   static void testUnsubscribeLinkGenerationLead() {
     // Arrange: Run the batch job and check unsubscribe link generation
-    UUIDBatchJob batchJob = new UUIDBatchJob('Lead', 'Public_Id__c');
+    UUIDBatchJob batchJob = new UUIDBatchJob(
+      'Lead',
+      'Public_Id__c',
+      'Unsubscribe all'
+    );
     Test.startTest();
     Database.executeBatch(batchJob, 200);
     Test.stopTest();
