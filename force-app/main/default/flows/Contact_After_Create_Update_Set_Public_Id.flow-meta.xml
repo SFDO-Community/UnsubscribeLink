@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
         <name>Generate_UUID</name>
@@ -25,9 +25,9 @@
         <versionSegment>1</versionSegment>
     </actionCalls>
     <apiVersion>61.0</apiVersion>
+    <description>This version gets the link text for the URL from the Unsubscribe Link Setup record.</description>
     <environments>Default</environments>
-    <interviewLabel
-  >Contact || After Create/Update || Set Public Id {!$Flow.CurrentDateTime}</interviewLabel>
+    <interviewLabel>Contact || After Create/Update || Set Public Id {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Contact || After Create/Update || Set Public Id</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -53,8 +53,7 @@
         <label>Get Experience Site</label>
         <locationX>176</locationX>
         <locationY>431</locationY>
-        <assignNullValuesIfNoRecordsFound
-    >false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_My_Domain</targetReference>
         </connector>
@@ -75,10 +74,9 @@
         <label>Get My Domain</label>
         <locationX>176</locationX>
         <locationY>539</locationY>
-        <assignNullValuesIfNoRecordsFound
-    >false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Update_the_Contact</targetReference>
+            <targetReference>Get_Unsubscribe_Link_Setup</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -92,11 +90,24 @@
         <object>DomainSite</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordLookups>
+        <name>Get_Unsubscribe_Link_Setup</name>
+        <label>Get Unsubscribe Link Setup</label>
+        <locationX>176</locationX>
+        <locationY>647</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Update_the_Contact</targetReference>
+        </connector>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Unsubscribe_Link_Setup__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordUpdates>
         <name>Update_the_Contact</name>
         <label>Update the Contact</label>
         <locationX>176</locationX>
-        <locationY>647</locationY>
+        <locationY>755</locationY>
         <inputAssignments>
             <field>Public_Id__c</field>
             <value>
@@ -129,12 +140,11 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <textTemplates>
         <name>txt_UnsubscribeLinkURL</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
-        <text
-    >https://{!Get_My_Domain.Domain.Domain}/Unsubscribe/s/unsubscribe?varRecId=C{!UUID}</text>
+        <text>https://{!Get_My_Domain.Domain.Domain}/Unsubscribe/s/unsubscribe?varRecId=C{!UUID}+{!Get_Unsubscribe_Link_Setup.Link_Text__c}</text>
     </textTemplates>
     <variables>
         <name>recordId</name>
