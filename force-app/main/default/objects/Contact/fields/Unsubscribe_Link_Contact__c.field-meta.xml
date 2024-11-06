@@ -6,11 +6,11 @@
     <formula>HYPERLINK(
 
 
-LEFT(UnsubscribeLinkContact__c , FIND(&quot;+&quot;,UnsubscribeLinkContact__c ) - 1),
+LEFT(Part1_Unsubscribe_Link__c , FIND(&quot;+&quot;,Part1_Unsubscribe_Link__c ) - 1),
 				
-				RIGHT(UnsubscribeLinkContact__c,(LEN( UnsubscribeLinkContact__c )-FIND(&quot;+&quot;, UnsubscribeLinkContact__c ))))</formula>
+				RIGHT(Part1_Unsubscribe_Link__c,(LEN( Part1_Unsubscribe_Link__c )-FIND(&quot;+&quot;, Part1_Unsubscribe_Link__c ))))</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-    <inlineHelpText>UnsubscribeLnk__UnsubscribeLinkContact__c</inlineHelpText>
+    <inlineHelpText>UnsubscribeLnk__Part1_Unsubscribe_Link__c</inlineHelpText>
     <label>Unsubscribe Link Contact</label>
     <required>false</required>
     <type>Text</type>

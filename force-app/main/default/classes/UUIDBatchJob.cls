@@ -56,10 +56,10 @@ public class UUIDBatchJob implements Database.Batchable<SObject> {
 
     // Determine the unsubscribe link field based on object type
     if (objectType.equalsIgnoreCase('Contact')) {
-      this.unsubscribeLinkField = 'UnsubscribeLinkContact__c'; // Adjust field name as needed
+      this.unsubscribeLinkField = 'Part1_Unsubscribe_Link__c'; // Adjust field name as needed
       this.objectTypeLetter = 'C';
     } else if (objectType.equalsIgnoreCase('Lead')) {
-      this.unsubscribeLinkField = 'UnsubscribeLinkLead__c';
+      this.unsubscribeLinkField = 'Part1_Unsubscribe_Link__c';
       this.objectTypeLetter = 'L';
     } else {
       throw new UUIDBatchException('Object type must be Contact or Lead');

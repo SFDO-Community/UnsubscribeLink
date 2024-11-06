@@ -115,7 +115,7 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>UnsubscribeLinkContact__c</field>
+            <field>Part1_Unsubscribe_Link__c</field>
             <value>
                 <elementReference>txt_UnsubscribeLinkURL</elementReference>
             </value>
