@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
         <name>Generate_UUID</name>
@@ -25,9 +25,9 @@
         <versionSegment>1</versionSegment>
     </actionCalls>
     <apiVersion>61.0</apiVersion>
+    <description>This version looks up the friendly name/Link text and appends it to the unsubscribe link that is set on the lead.</description>
     <environments>Default</environments>
-    <interviewLabel
-  >Lead || After Create/Update || Set Public Id {!$Flow.CurrentDateTime}</interviewLabel>
+    <interviewLabel>Lead || After Create/Update || Set Public Id {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Lead || After Create/Update || Set Public Id</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -54,8 +54,7 @@
         <label>Get Experience Site</label>
         <locationX>1025</locationX>
         <locationY>479</locationY>
-        <assignNullValuesIfNoRecordsFound
-    >false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_My_Domain</targetReference>
         </connector>
@@ -76,10 +75,9 @@
         <label>Get My Domain</label>
         <locationX>752</locationX>
         <locationY>691</locationY>
-        <assignNullValuesIfNoRecordsFound
-    >false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Update_the_Lead</targetReference>
+            <targetReference>Get_Unsubscribe_Link_Setup</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -91,6 +89,20 @@
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>DomainSite</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get setup record to find friendly name of URL.</description>
+        <name>Get_Unsubscribe_Link_Setup</name>
+        <label>Get Unsubscribe Link Setup</label>
+        <locationX>881</locationX>
+        <locationY>766</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Update_the_Lead</targetReference>
+        </connector>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Unsubscribe_Link_Setup__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
@@ -134,8 +146,7 @@
     <textTemplates>
         <name>txt_UnsubscribeLinkURL</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
-        <text
-    >https://{!Get_My_Domain.Domain.Domain}/Unsubscribe/s/unsubscribe?varRecId=C{!uuid}</text>
+        <text>https://{!Get_My_Domain.Domain.Domain}/Unsubscribe/s/unsubscribe?varRecId=L{!uuid}+{!Get_Unsubscribe_Link_Setup.Link_Text__c}</text>
     </textTemplates>
     <variables>
         <name>uuid</name>
