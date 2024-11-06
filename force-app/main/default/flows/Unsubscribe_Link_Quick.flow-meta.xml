@@ -57,12 +57,12 @@
     <actionCalls>
         <name>Send_Error_Email</name>
         <label>Send Error Email</label>
-        <locationX>556</locationX>
-        <locationY>377</locationY>
+        <locationX>731</locationX>
+        <locationY>919</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
-            <targetReference>ERRORSCREEN</targetReference>
+            <targetReference>Error_Alert_Email</targetReference>
         </connector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
@@ -422,8 +422,8 @@ If not, check if the custom metadata type allows the user to type in their email
     <recordLookups>
         <name>Get_Org_Wide_Email</name>
         <label>Get Org Wide Email</label>
-        <locationX>644</locationX>
-        <locationY>507</locationY>
+        <locationX>690</locationX>
+        <locationY>594</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Send_Error_Email</targetReference>
@@ -489,22 +489,6 @@ If not, check if the custom metadata type allows the user to type in their email
         <fields>
             <name>sorrycharlie</name>
             <fieldText>&lt;p&gt;We apologize, but we are unable to automatically unsubscribe you at this time. We have been alerted about the problem.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>ERRORSCREEN</name>
-        <label>error with no email</label>
-        <locationX>550</locationX>
-        <locationY>188</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>wentwrong_0_0_0_0</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;We apologize, but we are unable to automatically unsubscribe you at this time. We have been alerted about the problem.&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -617,7 +601,7 @@ If not, check if the custom metadata type allows the user to type in their email
         <description>Part of the unmanaged packed Unsubscribe Link from Salesforce Labs and loops through all leads with a particular email address to mark them as email opt out. This flow is launched by the flow Unsubscribe Link.</description>
         <name>Unsubscribe_Leads</name>
         <label>Unsubscribe Leads</label>
-        <locationX>1474</locationX>
+        <locationX>1473</locationX>
         <locationY>1482</locationY>
         <connector>
             <targetReference>Send_Confirmation_Email</targetReference>
