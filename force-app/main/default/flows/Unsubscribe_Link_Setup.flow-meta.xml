@@ -3,8 +3,8 @@
     <actionCalls>
         <name>Contact_Batch</name>
         <label>Contact Batch</label>
-        <locationX>1770</locationX>
-        <locationY>2265</locationY>
+        <locationX>577</locationX>
+        <locationY>4010</locationY>
         <actionName>UUIDBatchInvocable</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -35,8 +35,8 @@
     <actionCalls>
         <name>LeadBatch</name>
         <label>Lead Batch</label>
-        <locationX>1845</locationX>
-        <locationY>2341</locationY>
+        <locationX>577</locationX>
+        <locationY>4118</locationY>
         <actionName>UUIDBatchInvocable</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -66,11 +66,43 @@
     </actionCalls>
     <apiVersion>61.0</apiVersion>
     <assignments>
+        <name>ass_final_value_of_sender_email</name>
+        <label>final value of sender email</label>
+        <locationX>445</locationX>
+        <locationY>1238</locationY>
+        <assignmentItems>
+            <assignToReference>var_FinalRecord.Org_Wide_Email_Address__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>orgWideEmail.value</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_Org_Wide_Email_Address</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>ass_final_value_of_sender_email_0</name>
+        <label>final value of sender email</label>
+        <locationX>709</locationX>
+        <locationY>1022</locationY>
+        <assignmentItems>
+            <assignToReference>var_FinalRecord.Org_Wide_Email_Address__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>OrgWideEmailQ</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_Org_Wide_Email_Address</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <description>Assign selections made on previous screens</description>
         <name>Assign_Modified_Value</name>
         <label>Assign Modified Value</label>
-        <locationX>1703</locationX>
-        <locationY>1901</locationY>
+        <locationX>577</locationX>
+        <locationY>3494</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Screen_1_Part_2__c</assignToReference>
             <operator>Assign</operator>
@@ -142,8 +174,8 @@
         <description>Assign values to the default if this is their first time creating a record.</description>
         <name>Default_AssignValues</name>
         <label>DEFAULT Assign Values</label>
-        <locationX>1227</locationX>
-        <locationY>662</locationY>
+        <locationX>709</locationX>
+        <locationY>506</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Screen_3__c</assignToReference>
             <operator>Assign</operator>
@@ -155,7 +187,7 @@
             <assignToReference>var_FinalRecord.Confirmation_Page__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>No</stringValue>
+                <stringValue>Yes</stringValue>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -221,6 +253,20 @@
                 <stringValue>Click here to unsubscribe. </stringValue>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_FinalRecord.Send_Confirmation_Email__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>No</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_FinalRecord.Error_Email_Recipient__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$User.Email</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Set_Up_Unsubscribe_Link_0</targetReference>
         </connector>
@@ -229,8 +275,8 @@
         <description>Assign values to the final variable if this is their second or later time filling this out.</description>
         <name>EXISTINGAssignValues</name>
         <label>EXISTING Assign Values</label>
-        <locationX>1526</locationX>
-        <locationY>663</locationY>
+        <locationX>445</locationX>
+        <locationY>398</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Screen_3__c</assignToReference>
             <operator>Assign</operator>
@@ -330,20 +376,13 @@
         <description>Assign values to the final variable based on answers to the initial screen.</description>
         <name>UpdateFinalValues</name>
         <label>UpdateFinalValues</label>
-        <locationX>1831</locationX>
-        <locationY>620</locationY>
+        <locationX>577</locationX>
+        <locationY>2054</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Confirmation_Email_Text__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>ConfirmEmailText</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>var_FinalRecord.Org_Wide_Email_Address__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>OrgWideEmailQ</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -365,11 +404,35 @@
         </connector>
     </assignments>
     <choices>
+        <name>Create_an_org_wide_email_now</name>
+        <choiceText>Create an org wide email now.</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Create an org wide email now.</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Default_No_Reply_Address</name>
+        <choiceText>Default No-Reply Address</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>DefaultNoReply</stringValue>
+        </value>
+    </choices>
+    <choices>
         <name>No</name>
         <choiceText>No</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>No</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>User_Selection_and_Default_No_Reply_Address</name>
+        <choiceText>User Selection and Default No-Reply Address</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>UserSelectionAndDefaultNoReply</stringValue>
         </value>
     </choices>
     <choices>
@@ -383,8 +446,8 @@
     <decisions>
         <name>Confirmation_EmailSend</name>
         <label>Send Confirmation Email?</label>
-        <locationX>1703</locationX>
-        <locationY>1346</locationY>
+        <locationX>577</locationX>
+        <locationY>2978</locationY>
         <defaultConnector>
             <targetReference>Get_Experience_Site</targetReference>
         </defaultConnector>
@@ -406,11 +469,36 @@
         </rules>
     </decisions>
     <decisions>
+        <name>dec_Org_wide_confirmation_email_sender</name>
+        <label>Org wide confirmation email sender</label>
+        <locationX>577</locationX>
+        <locationY>914</locationY>
+        <defaultConnector>
+            <targetReference>ass_final_value_of_sender_email_0</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Use Existing</defaultConnectorLabel>
+        <rules>
+            <name>out_Createnew</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>OrgWideEmailQ</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Create_an_org_wide_email_now</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Org_Wide_Email_0</targetReference>
+            </connector>
+            <label>Create new</label>
+        </rules>
+    </decisions>
+    <decisions>
         <description>Does a setup record exist already</description>
         <name>ExistingRecordSameName_0</name>
         <label>Setup Record Exists?</label>
-        <locationX>1527</locationX>
-        <locationY>415</locationY>
+        <locationX>577</locationX>
+        <locationY>290</locationY>
         <defaultConnector>
             <targetReference>CompanyName</targetReference>
         </defaultConnector>
@@ -435,8 +523,8 @@
         <description>Does a setup record exist already</description>
         <name>ExistingRecordSameName_0_0</name>
         <label>Setup Record Exists?</label>
-        <locationX>1395</locationX>
-        <locationY>1898</locationY>
+        <locationX>577</locationX>
+        <locationY>3602</locationY>
         <defaultConnector>
             <targetReference>Create_Record</targetReference>
         </defaultConnector>
@@ -458,10 +546,35 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Include_screen_1</name>
+        <label>Include screen 1</label>
+        <locationX>577</locationX>
+        <locationY>2270</locationY>
+        <defaultConnector>
+            <targetReference>Screen2PreviewScreen_0</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>YesScreen1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>var_FinalRecord.Confirmation_Page__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Screen1Preview</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>IncludeScreen3Decision</name>
         <label>Include Email Type In Screen</label>
-        <locationX>1703</locationX>
-        <locationY>1046</locationY>
+        <locationX>577</locationX>
+        <locationY>2678</locationY>
         <defaultConnector>
             <targetReference>Confirmation_EmailSend</targetReference>
         </defaultConnector>
@@ -482,7 +595,53 @@
             <label>Include Confirmation Screen</label>
         </rules>
     </decisions>
-    <description>New contact batch to pass in the link text. This version has an extra decision to check if record needs to be created or updated.</description>
+    <decisions>
+        <description>Does an org wide email address already exist for error handling?</description>
+        <name>Is_there_already_an_org_wide_email_address</name>
+        <label>Error handling email exists</label>
+        <locationX>577</locationX>
+        <locationY>1538</locationY>
+        <defaultConnector>
+            <targetReference>Create_Org_Wide_Email_Address</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>YesAlreadyOrgWideEmail</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Org_Wide_Email_Address</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>UpdateFinalValues</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <description>Included creating an org wide email address for confirmation email sender. And profile security.</description>
+    <dynamicChoiceSets>
+        <description>Pick another org wide email to get an error message.</description>
+        <name>ErrorEmailAddress</name>
+        <dataType>String</dataType>
+        <displayField>Address</displayField>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>IsVerified</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>OrgWideEmailAddress</object>
+        <outputAssignments>
+            <assignToReference>var_FinalRecord.Error_Email_Recipient__c</assignToReference>
+            <field>Address</field>
+        </outputAssignments>
+        <valueField>Address</valueField>
+    </dynamicChoiceSets>
     <dynamicChoiceSets>
         <name>orgWideEmails</name>
         <dataType>String</dataType>
@@ -557,11 +716,83 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <recordCreates>
+        <description>Create the Org wide email address used by the confirmation email as the sender.</description>
+        <name>Create_Org_Wide_Email_0</name>
+        <label>Create Org Wide Sender Email</label>
+        <locationX>445</locationX>
+        <locationY>1022</locationY>
+        <connector>
+            <targetReference>ass_final_value_of_sender_email</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Address</field>
+            <value>
+                <elementReference>orgWideEmail.value</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>DisplayName</field>
+            <value>
+                <elementReference>Display_NameOrgWideEmail</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>IsAllowAllProfiles</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Purpose</field>
+            <value>
+                <elementReference>Purpose</elementReference>
+            </value>
+        </inputAssignments>
+        <object>OrgWideEmailAddress</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <description>Create the email address to handle errors at the beginning of the Unsubscribe Quick Flow.</description>
+        <name>Create_Org_Wide_error_Email</name>
+        <label>Org Wide Error Handling Email</label>
+        <locationX>687</locationX>
+        <locationY>1806</locationY>
+        <connector>
+            <targetReference>UpdateFinalValues</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Address</field>
+            <value>
+                <elementReference>ErrorEmailOrgWide.value</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>DisplayName</field>
+            <value>
+                <stringValue>Unsubscribe Error Handling</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>IsAllowAllProfiles</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Purpose</field>
+            <value>
+                <stringValue>UserSelection</stringValue>
+            </value>
+        </inputAssignments>
+        <object>OrgWideEmailAddress</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
         <description>Create the UL record.</description>
         <name>Create_Record</name>
         <label>Create Record</label>
-        <locationX>1558</locationX>
-        <locationY>2015</locationY>
+        <locationX>709</locationX>
+        <locationY>3710</locationY>
         <connector>
             <targetReference>Create_Public_Ids</targetReference>
         </connector>
@@ -571,8 +802,8 @@
         <description>Collect Experience Site informations</description>
         <name>Get_Experience_Site</name>
         <label>Get Experience Site</label>
-        <locationX>1703</locationX>
-        <locationY>1646</locationY>
+        <locationX>577</locationX>
+        <locationY>3278</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_My_Domain</targetReference>
@@ -585,8 +816,8 @@
         <description>Collect URL from Experience Site</description>
         <name>Get_My_Domain</name>
         <label>Get My Domain</label>
-        <locationX>1702</locationX>
-        <locationY>1754</locationY>
+        <locationX>577</locationX>
+        <locationY>3386</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Assign_Modified_Value</targetReference>
@@ -604,10 +835,38 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
+        <name>Get_Org_Wide_Email_Address</name>
+        <label>Get Org Wide Error Handling Email</label>
+        <locationX>582</locationX>
+        <locationY>1389</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Is_there_already_an_org_wide_email_address</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DisplayName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Unsubscribe Error Handling</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Purpose</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>UserSelection</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>OrgWideEmailAddress</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>getULSetup</name>
         <label>getULSetup</label>
-        <locationX>1505</locationX>
-        <locationY>198</locationY>
+        <locationX>577</locationX>
+        <locationY>182</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>ExistingRecordSameName_0</targetReference>
@@ -619,8 +878,8 @@
     <recordUpdates>
         <name>Update_existing_record</name>
         <label>Update existing record</label>
-        <locationX>1281</locationX>
-        <locationY>2031</locationY>
+        <locationX>445</locationX>
+        <locationY>3710</locationY>
         <connector>
             <targetReference>Create_Public_Ids</targetReference>
         </connector>
@@ -629,8 +888,8 @@
     <screens>
         <name>CompanyName</name>
         <label>CompanyName</label>
-        <locationX>1227</locationX>
-        <locationY>422</locationY>
+        <locationX>709</locationX>
+        <locationY>398</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -683,8 +942,8 @@
     <screens>
         <name>completeScreen</name>
         <label>completeScreen</label>
-        <locationX>1700</locationX>
-        <locationY>2441</locationY>
+        <locationX>577</locationX>
+        <locationY>4226</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -699,8 +958,8 @@
     <screens>
         <name>ConfirmationEmailPreviewScreen</name>
         <label>Email Confirmation Preview Screen</label>
-        <locationX>1571</locationX>
-        <locationY>1454</locationY>
+        <locationX>445</locationX>
+        <locationY>3086</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -716,10 +975,44 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
+        <description>Create error handling email address</description>
+        <name>Create_Org_Wide_Email_Address</name>
+        <label>Create Error Org Wide Email Address</label>
+        <locationX>665</locationX>
+        <locationY>1646</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Create_Org_Wide_error_Email</targetReference>
+        </connector>
+        <fields>
+            <name>ErrorEmailScreen</name>
+            <fieldText>&lt;p&gt;&lt;strong&gt;&lt;u&gt;Error handling&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Most errors in the Unsubscribe Link process will send standard flow error emails.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;However, if there is an error with the Unsubscribe Link Setup object, we need a specific organization-wide email address to be alerted when someone tries to unsubscribe.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;We will create one now. Look for the verification email.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>ErrorEmailOrgWide</name>
+            <extensionName>flowruntime:email</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>dis_ReadyToPreview</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 18px;&quot;&gt;{!horizontalLine1}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;Click &lt;/span&gt;&lt;em style=&quot;font-size: 18px;&quot;&gt;Preview&lt;/em&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt; to see the unsubscribe process from the email recipient&apos;s perspective.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <nextOrFinishButtonLabel>Preview</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
         <name>Create_Public_Ids</name>
         <label>Create Public Ids</label>
-        <locationX>1703</locationX>
-        <locationY>2078</locationY>
+        <locationX>577</locationX>
+        <locationY>3902</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -738,13 +1031,13 @@
         <description>A preview of the email with the option to modify the text of the link</description>
         <name>EmailModifyScreen</name>
         <label>Screen Email Preview</label>
-        <locationX>2021</locationX>
-        <locationY>696</locationY>
+        <locationX>577</locationX>
+        <locationY>2162</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Screen1Preview</targetReference>
+            <targetReference>Include_screen_1</targetReference>
         </connector>
         <fields>
             <name>SampleEmailDisplayText_0</name>
@@ -774,8 +1067,8 @@
         <description>Give the option to have a confirmation screen before Opt Out, but this is not recommended.</description>
         <name>Screen1Preview</name>
         <label>Screen 1 Preview</label>
-        <locationX>2039</locationX>
-        <locationY>847</locationY>
+        <locationX>445</locationX>
+        <locationY>2378</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -804,7 +1097,7 @@
                     <choiceReferences>No</choiceReferences>
                     <dataType>String</dataType>
                     <defaultValue>
-                        <elementReference>getULSetup.Confirmation_Page__c</elementReference>
+                        <elementReference>var_FinalRecord.Confirmation_Page__c</elementReference>
                     </defaultValue>
                     <fieldText>Do you want to include this confirmation page?</fieldText>
                     <fieldType>DropdownBox</fieldType>
@@ -922,8 +1215,8 @@
         <description>This screen will display the confirmation message you want the user to see</description>
         <name>Screen2PreviewScreen_0</name>
         <label>Screen 2</label>
-        <locationX>1885</locationX>
-        <locationY>973</locationY>
+        <locationX>577</locationX>
+        <locationY>2570</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -1009,8 +1302,8 @@
         <description>This is an optional screen to allow user to enter their email if not found in the database.</description>
         <name>Screen3PreviewScreen</name>
         <label>Screen 3</label>
-        <locationX>1573</locationX>
-        <locationY>1153</locationY>
+        <locationX>445</locationX>
+        <locationY>2786</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -1086,13 +1379,13 @@
         <description>Select informations to set up the unsubscribe link</description>
         <name>Set_Up_Unsubscribe_Link_0</name>
         <label>InitialSetUp</label>
-        <locationX>1415</locationX>
-        <locationY>879</locationY>
+        <locationX>577</locationX>
+        <locationY>698</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>UpdateFinalValues</targetReference>
+            <targetReference>dec_Org_wide_confirmation_email_sender</targetReference>
         </connector>
         <fields>
             <name>Set_Up_Unsubscribe_Link_0_Section1</name>
@@ -1135,35 +1428,14 @@
                     <isRequired>false</isRequired>
                 </fields>
                 <fields>
-                    <name>ConfirmEmailText</name>
-                    <dataType>String</dataType>
-                    <defaultValue>
-                        <elementReference>var_FinalRecord.Confirmation_Email_Text__c</elementReference>
-                    </defaultValue>
-                    <fieldText>What should the email say?</fieldText>
-                    <fieldType>InputField</fieldType>
-                    <helpText>&lt;p&gt;Example text: You have successfully unsubscribed from all email from &amp;lt;insert company name&amp;gt;.&lt;/p&gt;</helpText>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>false</isRequired>
-                    <visibilityRule>
-                        <conditionLogic>and</conditionLogic>
-                        <conditions>
-                            <leftValueReference>confirmEmailQ</leftValueReference>
-                            <operator>EqualTo</operator>
-                            <rightValue>
-                                <elementReference>Yes</elementReference>
-                            </rightValue>
-                        </conditions>
-                    </visibilityRule>
-                </fields>
-                <fields>
                     <name>OrgWideEmailQ</name>
                     <choiceReferences>orgWideEmails</choiceReferences>
+                    <choiceReferences>Create_an_org_wide_email_now</choiceReferences>
                     <dataType>String</dataType>
                     <defaultValue>
                         <elementReference>var_FinalRecord.Org_Wide_Email_Address__c</elementReference>
                     </defaultValue>
-                    <fieldText>Choose the organization wide email address that this email will appear to be from.</fieldText>
+                    <fieldText>Choose an organization wide email address for this email to appear from.</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
@@ -1179,9 +1451,16 @@
                     </visibilityRule>
                 </fields>
                 <fields>
-                    <name>orgwideEmailMoreInfo</name>
-                    <fieldText>&lt;p&gt;&lt;a href=&quot;https://help.salesforce.com/articleView?id=sf.emailadmin_manage_orgwide_email_addresses.htm&amp;amp;type=5&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;background-color: transparent; color: rgb(17, 85, 204); font-size: 11px;&quot;&gt;&lt;u&gt;Here&apos;s how to set up an org wide email address&lt;/u&gt;&lt;/a&gt;&lt;span style=&quot;background-color: transparent; font-size: 11px;&quot;&gt;.&amp;nbsp;&lt;/span&gt;&lt;/p&gt;</fieldText>
-                    <fieldType>DisplayText</fieldType>
+                    <name>ConfirmEmailText</name>
+                    <dataType>String</dataType>
+                    <defaultValue>
+                        <elementReference>var_FinalRecord.Confirmation_Email_Text__c</elementReference>
+                    </defaultValue>
+                    <fieldText>What should the email say?</fieldText>
+                    <fieldType>InputField</fieldType>
+                    <helpText>&lt;p&gt;Example text: You have successfully unsubscribed from all email from &amp;lt;insert company name&amp;gt;.&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>false</isRequired>
                     <visibilityRule>
                         <conditionLogic>and</conditionLogic>
                         <conditions>
@@ -1216,15 +1495,90 @@
             <regionContainerType>SectionWithoutHeader</regionContainerType>
         </fields>
         <fields>
-            <name>OneClickdisplaytext</name>
-            <fieldText>&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px; background-color: transparent;&quot;&gt;The unsubscribe link passes the contact or lead&apos;s Salesforce id to a flow. Sometimes an email recipient&apos;s security settings block or scramble the ID. You can allow your recipients to type in their email addresses to unsubscribe in that situation. BE CAREFUL! This allows anyone who has the link and knows any email addresses in your database to unsubscribe them. For example, if a bad guy knows that joeschmoe@ymail.com loves your newsletters and that bad guy dislikes your organization, then he could potentially unsubscribe Joe Schmoe from your newsletter!&amp;nbsp;&lt;/span&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
             <name>Set_Up_Unsubscribe_Link_0_Section2</name>
             <fieldType>RegionContainer</fieldType>
             <fields>
                 <name>Set_Up_Unsubscribe_Link_0_Section2_Column1</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>dis_CreateOrgWide</name>
+                    <fieldText>&lt;p&gt;&lt;strong&gt;&lt;u&gt;Create organization wide email address&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;</fieldText>
+                    <fieldType>DisplayText</fieldType>
+                </fields>
+                <fields>
+                    <name>Display_NameOrgWideEmail</name>
+                    <dataType>String</dataType>
+                    <fieldText>Display Name</fieldText>
+                    <fieldType>InputField</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>false</isRequired>
+                </fields>
+                <fields>
+                    <name>orgWideEmail</name>
+                    <extensionName>flowruntime:email</extensionName>
+                    <fieldType>ComponentInstance</fieldType>
+                    <inputParameters>
+                        <name>label</name>
+                        <value>
+                            <stringValue>Email</stringValue>
+                        </value>
+                    </inputParameters>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>true</isRequired>
+                    <storeOutputAutomatically>true</storeOutputAutomatically>
+                </fields>
+                <fields>
+                    <name>Purpose</name>
+                    <choiceReferences>Default_No_Reply_Address</choiceReferences>
+                    <choiceReferences>User_Selection_and_Default_No_Reply_Address</choiceReferences>
+                    <dataType>String</dataType>
+                    <fieldText>Purpose</fieldText>
+                    <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>false</isRequired>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>6</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <fields>
+                <name>Set_Up_Unsubscribe_Link_0_Section2_Column2</name>
+                <fieldType>Region</fieldType>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>6</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <isRequired>false</isRequired>
+            <regionContainerType>SectionWithoutHeader</regionContainerType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>OrgWideEmailQ</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>Create_an_org_wide_email_now</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>OneClickdisplaytext</name>
+            <fieldText>&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;u&gt;Allow Recipients to Type-In Email Address&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px; background-color: transparent;&quot;&gt;The unsubscribe link passes the contact or lead&apos;s Salesforce id to a flow. Sometimes an email recipient&apos;s security settings block or scramble the ID. You can allow your recipients to type in their email addresses to unsubscribe in that situation. BE CAREFUL! This allows anyone who has the link and knows any email addresses in your database to unsubscribe them. For example, if a bad guy knows that joeschmoe@ymail.com loves your newsletters and that bad guy dislikes your organization, then he could potentially unsubscribe Joe Schmoe from your newsletter!&amp;nbsp;&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Set_Up_Unsubscribe_Link_0_Section3</name>
+            <fieldType>RegionContainer</fieldType>
+            <fields>
+                <name>Set_Up_Unsubscribe_Link_0_Section3_Column1</name>
                 <fieldType>Region</fieldType>
                 <fields>
                     <name>type_in_unsubscribe</name>
@@ -1242,18 +1596,18 @@
                 <inputParameters>
                     <name>width</name>
                     <value>
-                        <stringValue>3</stringValue>
+                        <stringValue>4</stringValue>
                     </value>
                 </inputParameters>
                 <isRequired>false</isRequired>
             </fields>
             <fields>
-                <name>Set_Up_Unsubscribe_Link_0_Section2_Column2</name>
+                <name>Set_Up_Unsubscribe_Link_0_Section3_Column2</name>
                 <fieldType>Region</fieldType>
                 <inputParameters>
                     <name>width</name>
                     <value>
-                        <stringValue>9</stringValue>
+                        <stringValue>8</stringValue>
                     </value>
                 </inputParameters>
                 <isRequired>false</isRequired>
@@ -1261,17 +1615,12 @@
             <isRequired>false</isRequired>
             <regionContainerType>SectionWithoutHeader</regionContainerType>
         </fields>
-        <fields>
-            <name>GetReadytoPreviewDisplayText</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 18px;&quot;&gt;{!horizontalLine1}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;Click &lt;/span&gt;&lt;em style=&quot;font-size: 18px;&quot;&gt;Preview&lt;/em&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt; to see the unsubscribe process from the email recipient&apos;s perspective.&lt;/span&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <nextOrFinishButtonLabel>Preview</nextOrFinishButtonLabel>
+        <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>1379</locationX>
+        <locationX>451</locationX>
         <locationY>48</locationY>
         <connector>
             <targetReference>getULSetup</targetReference>
