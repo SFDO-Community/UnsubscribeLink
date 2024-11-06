@@ -77,6 +77,13 @@
                 <elementReference>orgWideEmail.value</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varT_OrgWideEmailDisplayName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Display_NameOrgWideEmail</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Get_Org_Wide_Email_Address</targetReference>
         </connector>
@@ -88,6 +95,13 @@
         <locationY>1022</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Org_Wide_Email_Address__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>OrgWideEmailQ</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varT_OrgWideEmailDisplayName</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>OrgWideEmailQ</elementReference>
@@ -643,7 +657,7 @@
         <valueField>Address</valueField>
     </dynamicChoiceSets>
     <dynamicChoiceSets>
-        <name>orgWideEmails</name>
+        <name>senderOrgWideEmails</name>
         <dataType>String</dataType>
         <displayField>DisplayName</displayField>
         <filterLogic>1 AND (2 OR 3)</filterLogic>
@@ -1429,7 +1443,7 @@
                 </fields>
                 <fields>
                     <name>OrgWideEmailQ</name>
-                    <choiceReferences>orgWideEmails</choiceReferences>
+                    <choiceReferences>senderOrgWideEmails</choiceReferences>
                     <choiceReferences>Create_an_org_wide_email_now</choiceReferences>
                     <dataType>String</dataType>
                     <defaultValue>
