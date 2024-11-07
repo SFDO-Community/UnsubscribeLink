@@ -77,6 +77,13 @@
                 <elementReference>orgWideEmail.value</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varT_OrgWideEmailDisplayName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Display_NameOrgWideEmail</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Get_Org_Wide_Email_Address</targetReference>
         </connector>
@@ -88,6 +95,13 @@
         <locationY>1022</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Org_Wide_Email_Address__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>OrgWideEmailQ</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varT_OrgWideEmailDisplayName</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>OrgWideEmailQ</elementReference>
@@ -995,6 +1009,12 @@
             <name>ErrorEmailOrgWide</name>
             <extensionName>flowruntime:email</extensionName>
             <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -1102,7 +1122,7 @@
                     <fieldText>Do you want to include this confirmation page?</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>false</isRequired>
+                    <isRequired>true</isRequired>
                 </fields>
                 <inputParameters>
                     <name>width</name>
@@ -1425,7 +1445,7 @@
                     <fieldText>Do you want to send a confirmation email immediately after the email recipient opts out?</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>false</isRequired>
+                    <isRequired>true</isRequired>
                 </fields>
                 <fields>
                     <name>OrgWideEmailQ</name>
@@ -1511,7 +1531,7 @@
                     <fieldText>Display Name</fieldText>
                     <fieldType>InputField</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>false</isRequired>
+                    <isRequired>true</isRequired>
                 </fields>
                 <fields>
                     <name>orgWideEmail</name>
@@ -1521,6 +1541,12 @@
                         <name>label</name>
                         <value>
                             <stringValue>Email</stringValue>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>required</name>
+                        <value>
+                            <booleanValue>true</booleanValue>
                         </value>
                     </inputParameters>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -1535,7 +1561,7 @@
                     <fieldText>Purpose</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>false</isRequired>
+                    <isRequired>true</isRequired>
                 </fields>
                 <inputParameters>
                     <name>width</name>
@@ -1591,7 +1617,7 @@
                     <fieldText>Allow recipient to type in email</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>false</isRequired>
+                    <isRequired>true</isRequired>
                 </fields>
                 <inputParameters>
                     <name>width</name>
