@@ -6,9 +6,9 @@
      <formula>HYPERLINK(
 
 
-LEFT(UnsubscribeLinkLead__c , FIND(&quot;+&quot;,UnsubscribeLinkLead__c ) - 1),
+LEFT(Part1_Unsubscribe_Link__c , FIND(&quot;+&quot;,Part1_Unsubscribe_Link__c ) - 1),
 				
-				RIGHT(UnsubscribeLinkLead__c,(LEN( UnsubscribeLinkLead__c )-FIND(&quot;+&quot;, UnsubscribeLinkLead__c ))))</formula>
+				RIGHT(Part1_Unsubscribe_Link__c,(LEN( Part1_Unsubscribe_Link__c )-FIND(&quot;+&quot;, Part1_Unsubscribe_Link__c ))))</formula>
   
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Unsubscribe Link Lead</label>

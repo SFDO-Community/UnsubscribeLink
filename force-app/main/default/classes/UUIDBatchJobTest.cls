@@ -55,7 +55,7 @@ private class UUIDBatchJobTest {
 
     // Assert: Check that all Contacts now have a generated UUID
     List<Contact> contactsAfter = [
-      SELECT Id, Public_Id__c, UnsubscribeLinkContact__c
+      SELECT Id, Public_Id__c, Part1_Unsubscribe_Link__c
       FROM Contact
       WHERE Public_Id__c != NULL
     ];
@@ -78,7 +78,7 @@ private class UUIDBatchJobTest {
       );
       System.assertNotEquals(
         null,
-        c.UnsubscribeLinkContact__c,
+        c.Part1_Unsubscribe_Link__c,
         'Unsubscribe link should be generated.'
       );
     }
@@ -110,7 +110,7 @@ private class UUIDBatchJobTest {
 
     // Assert: Check that all Leads now have a generated UUID
     List<Lead> leadsAfter = [
-      SELECT Id, Public_Id__c, UnsubscribeLinkLead__c
+      SELECT Id, Public_Id__c, Part1_Unsubscribe_Link__c
       FROM Lead
       WHERE Public_Id__c != NULL
     ];
@@ -132,7 +132,7 @@ private class UUIDBatchJobTest {
       );
       System.assertNotEquals(
         null,
-        l.UnsubscribeLinkLead__c,
+        l.Part1_Unsubscribe_Link__c,
         'Unsubscribe link should be generated.'
       );
     }
@@ -176,14 +176,14 @@ private class UUIDBatchJobTest {
 
     // Assert: Verify unsubscribe links are generated for all contacts
     List<Contact> contactsAfter = [
-      SELECT Id, Public_Id__c, UnsubscribeLinkContact__c
+      SELECT Id, Public_Id__c, Part1_Unsubscribe_Link__c
       FROM Contact
       WHERE Public_Id__c != NULL
     ];
     for (Contact c : contactsAfter) {
       System.assertNotEquals(
         null,
-        c.UnsubscribeLinkContact__c,
+        c.Part1_Unsubscribe_Link__c,
         'Unsubscribe link should not be null after batch execution.'
       );
     }
@@ -203,14 +203,14 @@ private class UUIDBatchJobTest {
 
     // Assert: Verify unsubscribe links are generated for all contacts
     List<Lead> leadsAfter = [
-      SELECT Id, Public_Id__c, UnsubscribeLinkLead__c
+      SELECT Id, Public_Id__c, Part1_Unsubscribe_Link__c
       FROM Lead
       WHERE Public_Id__c != NULL
     ];
     for (Lead l : leadsAfter) {
       System.assertNotEquals(
         null,
-        l.UnsubscribeLinkLead__c,
+        l.Part1_Unsubscribe_Link__c,
         'Unsubscribe link should not be null after batch execution.'
       );
     }
