@@ -54,69 +54,13 @@
         <nameSegment>emailSimple</nameSegment>
         <versionSegment>1</versionSegment>
     </actionCalls>
-    <actionCalls>
-        <name>Send_Error_Email</name>
-        <label>Send Error Email</label>
-        <locationX>731</locationX>
-        <locationY>919</locationY>
-        <actionName>emailSimple</actionName>
-        <actionType>emailSimple</actionType>
-        <connector>
-            <targetReference>Error_Alert_Email</targetReference>
-        </connector>
-        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
-        <inputParameters>
-            <name>emailAddresses</name>
-            <value>
-                <elementReference>Get_Org_Wide_Email.Address</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>senderType</name>
-            <value>
-                <stringValue>OrgWideEmailAddress</stringValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>senderAddress</name>
-            <value>
-                <elementReference>Get_Org_Wide_Email.Address</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>emailSubject</name>
-            <value>
-                <stringValue>Error with Unsubscribe Link</stringValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>emailBody</name>
-            <value>
-                <elementReference>errorBody</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>sendRichBody</name>
-            <value>
-                <booleanValue>true</booleanValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>useLineBreaks</name>
-            <value>
-                <booleanValue>true</booleanValue>
-            </value>
-        </inputParameters>
-        <nameSegment>emailSimple</nameSegment>
-        <versionSegment>1</versionSegment>
-    </actionCalls>
     <apiVersion>49.0</apiVersion>
     <decisions>
         <description>Was the original email with an unsubscribe link sent to a contact or a lead record? The Unsubscribe Link contains the public id., starting with C or L if it is a lead or contact. We need to find whether it is a contact or lead so that the Unsubscribe Record can be properly linked to the record.</description>
         <name>Contact_or_Lead</name>
         <label>Contact or Lead</label>
-        <locationX>1356</locationX>
-        <locationY>372</locationY>
+        <locationX>1287</locationX>
+        <locationY>362</locationY>
         <defaultConnector>
             <targetReference>Blank_Values_Flow</targetReference>
         </defaultConnector>
@@ -150,32 +94,6 @@
                 <targetReference>Get_Lead</targetReference>
             </connector>
             <label>Lead</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <description>Can we find the unsubscribe setup object?</description>
-        <name>dec_Setup_object_found</name>
-        <label>Setup object found</label>
-        <locationX>998</locationX>
-        <locationY>358</locationY>
-        <defaultConnector>
-            <targetReference>Contact_or_Lead</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>UL Setup Found</defaultConnectorLabel>
-        <rules>
-            <name>Setup_not_found</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Get_Unsubscribe_Link_Setup</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Get_Org_Wide_Email</targetReference>
-            </connector>
-            <label>Setup not found</label>
         </rules>
     </decisions>
     <decisions>
@@ -268,7 +186,7 @@ If not, check if the custom metadata type allows the user to type in their email
             <label>No record found. Allow Type-In</label>
         </rules>
     </decisions>
-    <description>Added in some error handling including getting an org wide email address.</description>
+    <description>Customer facing flow of the Unsubscribe Link managed package from AppExchange.</description>
     <environments>Default</environments>
     <formulas>
         <description>get the total number of records that had this email address and unsubscribed.</description>
@@ -354,8 +272,8 @@ If not, check if the custom metadata type allows the user to type in their email
         <description>Look for a contact record with ID passed into the flow. Assign the email address to an email variable and the ID to a text variable called FoundId that is passed to other flows.</description>
         <name>Get_Contact</name>
         <label>Get Contact</label>
-        <locationX>822</locationX>
-        <locationY>506</locationY>
+        <locationX>1001</locationX>
+        <locationY>583</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Was_a_Record_Found</targetReference>
@@ -392,8 +310,8 @@ If not, check if the custom metadata type allows the user to type in their email
         <description>Look for a lead record with ID passed into the flow. Assign the email address to an email variable and the ID to a text variable called FoundId that is passed to other flows.</description>
         <name>Get_Lead</name>
         <label>Get Lead</label>
-        <locationX>1350</locationX>
-        <locationY>506</locationY>
+        <locationX>1377</locationX>
+        <locationY>554</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Was_a_Record_Found</targetReference>
@@ -420,37 +338,16 @@ If not, check if the custom metadata type allows the user to type in their email
         </outputAssignments>
     </recordLookups>
     <recordLookups>
-        <name>Get_Org_Wide_Email</name>
-        <label>Get Org Wide Email</label>
-        <locationX>690</locationX>
-        <locationY>594</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Send_Error_Email</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>DisplayName</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>Unsubscribe Error Handling</stringValue>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>OrgWideEmailAddress</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
         <name>Get_Unsubscribe_Link_Setup</name>
         <label>Get Unsubscribe Link Setup</label>
         <locationX>888</locationX>
         <locationY>185</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>dec_Setup_object_found</targetReference>
+            <targetReference>Contact_or_Lead</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>Get_Org_Wide_Email</targetReference>
+            <targetReference>Error_Alert_Email</targetReference>
         </faultConnector>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Unsubscribe_Link_Setup__c</object>
@@ -481,8 +378,8 @@ If not, check if the custom metadata type allows the user to type in their email
         <description>We will be alerted about an error at this point.</description>
         <name>Error_Alert_Email</name>
         <label>Error Alert Screen</label>
-        <locationX>1736</locationX>
-        <locationY>1224</locationY>
+        <locationX>1715</locationX>
+        <locationY>186</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
