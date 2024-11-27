@@ -1,4 +1,4 @@
-public class UUIDBatchInvocable {
+public with sharing class UUIDBatchInvocable {
   @InvocableMethod(
     label='Run UUID Batch Job'
     description='Invokes the batch job to generate UUIDs for Leads or Contacts where the specified field is null'
