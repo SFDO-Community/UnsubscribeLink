@@ -18,7 +18,7 @@ public without sharing class TestDataFactory {
     );
     List<Lead> newLeads = new List<Lead>{ tig, fortune, mae };
 
-    insert newLeads;
+    insert as user newLeads;
 
     System.debug('The list of leads:' + newLeads);
 
@@ -31,7 +31,12 @@ public without sharing class TestDataFactory {
       DateTime.now().getTime() +
       '@testorg.com';
     // This code runs as the system user
-    Profile p = [SELECT Id FROM Profile WHERE Name = 'System Administrator'];
+    Profile p = [
+      SELECT Id
+      FROM Profile
+      WHERE Name = 'System Administrator'
+      WITH SECURITY_ENFORCED
+    ];
     User adminUser = new User(
       Alias = 'Seattle',
       Email = 'adminduser@testorg.com',
@@ -43,16 +48,22 @@ public without sharing class TestDataFactory {
       TimeZoneSidKey = 'America/Los_Angeles',
       UserName = uniqueUserName
     );
-    insert adminUser;
-    User currentUser = [SELECT Id FROM User WHERE Id = :UserInfo.getUserId()];
+    insert as user adminUser;
+    User currentUser = [
+      SELECT Id
+      FROM User
+      WHERE Id = :UserInfo.getUserId()
+      WITH SECURITY_ENFORCED
+    ];
     // Insert account as current user
     System.runAs(currentUser) {
       PermissionSet permSet = [
         SELECT Id
         FROM PermissionSet
         WHERE Name = 'Unsubscribe_Link'
+        WITH SECURITY_ENFORCED
       ];
-      insert new PermissionSetAssignment(
+      insert as user new PermissionSetAssignment(
         AssigneeId = adminUser.Id,
         PermissionSetId = permSet.Id
       );
@@ -67,7 +78,7 @@ public without sharing class TestDataFactory {
     Account newB = new Account(Name = 'KUOW.org');
     Account newC = new Account(Name = 'KCTS9');
     List<Account> newAccounts = new List<Account>{ newA, newB, newC };
-    insert newAccounts;
+    insert as user newAccounts;
 
     Contact bob = new Contact(
       LastName = 'Sagal',
@@ -85,7 +96,7 @@ public without sharing class TestDataFactory {
       AccountId = newC.id
     );
     List<Contact> newContacts = new List<Contact>{ bob, paula, maz };
-    insert newContacts;
+    insert as user newContacts;
   }
 
   public static void createBulkContacts() {
@@ -101,7 +112,7 @@ public without sharing class TestDataFactory {
       );
       cons.add(c);
     }
-    insert cons;
+    insert as user cons;
   }
 
   public static void createBulkLeads() {
@@ -115,6 +126,6 @@ public without sharing class TestDataFactory {
       );
       leads.add(l);
     }
-    insert leads;
+    insert as user leads;
   }
 }
