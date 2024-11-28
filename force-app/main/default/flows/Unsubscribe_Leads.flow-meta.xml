@@ -36,7 +36,7 @@
         <nameSegment>emailSimple</nameSegment>
         <versionSegment>1</versionSegment>
     </actionCalls>
-    <apiVersion>49.0</apiVersion>
+    <apiVersion>61.0</apiVersion>
     <assignments>
         <description>Add the revised lead to the collection of records to be modified at the end of the loop.</description>
         <name>Add_to_collection</name>

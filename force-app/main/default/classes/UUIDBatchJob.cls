@@ -1,4 +1,4 @@
-public class UUIDBatchJob implements Database.Batchable<SObject> {
+public with sharing class UUIDBatchJob implements Database.Batchable<SObject> {
   private String objectType;
   private String fieldName;
   private String unsubscribeLinkField;

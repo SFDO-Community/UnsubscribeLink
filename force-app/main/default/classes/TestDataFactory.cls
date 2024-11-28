@@ -1,4 +1,4 @@
-public without sharing class TestDataFactory {
+public with sharing class TestDataFactory {
   public static String createLeads() {
     String emailAddress = 'handsomes@thehandsomepod.com';
     Lead tig = new Lead(
@@ -102,7 +102,7 @@ public without sharing class TestDataFactory {
   public static void createBulkContacts() {
     String emailAdd = 'waitwait@npr.org';
     Account newA = new Account(Name = 'NPR.org');
-    insert newA;
+    insert as user newA;
     List<Contact> cons = new List<Contact>();
     for (Integer i = 0; i < 200; i++) {
       Contact c = new Contact(

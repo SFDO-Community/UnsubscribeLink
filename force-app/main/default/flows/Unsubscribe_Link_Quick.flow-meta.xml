@@ -54,7 +54,7 @@
         <nameSegment>emailSimple</nameSegment>
         <versionSegment>1</versionSegment>
     </actionCalls>
-    <apiVersion>49.0</apiVersion>
+    <apiVersion>61.0</apiVersion>
     <decisions>
         <description>Was the original email with an unsubscribe link sent to a contact or a lead record? The Unsubscribe Link contains the public id., starting with C or L if it is a lead or contact. We need to find whether it is a contact or lead so that the Unsubscribe Record can be properly linked to the record.</description>
         <name>Contact_or_Lead</name>
