@@ -24,3 +24,15 @@ tasks:
     run_tests:
         options:
             required_org_code_coverage_percent: 75
+
+    install_v3:
+        description: install the older SF Labs version 3 of Unsubscribe Link. Useful for upgrade testing
+        class_path: cumulusci.tasks.command.Command
+        options:
+            command: sf package install --package 04t4W000002kcU0QAI
+
+    install_v4-prerelease:
+        description: install the pre-release version of the Commons version of Unsubscribe Link. Used in the March 2025 sprint, but should be deprecated after the package is released.
+        class_path: cumulusci.tasks.command.Command
+        options:
+            command: sf package install --package 04taj000000471JAAQ
