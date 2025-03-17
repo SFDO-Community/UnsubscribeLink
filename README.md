@@ -19,6 +19,7 @@ Unsubscribe Link Resources:
 * Aïcha Medjahed
 * [Hua Ping Tan](https://www.linkedin.com/in/huapingtan/)
 * [Igor Androsov](https://www.linkedin.com/in/iandrosov/)
+* [Jaydeep Godara](https://www.linkedin.com/in/jaydeepgo/)
 
 #### Agenda TENTATIVE
 * Revise `generateAllRandomStrings` class to generate `Public_Id__c` for Leads as well as Contacts.
