@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
-        <name>Generate_Public_Id</name>
-        <label>Generate Public Id</label>
+        <name>Generate_UUID</name>
+        <label>Generate UUID</label>
         <locationX>176</locationX>
         <locationY>323</locationY>
-        <actionName>GenerateRandomString</actionName>
+        <actionName>SingleRecordUUIDInvocable</actionName>
         <actionType>apex</actionType>
         <connector>
-            <targetReference>Update_the_Contact</targetReference>
+            <targetReference>Get_Experience_Site</targetReference>
         </connector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
-            <name>recordId</name>
+            <name>recordIds</name>
             <value>
-                <elementReference>$Record.Id</elementReference>
+                <elementReference>recordId</elementReference>
             </value>
         </inputParameters>
-        <nameSegment>GenerateRandomString</nameSegment>
+        <nameSegment>SingleRecordUUIDInvocable</nameSegment>
         <outputParameters>
-            <assignToReference>$Record.Public_Id__c</assignToReference>
-            <name>out</name>
+            <assignToReference>UUID</assignToReference>
+            <name>generatedUUID</name>
         </outputParameters>
         <versionSegment>1</versionSegment>
     </actionCalls>
     <apiVersion>61.0</apiVersion>
+    <description>This version gets the link text for the URL from the Unsubscribe Link Setup record.</description>
     <environments>Default</environments>
     <interviewLabel>Contact || After Create/Update || Set Public Id {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Contact || After Create/Update || Set Public Id</label>
@@ -47,22 +48,85 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Experience_Site</name>
+        <label>Get Experience Site</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_My_Domain</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Unsubscribe</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Site</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_My_Domain</name>
+        <label>Get My Domain</label>
+        <locationX>176</locationX>
+        <locationY>539</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Unsubscribe_Link_Setup</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SiteId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Experience_Site.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>DomainSite</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Unsubscribe_Link_Setup</name>
+        <label>Get Unsubscribe Link Setup</label>
+        <locationX>176</locationX>
+        <locationY>647</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Update_the_Contact</targetReference>
+        </connector>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Unsubscribe_Link_Setup__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordUpdates>
         <name>Update_the_Contact</name>
         <label>Update the Contact</label>
         <locationX>176</locationX>
-        <locationY>431</locationY>
-        <faultConnector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Generate_Public_Id</targetReference>
-        </faultConnector>
+        <locationY>755</locationY>
+        <inputAssignments>
+            <field>Public_Id__c</field>
+            <value>
+                <elementReference>UUID</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Part1_Unsubscribe_Link__c</field>
+            <value>
+                <elementReference>txt_UnsubscribeLinkURL</elementReference>
+            </value>
+        </inputAssignments>
         <inputReference>$Record</inputReference>
     </recordUpdates>
     <start>
         <locationX>50</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Generate_Public_Id</targetReference>
+            <targetReference>Generate_UUID</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -76,7 +140,12 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
+    <textTemplates>
+        <name>txt_UnsubscribeLinkURL</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>https://{!Get_My_Domain.Domain.Domain}/Unsubscribe/s/unsubscribe?varRecId=C{!UUID}+{!Get_Unsubscribe_Link_Setup.Link_Text__c}</text>
+    </textTemplates>
     <variables>
         <name>recordId</name>
         <dataType>String</dataType>
@@ -86,5 +155,12 @@
         <value>
             <elementReference>$Record.Id</elementReference>
         </value>
+    </variables>
+    <variables>
+        <name>UUID</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
     </variables>
 </Flow>
