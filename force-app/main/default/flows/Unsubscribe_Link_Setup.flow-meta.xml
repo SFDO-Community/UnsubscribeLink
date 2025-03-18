@@ -30,7 +30,6 @@
             </value>
         </inputParameters>
         <nameSegment>UUIDBatchInvocable</nameSegment>
-        <versionSegment>1</versionSegment>
     </actionCalls>
     <actionCalls>
         <name>LeadBatch</name>
@@ -62,7 +61,6 @@
             </value>
         </inputParameters>
         <nameSegment>UUIDBatchInvocable</nameSegment>
-        <versionSegment>1</versionSegment>
     </actionCalls>
     <apiVersion>61.0</apiVersion>
     <assignments>
@@ -867,13 +865,13 @@
         <name>completeScreen</name>
         <label>completeScreen</label>
         <locationX>577</locationX>
-        <locationY>4226</locationY>
+        <locationY>4225</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowFinish>false</allowFinish>
+        <allowPause>false</allowPause>
         <fields>
             <name>DonedisplayText</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;You are done!&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 20px; color: rgb(0, 189, 25);&quot;&gt;Success!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;You should now close this tab.&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -1522,7 +1520,7 @@
             <targetReference>getULSetup</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <textTemplates>
         <name>horizontalLine1</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
