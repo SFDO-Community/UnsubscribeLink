@@ -5,6 +5,9 @@
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
     },
+    "communitiesSettings": {
+        "enableNetworksEnabled": true
+    },
     "chatterSettings": {
       "enableChatter": true
     },
