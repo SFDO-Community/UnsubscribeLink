@@ -42,3 +42,36 @@ tasks:
         class_path: cumulusci.tasks.salesforce.Deploy
         options:
             path: unpackaged/labs-upgrade
+
+flows:
+    customer_org:
+        description: Flow that installs the managed version and, optionally, the upgrade package into a customer org
+        steps:
+            1:
+                task: install_managed
+
+
+plans:
+    install:
+        slug: install
+        title: Base Install
+        tier: primary
+        is_listed: true
+        preflight_message: This will install Unsubscribe Link into your org.
+        steps:
+            1:
+                flow: customer_org
+
+    lab-upgrade:
+        slug: labs-upgrade
+        title: Salesforce Labs Upgrade Path
+        is_listed: true
+        preflight_message: For orgs upgrading from Salesforce labs, install a migration tool for moving old Unsubscribe records to the new managed object.
+        post_install_message: "Within your org, run the 'Unsubscribe: Data Migration Flow' screen flow to kick off the data migration batch."
+        checks:
+            - when: "'jrsl_ul_Unsubscribe__c' not in tasks.check_sobjects_available()"
+              action: error
+              message: "This plan is only accessible if you have previously installed the Salesforce Labs version of the application in your org."
+        steps:
+            1:
+                task: labs_upgrade_package
