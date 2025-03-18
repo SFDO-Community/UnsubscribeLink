@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Kicks off the</description>
+        <name>Start_Migration_Batch</name>
+        <label>Start Migration Batch</label>
+        <locationX>176</locationX>
+        <locationY>242</locationY>
+        <actionName>labs_upgrade_BATCH</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>screen_finish</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>batchsize</name>
+            <value>
+                <elementReference>Batch_Size</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>labs_upgrade_BATCH</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>63.0</apiVersion>
+    <description>This flow kicks off a data migration batch job for organizations upgrading from the Salesforce Labs app. This flow should likely only be run once, but will not cause issues if run additional times.</description>
+    <environments>Default</environments>
+    <interviewLabel>Unsubscribe: Data Migration Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Unsubscribe: Data Migration Flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <name>screen_finish</name>
+        <label>Finish Screen</label>
+        <locationX>176</locationX>
+        <locationY>350</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>text_success</name>
+            <fieldText>&lt;p&gt;The batch job has been started successfully. You will receive an email when the job is complete.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Start_Migration_Batch</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>text_failure</name>
+            <fieldText>&lt;p&gt;There was an error starting the data migration batch. Please check your apex error messages.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Start_Migration_Batch</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>false</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>screen_start</name>
+        <label>Begin Migration</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Start_Migration_Batch</targetReference>
+        </connector>
+        <fields>
+            <name>confirm_text</name>
+            <fieldText>&lt;p&gt;Click Next below to begin the data migration process.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;The process will copy Unsubscribe records from the Salesforce Labs package into the newer Unsubscribe object provided by the Salesforce Community Commons app.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;You may optionally specify a batch size for the data migration in the field below (most orgs will not need to specify this value).&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Batch_Size</name>
+            <dataType>Number</dataType>
+            <fieldText>Batch Size</fieldText>
+            <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <scale>0</scale>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>screen_start</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+</Flow>

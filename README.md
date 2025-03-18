@@ -17,9 +17,9 @@ cci flow run dev_org --org dev
 cci org browser --org dev
 ```
 
-Optionally, you can run `cci org default dev` to set the 'dev' org definition as your default. If you do this, you can omit the --org dev portion of any CCI command.
+Optionally, you can run `cci org default dev` to set the 'dev' org definition as your default. If you do this, you can omit the `--org dev` portion of any CCI command.
 
-To install the packaged version, you can use either
+To install the packaged version into a scratch or developer org, use one of the following commands
 ```
 cci task run install_managed
 cci task run install_managed_beta

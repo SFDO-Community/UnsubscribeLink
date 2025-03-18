@@ -3,7 +3,7 @@ project:
     name: Unsubscribe-Link
     package:
         name: Unsubscribe-Link
-        namespace: UnsubscribeLink
+        namespace: UnsubscribeLnk
         api_version: '60.0'
     git:
         default_branch: 'main'
@@ -32,7 +32,13 @@ tasks:
             command: sf package install --package 04t4W000002kcU0QAI
 
     install_v4-prerelease:
-        description: install the pre-release version of the Commons version of Unsubscribe Link. Used in the March 2025 sprint, but should be deprecated after the package is released.
+        description: install the pre-release packaged version of the Commons version of Unsubscribe Link. Used in the March 2025 sprint, but should be deprecated after the package is released in favor of default CCI tasks.
         class_path: cumulusci.tasks.command.Command
         options:
             command: sf package install --package 04taj000000471JAAQ
+
+    labs_upgrade_package:
+        description: Installs metadata used for a scripted migration from the Salesforce Labs package to the Commons managed package.
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/labs-upgrade
