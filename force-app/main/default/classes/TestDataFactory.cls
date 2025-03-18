@@ -128,4 +128,10 @@ public with sharing class TestDataFactory {
     }
     insert as user leads;
   }
+    
+  public static void createULSetup(){
+      Unsubscribe_Link_Setup__c  ulSetup = new Unsubscribe_Link_Setup__c();
+      ulSetup.Link_Text__c = 'Click here to unsubscribe' ;
+      insert ulSetup;
+  }
 }

@@ -1,0 +1,4 @@
+<apex:component controller="UnsubscribeLinkController" access="global">
+	<apex:attribute name="recipientId" description="Recipient of email" type="Id" assignTo="{!emailRecipientId}"/>    
+    <apex:outputLink value="{!unsubscribeLinkUrl}" target="_blank">{!unsubscribeLinkTitle}</apex:outputLink>
+</apex:component>
