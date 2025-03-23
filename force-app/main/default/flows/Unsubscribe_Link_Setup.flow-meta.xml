@@ -607,7 +607,7 @@
             <label>Include Confirmation Screen</label>
         </rules>
     </decisions>
-    <description>Changes to language and layout of the flow.  Also &quot;no&quot; is set to default for the optional opt-out page.</description>
+    <description>Includes cosmetic changes to flow, prevents users from &quot;looping&quot; through the flow multiple times when running, and &quot;no&quot; is set to default for the optional opt-out page.</description>
     <dynamicChoiceSets>
         <description>Pick another org wide email to get an error message.</description>
         <name>ErrorEmailAddress</name>
@@ -832,7 +832,7 @@
                     </defaultValue>
                     <fieldText>What is your organization or company name?</fieldText>
                     <fieldType>InputField</fieldType>
-                                        <helpText>&lt;p&gt;This name will appear to email recipients who click the unsubscribe link.  If you want recipients to see a different name, please write it below.&lt;/p&gt;</helpText>
+                    <helpText>&lt;p&gt;This name will appear to email recipients who click the unsubscribe link.  If you want recipients to see a different name, please write it below.&lt;/p&gt;</helpText>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                 </fields>
@@ -985,9 +985,7 @@
                     <choiceReferences>Yes</choiceReferences>
                     <choiceReferences>No</choiceReferences>
                     <dataType>String</dataType>
-                    <defaultValue>
-                        <elementReference>var_FinalRecord.Confirmation_Page__c</elementReference>
-                    </defaultValue>
+                    <defaultSelectedChoiceReference>No</defaultSelectedChoiceReference>
                     <fieldText>Do you want to include this confirmation page?</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
