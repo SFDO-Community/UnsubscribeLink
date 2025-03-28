@@ -4,15 +4,16 @@
         <description>Alert the person that they unsubscribed. Turn this off in the custom metadata type Unsubscribe Link.</description>
         <name>ConfirmationEmail</name>
         <label>ConfirmationEmail</label>
-        <locationX>950</locationX>
-        <locationY>1627</locationY>
+        <locationX>50</locationX>
+        <locationY>1490</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
             <targetReference>screenConfirmationEmail</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>Error_Alert_Email</targetReference>
+            <isGoTo>true</isGoTo>
+            <targetReference>screenConfirmationEmail</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
@@ -52,16 +53,16 @@
             </value>
         </inputParameters>
         <nameSegment>emailSimple</nameSegment>
-        <versionSegment>1</versionSegment>
     </actionCalls>
     <apiVersion>61.0</apiVersion>
     <decisions>
         <description>Was the original email with an unsubscribe link sent to a contact or a lead record? The Unsubscribe Link contains the public id., starting with C or L if it is a lead or contact. We need to find whether it is a contact or lead so that the Unsubscribe Record can be properly linked to the record.</description>
         <name>Contact_or_Lead</name>
         <label>Contact or Lead</label>
-        <locationX>1287</locationX>
-        <locationY>362</locationY>
+        <locationX>314</locationX>
+        <locationY>242</locationY>
         <defaultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Blank_Values_Flow</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>No Record Found</defaultConnectorLabel>
@@ -99,8 +100,8 @@
     <decisions>
         <name>Quick_UnsubscribeDecision</name>
         <label>Quick Unsubscribe</label>
-        <locationX>1028</locationX>
-        <locationY>1081</locationY>
+        <locationX>314</locationX>
+        <locationY>758</locationY>
         <defaultConnector>
             <targetReference>Are_you_sure</targetReference>
         </defaultConnector>
@@ -125,8 +126,8 @@
         <description>The custom metadata type stores the yes/no answer to whether or not you want an email sent to confirm that the person unsubscribed.</description>
         <name>Send_Confirmation_Email</name>
         <label>Send Confirmation Email</label>
-        <locationX>1620</locationX>
-        <locationY>1610</locationY>
+        <locationX>314</locationX>
+        <locationY>1382</locationY>
         <defaultConnector>
             <targetReference>screenConfirmationNoEmail</targetReference>
         </defaultConnector>
@@ -152,8 +153,8 @@
 If not, check if the custom metadata type allows the user to type in their email address.</description>
         <name>Was_a_Record_Found</name>
         <label>Was a Record Found</label>
-        <locationX>946</locationX>
-        <locationY>775</locationY>
+        <locationX>314</locationX>
+        <locationY>542</locationY>
         <defaultConnectorLabel>No record found, no type in</defaultConnectorLabel>
         <rules>
             <name>Yes_Record_Found1st</name>
@@ -166,6 +167,7 @@ If not, check if the custom metadata type allows the user to type in their email
                 </rightValue>
             </conditions>
             <connector>
+                <isGoTo>true</isGoTo>
                 <targetReference>Quick_UnsubscribeDecision</targetReference>
             </connector>
             <label>RecordFound</label>
@@ -186,7 +188,7 @@ If not, check if the custom metadata type allows the user to type in their email
             <label>No record found. Allow Type-In</label>
         </rules>
     </decisions>
-    <description>Customer facing flow of the Unsubscribe Link managed package from AppExchange.</description>
+    <description>Updated so that the last fault path still brings the recipient to the success screen, since they were actually unsubscribed.</description>
     <environments>Default</environments>
     <formulas>
         <description>get the total number of records that had this email address and unsubscribed.</description>
@@ -225,7 +227,7 @@ If not, check if the custom metadata type allows the user to type in their email
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
@@ -233,15 +235,12 @@ If not, check if the custom metadata type allows the user to type in their email
         <description>Create Unsubscribe record which stores details of this transaction.</description>
         <name>Create_Unsubscribe_Record</name>
         <label>Create Unsubscribe Record</label>
-        <locationX>1447</locationX>
-        <locationY>1093</locationY>
+        <locationX>314</locationX>
+        <locationY>1058</locationY>
         <assignRecordIdToReference>UnsubscribeId.Id</assignRecordIdToReference>
         <connector>
             <targetReference>Unsubscribe_Contacts</targetReference>
         </connector>
-        <faultConnector>
-            <targetReference>Error_Alert_Email</targetReference>
-        </faultConnector>
         <inputAssignments>
             <field>Contact__c</field>
             <value>
@@ -272,15 +271,12 @@ If not, check if the custom metadata type allows the user to type in their email
         <description>Look for a contact record with ID passed into the flow. Assign the email address to an email variable and the ID to a text variable called FoundId that is passed to other flows.</description>
         <name>Get_Contact</name>
         <label>Get Contact</label>
-        <locationX>1001</locationX>
-        <locationY>583</locationY>
+        <locationX>50</locationX>
+        <locationY>350</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Was_a_Record_Found</targetReference>
         </connector>
-        <faultConnector>
-            <targetReference>Error_Alert_Email</targetReference>
-        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Public_Id__c</field>
@@ -310,15 +306,12 @@ If not, check if the custom metadata type allows the user to type in their email
         <description>Look for a lead record with ID passed into the flow. Assign the email address to an email variable and the ID to a text variable called FoundId that is passed to other flows.</description>
         <name>Get_Lead</name>
         <label>Get Lead</label>
-        <locationX>1377</locationX>
-        <locationY>554</locationY>
+        <locationX>314</locationX>
+        <locationY>350</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Was_a_Record_Found</targetReference>
         </connector>
-        <faultConnector>
-            <targetReference>Error_Alert_Email</targetReference>
-        </faultConnector>
         <filterLogic>or</filterLogic>
         <filters>
             <field>Public_Id__c</field>
@@ -340,15 +333,12 @@ If not, check if the custom metadata type allows the user to type in their email
     <recordLookups>
         <name>Get_Unsubscribe_Link_Setup</name>
         <label>Get Unsubscribe Link Setup</label>
-        <locationX>888</locationX>
-        <locationY>185</locationY>
+        <locationX>314</locationX>
+        <locationY>134</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Contact_or_Lead</targetReference>
         </connector>
-        <faultConnector>
-            <targetReference>Error_Alert_Email</targetReference>
-        </faultConnector>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Unsubscribe_Link_Setup__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -358,8 +348,8 @@ If not, check if the custom metadata type allows the user to type in their email
         <description>confirmation screen for person to confirm they want to unsubscribe. Update &quot;our organization&quot; in the custom metadata type &quot;Unsubscribe Link.&quot;</description>
         <name>Are_you_sure</name>
         <label>Are you sure</label>
-        <locationX>854</locationX>
-        <locationY>1373</locationY>
+        <locationX>402</locationX>
+        <locationY>866</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -375,27 +365,10 @@ If not, check if the custom metadata type allows the user to type in their email
         <showHeader>false</showHeader>
     </screens>
     <screens>
-        <description>We will be alerted about an error at this point.</description>
-        <name>Error_Alert_Email</name>
-        <label>Error Alert Screen</label>
-        <locationX>1715</locationX>
-        <locationY>186</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>sorrycharlie</name>
-            <fieldText>&lt;p&gt;We apologize, but we are unable to automatically unsubscribe you at this time. We have been alerted about the problem.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>false</showHeader>
-    </screens>
-    <screens>
         <name>screenConfirmationEmail</name>
         <label>screenConfirmationEmail</label>
-        <locationX>950</locationX>
-        <locationY>1800</locationY>
+        <locationX>50</locationX>
+        <locationY>1598</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -410,8 +383,8 @@ If not, check if the custom metadata type allows the user to type in their email
     <screens>
         <name>screenConfirmationNoEmail</name>
         <label>screenConfirmationNoEmail</label>
-        <locationX>1444</locationX>
-        <locationY>1703</locationY>
+        <locationX>578</locationX>
+        <locationY>1490</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -424,8 +397,8 @@ If not, check if the custom metadata type allows the user to type in their email
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>762</locationX>
-        <locationY>48</locationY>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_Unsubscribe_Link_Setup</targetReference>
         </connector>
@@ -434,8 +407,8 @@ If not, check if the custom metadata type allows the user to type in their email
     <subflows>
         <name>Blank_Values_Flow</name>
         <label>Blank Values Flow</label>
-        <locationX>1218</locationX>
-        <locationY>854</locationY>
+        <locationX>314</locationX>
+        <locationY>650</locationY>
         <connector>
             <targetReference>Quick_UnsubscribeDecision</targetReference>
         </connector>
@@ -465,8 +438,8 @@ If not, check if the custom metadata type allows the user to type in their email
         <description>Launch this additional flow to find all contacts who have this email address and mark them as email opt out.</description>
         <name>Unsubscribe_Contacts</name>
         <label>Unsubscribe Contacts</label>
-        <locationX>1469</locationX>
-        <locationY>1363</locationY>
+        <locationX>314</locationX>
+        <locationY>1166</locationY>
         <connector>
             <targetReference>Unsubscribe_Leads</targetReference>
         </connector>
@@ -498,8 +471,8 @@ If not, check if the custom metadata type allows the user to type in their email
         <description>Part of the unmanaged packed Unsubscribe Link from Salesforce Labs and loops through all leads with a particular email address to mark them as email opt out. This flow is launched by the flow Unsubscribe Link.</description>
         <name>Unsubscribe_Leads</name>
         <label>Unsubscribe Leads</label>
-        <locationX>1473</locationX>
-        <locationY>1482</locationY>
+        <locationX>314</locationX>
+        <locationY>1274</locationY>
         <connector>
             <targetReference>Send_Confirmation_Email</targetReference>
         </connector>
