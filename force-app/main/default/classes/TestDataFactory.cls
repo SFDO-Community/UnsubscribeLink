@@ -83,7 +83,8 @@ public with sharing class TestDataFactory {
     Contact bob = new Contact(
       LastName = 'Sagal',
       Email = emailAdd,
-      AccountId = newA.id
+      AccountId = newA.id,
+      Part1_Unsubscribe_Link__c = 'https://example.com/unsubscribe'
     );
     Contact paula = new Contact(
       LastName = 'Poundstone',
