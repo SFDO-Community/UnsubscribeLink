@@ -4,7 +4,8 @@ public with sharing class TestDataFactory {
     Lead tig = new Lead(
       LastName = 'Notaro',
       Email = emailAddress,
-      Company = 'Taylor Dayne Fan Club'
+      Company = 'Taylor Dayne Fan Club',
+      Part1_Unsubscribe_Link__c = 'https://example.com/unsubscribe+bob'
     );
     Lead fortune = new Lead(
       LastName = 'Feimster',
@@ -84,7 +85,7 @@ public with sharing class TestDataFactory {
       LastName = 'Sagal',
       Email = emailAdd,
       AccountId = newA.id,
-      Part1_Unsubscribe_Link__c = 'https://example.com/unsubscribe'
+      Part1_Unsubscribe_Link__c = 'https://example.com/unsubscribe+bob'
     );
     Contact paula = new Contact(
       LastName = 'Poundstone',
