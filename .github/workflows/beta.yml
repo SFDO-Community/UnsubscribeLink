@@ -1,26 +1,12 @@
+name: Upload Beta Release (2GP)
 on:
   push:
     branches:
-        - 'main'
-
+      - 'main'
 jobs:
-  upload-beta-release-2gp:
-    name: "Upload Beta Release (2GP)"
-    environment: packaging
-    concurrency: packaging
-    runs-on: ubuntu-latest
-    steps:
-      - uses: cumulus-actions/release-beta-2gp@v1
-        with:
-          cumulusci-version: '3.86.1'
-          dev-hub-auth-url: '${{ secrets.PACKAGING_ORG_AUTH_URL }}'
-  beta-test:
-    name: "Beta Test"
-    environment: packaging
-    needs:
-      - upload-beta-release-2gp
-    runs-on: ubuntu-latest
-    steps: 
-      - uses: cumulus-actions/beta-test@v1
-        with:
-          dev-hub-auth-url: '${{ secrets.PACKAGING_ORG_AUTH_URL }}'
+  upload-beta:
+    uses: SFDO-Community/standard-workflows/.github/workflows/beta-2gp.yml@main
+    with:
+      cumulusci-version: '3.86.1'
+    secrets:
+      dev-hub-auth-url: '${{ secrets.PACKAGING_ORG_AUTH_URL }}'
