@@ -9,10 +9,10 @@ public without sharing class UnsubscribeContactsTest {
   public User adminUser;
   @isTest
   public static void contactsTest() {
-    testDataFactory.createContacts();
     testDataFactory.setUpUser();
     User adminUser = [SELECT id FROM User WHERE Alias = 'Seattle'];
     System.runAs(adminUser) {
+      testDataFactory.createContacts();
       Contact returnOneContact = [SELECT Email FROM Contact LIMIT 1];
       String emailAddress = returnOneContact.email;
       Map<String, String> params = new Map<String, String>();

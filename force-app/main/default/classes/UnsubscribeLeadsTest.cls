@@ -3,10 +3,10 @@ public without sharing class UnsubscribeLeadsTest {
   public User adminUser;
   @isTest
   public static void leadsTest() {
-    testDataFactory.createLeads();
     testDataFactory.setUpUser();
     User adminUser = [SELECT id FROM User WHERE Alias = 'Seattle'];
     System.runAs(adminUser) {
+      testDataFactory.createLeads();
       Lead returnOneLead = [SELECT Email FROM Lead LIMIT 1];
       String emailAddress = returnOneLead.email;
       Map<String, String> params = new Map<String, String>();
