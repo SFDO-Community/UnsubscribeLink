@@ -3,9 +3,14 @@ private class UnsubscribeLinkControllerTest {
     
     @testSetup
     static void setupTestData() {
-        testDataFactory.createULSetup();
-        testDataFactory.createContacts();
-        testDataFactory.createLeads();
+        testDataFactory.setUpUser();
+        User adminUser = [SELECT id FROM User WHERE Alias = 'Seattle'];
+        System.runAs(adminUser) {
+            // Create test data for Contacts and Leads
+            testDataFactory.createULSetup();
+            testDataFactory.createContacts();
+            testDataFactory.createLeads();
+        }
     }
     
     @IsTest
