@@ -1,0 +1,13 @@
+name: Upload Beta Release (2GP)
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+ upload-beta:
+   name: "Upload Beta 2GP"
+   uses: "SFDO-Community/standard-workflows/.github/workflows/beta-2gp.yml@main"
+   secrets:
+    dev-hub-auth-url: "${{ secrets.DEV_HUB_AUTH_URL }}"
+   with:
+    cumulusci-version: '3.86.1'

@@ -4,7 +4,8 @@ public with sharing class TestDataFactory {
     Lead tig = new Lead(
       LastName = 'Notaro',
       Email = emailAddress,
-      Company = 'Taylor Dayne Fan Club'
+      Company = 'Taylor Dayne Fan Club',
+      Part1_Unsubscribe_Link__c = 'https://example.com/unsubscribe+bob'
     );
     Lead fortune = new Lead(
       LastName = 'Feimster',
@@ -83,7 +84,8 @@ public with sharing class TestDataFactory {
     Contact bob = new Contact(
       LastName = 'Sagal',
       Email = emailAdd,
-      AccountId = newA.id
+      AccountId = newA.id,
+      Part1_Unsubscribe_Link__c = 'https://example.com/unsubscribe+bob'
     );
     Contact paula = new Contact(
       LastName = 'Poundstone',
@@ -127,5 +129,11 @@ public with sharing class TestDataFactory {
       leads.add(l);
     }
     insert as user leads;
+  }
+    
+  public static void createULSetup(){
+      Unsubscribe_Link_Setup__c  ulSetup = new Unsubscribe_Link_Setup__c();
+      ulSetup.Link_Text__c = 'Click here to unsubscribe' ;
+      insert ulSetup;
   }
 }
