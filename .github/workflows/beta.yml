@@ -9,5 +9,4 @@ jobs:
    uses: "SFDO-Community/standard-workflows/.github/workflows/beta-2gp.yml@main"
    secrets:
     dev-hub-auth-url: "${{ secrets.DEV_HUB_AUTH_URL }}"
-   with:
-    cumulusci-version: '4.4.0'
+
