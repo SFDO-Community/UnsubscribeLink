@@ -5,6 +5,7 @@ jobs:
     name: "Upload Production Release (2GP)"
     uses: SFDO-Community/standard-workflows/.github/workflows/production-2gp.yml@main
     with:
-      cumulusci-version: '3.86.1'
+      cumulusci-version: '3.93.0'
+      sfdx-version: '7.209.6'
     secrets:
       dev-hub-auth-url: '${{ secrets.PACKAGING_ORG_AUTH_URL }}'
