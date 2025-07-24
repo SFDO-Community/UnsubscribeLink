@@ -1,4 +1,4 @@
-minimum_cumulusci_version: '3.86.1'
+minimum_cumulusci_version: '4.4.0'
 project:
     name: Unsubscribe-Link
     package:

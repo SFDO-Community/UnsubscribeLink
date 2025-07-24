@@ -10,4 +10,4 @@ jobs:
    secrets:
     dev-hub-auth-url: "${{ secrets.DEV_HUB_AUTH_URL }}"
    with:
-    cumulusci-version: '3.86.1'
+    cumulusci-version: '4.4.0'
