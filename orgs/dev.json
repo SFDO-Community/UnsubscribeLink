@@ -7,6 +7,7 @@
     },
     "communitiesSettings": {
         "enableNetworksEnabled": true
+
     },
     "chatterSettings": {
       "enableChatter": true
