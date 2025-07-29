@@ -6,7 +6,8 @@
       "enableS1DesktopEnabled": true
     },
     "communitiesSettings": {
-      "enableNetworksEnabled": true
+        "enableNetworksEnabled": true
+
     },
     "chatterSettings": {
       "enableChatter": true
