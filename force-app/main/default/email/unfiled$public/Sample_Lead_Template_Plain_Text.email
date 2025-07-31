@@ -1,0 +1,17 @@
+<messaging:emailTemplate subject="Edit this subject" recipientType="Lead" >
+  <messaging:plainTextEmailBody > <!-- When creating a new visualforce template, the default option is plainTextEmailBody.
+  the unsubscribe link will note appear in that case.  Convert any visualforce templates to htmlEmailBody before
+  adding the visualforce component -->
+Dear Friend,
+
+It's Thursday! You love to order a pizza on Thursdays! If you order before 5, I'll also throw in some free drinks!
+
+Your friend,
+
+Bob
+
+Copy and paste this in your browser to unsubscribe: 
+{!Recipient.Unsubscribe_Url_Plain_Text__c}  <!-- This field can be 
+added to any plain text contact or lead email to display the url-->
+   </messaging:plainTextEmailBody>
+</messaging:emailTemplate>
