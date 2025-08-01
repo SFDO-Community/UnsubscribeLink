@@ -5,7 +5,7 @@
         <name>ConfirmationEmail</name>
         <label>ConfirmationEmail</label>
         <locationX>50</locationX>
-        <locationY>1598</locationY>
+        <locationY>1706</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
@@ -58,7 +58,7 @@
         <name>Send_Error_Email</name>
         <label>Send Error Email</label>
         <locationX>578</locationX>
-        <locationY>1598</locationY>
+        <locationY>1706</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
@@ -102,12 +102,29 @@
         <nameSegment>emailSimple</nameSegment>
     </actionCalls>
     <apiVersion>61.0</apiVersion>
+    <assignments>
+        <description>Passes the error email recipient email from the unsubscribe link setup to a text variable used by subflows.</description>
+        <name>Set_ErrorRecipient</name>
+        <label>Set ErrorRecipient</label>
+        <locationX>1128</locationX>
+        <locationY>242</locationY>
+        <assignmentItems>
+            <assignToReference>ErrorRecipient</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Unsubscribe_Link_Setup.Error_Email_Recipient__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Contact_or_Lead</targetReference>
+        </connector>
+    </assignments>
     <decisions>
         <description>Was the original email with an unsubscribe link sent to a contact or a lead record? The Unsubscribe Link contains the public id., starting with C or L if it is a lead or contact. We need to find whether it is a contact or lead so that the Unsubscribe Record can be properly linked to the record.</description>
         <name>Contact_or_Lead</name>
         <label>Contact or Lead</label>
         <locationX>1128</locationX>
-        <locationY>242</locationY>
+        <locationY>350</locationY>
         <defaultConnector>
             <isGoTo>true</isGoTo>
             <targetReference>Blank_Values_Flow</targetReference>
@@ -148,7 +165,7 @@
         <name>Is_Org_Wide_Email_Address_Valid</name>
         <label>Is Org-Wide Email Address Valid</label>
         <locationX>314</locationX>
-        <locationY>1490</locationY>
+        <locationY>1598</locationY>
         <defaultConnector>
             <targetReference>Send_Error_Email</targetReference>
         </defaultConnector>
@@ -170,7 +187,7 @@
         <name>Quick_UnsubscribeDecision</name>
         <label>Quick Unsubscribe</label>
         <locationX>710</locationX>
-        <locationY>650</locationY>
+        <locationY>758</locationY>
         <defaultConnector>
             <targetReference>Are_you_sure</targetReference>
         </defaultConnector>
@@ -196,7 +213,7 @@
         <name>Send_Confirmation_Email</name>
         <label>Send Confirmation Email</label>
         <locationX>710</locationX>
-        <locationY>1274</locationY>
+        <locationY>1382</locationY>
         <defaultConnector>
             <targetReference>screenConfirmationNoEmail</targetReference>
         </defaultConnector>
@@ -223,7 +240,7 @@ If not, check if the custom metadata type allows the user to type in their email
         <name>Was_a_Record_Found</name>
         <label>Was a Record Found</label>
         <locationX>1128</locationX>
-        <locationY>542</locationY>
+        <locationY>650</locationY>
         <defaultConnectorLabel>No record found, no type in</defaultConnectorLabel>
         <rules>
             <name>Yes_Record_Found1st</name>
@@ -256,7 +273,7 @@ If not, check if the custom metadata type allows the user to type in their email
             <label>No record found. Allow Type-In</label>
         </rules>
     </decisions>
-    <description>Customer facing flow of the Unsubscribe Link managed package from AppExchange.</description>
+    <description>Customer facing flow of the Unsubscribe Link managed package from AppExchange. Updated to set the value of the error email recipient flow.  Previously, the value was blank.</description>
     <environments>Default</environments>
     <formulas>
         <description>get the total number of records that had this email address and unsubscribed.</description>
@@ -304,7 +321,7 @@ If not, check if the custom metadata type allows the user to type in their email
         <name>Create_Unsubscribe_Record</name>
         <label>Create Unsubscribe Record</label>
         <locationX>710</locationX>
-        <locationY>950</locationY>
+        <locationY>1058</locationY>
         <assignRecordIdToReference>UnsubscribeId.Id</assignRecordIdToReference>
         <connector>
             <targetReference>Unsubscribe_Contacts</targetReference>
@@ -340,7 +357,7 @@ If not, check if the custom metadata type allows the user to type in their email
         <name>Get_Contact</name>
         <label>Get Contact</label>
         <locationX>864</locationX>
-        <locationY>350</locationY>
+        <locationY>458</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Was_a_Record_Found</targetReference>
@@ -375,7 +392,7 @@ If not, check if the custom metadata type allows the user to type in their email
         <name>Get_Lead</name>
         <label>Get Lead</label>
         <locationX>1128</locationX>
-        <locationY>350</locationY>
+        <locationY>458</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Was_a_Record_Found</targetReference>
@@ -403,7 +420,7 @@ If not, check if the custom metadata type allows the user to type in their email
         <name>Get_Org_Wide_Email_Address</name>
         <label>Get Org-Wide Email Address</label>
         <locationX>314</locationX>
-        <locationY>1382</locationY>
+        <locationY>1490</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Is_Org_Wide_Email_Address_Valid</targetReference>
@@ -434,7 +451,7 @@ If not, check if the custom metadata type allows the user to type in their email
         <locationY>134</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Contact_or_Lead</targetReference>
+            <targetReference>Set_ErrorRecipient</targetReference>
         </connector>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Unsubscribe_Link_Setup__c</object>
@@ -446,7 +463,7 @@ If not, check if the custom metadata type allows the user to type in their email
         <name>Are_you_sure</name>
         <label>Are you sure</label>
         <locationX>798</locationX>
-        <locationY>758</locationY>
+        <locationY>866</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -466,7 +483,7 @@ If not, check if the custom metadata type allows the user to type in their email
         <name>Error_Alert_Email</name>
         <label>Error Alert Screen</label>
         <locationX>314</locationX>
-        <locationY>1706</locationY>
+        <locationY>1814</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -482,7 +499,7 @@ If not, check if the custom metadata type allows the user to type in their email
         <name>screenConfirmationEmail</name>
         <label>screenConfirmationEmail</label>
         <locationX>50</locationX>
-        <locationY>1706</locationY>
+        <locationY>1814</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -498,7 +515,7 @@ If not, check if the custom metadata type allows the user to type in their email
         <name>screenConfirmationNoEmail</name>
         <label>screenConfirmationNoEmail</label>
         <locationX>710</locationX>
-        <locationY>2114</locationY>
+        <locationY>2222</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -522,7 +539,7 @@ If not, check if the custom metadata type allows the user to type in their email
         <name>Blank_Values_Flow</name>
         <label>Blank Values Flow</label>
         <locationX>1282</locationX>
-        <locationY>650</locationY>
+        <locationY>758</locationY>
         <connector>
             <isGoTo>true</isGoTo>
             <targetReference>Quick_UnsubscribeDecision</targetReference>
@@ -554,7 +571,7 @@ If not, check if the custom metadata type allows the user to type in their email
         <name>Unsubscribe_Contacts</name>
         <label>Unsubscribe Contacts</label>
         <locationX>710</locationX>
-        <locationY>1058</locationY>
+        <locationY>1166</locationY>
         <connector>
             <targetReference>Unsubscribe_Leads</targetReference>
         </connector>
@@ -587,7 +604,7 @@ If not, check if the custom metadata type allows the user to type in their email
         <name>Unsubscribe_Leads</name>
         <label>Unsubscribe Leads</label>
         <locationX>710</locationX>
-        <locationY>1166</locationY>
+        <locationY>1274</locationY>
         <connector>
             <targetReference>Send_Confirmation_Email</targetReference>
         </connector>
