@@ -3,8 +3,8 @@
     <actionCalls>
         <name>Contact_Batch</name>
         <label>Contact Batch</label>
-        <locationX>182</locationX>
-        <locationY>3122</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>UUIDBatchInvocable</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -34,8 +34,8 @@
     <actionCalls>
         <name>LeadBatch</name>
         <label>Lead Batch</label>
-        <locationX>182</locationX>
-        <locationY>3230</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>UUIDBatchInvocable</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -62,12 +62,12 @@
         </inputParameters>
         <nameSegment>UUIDBatchInvocable</nameSegment>
     </actionCalls>
-    <apiVersion>61.0</apiVersion>
+    <apiVersion>64.0</apiVersion>
     <assignments>
         <name>ass_final_value_of_sender_email</name>
         <label>final value of sender email</label>
-        <locationX>50</locationX>
-        <locationY>974</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Org_Wide_Email_Address__c</assignToReference>
             <operator>Assign</operator>
@@ -89,8 +89,8 @@
     <assignments>
         <name>ass_final_value_of_sender_email_0</name>
         <label>final value of sender email</label>
-        <locationX>314</locationX>
-        <locationY>866</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Org_Wide_Email_Address__c</assignToReference>
             <operator>Assign</operator>
@@ -113,8 +113,8 @@
         <description>Assign selections made on previous screens</description>
         <name>Assign_Modified_Value</name>
         <label>Assign Modified Value</label>
-        <locationX>182</locationX>
-        <locationY>2606</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Screen_1_Part_2__c</assignToReference>
             <operator>Assign</operator>
@@ -186,8 +186,8 @@
         <description>Assign values to the default if this is their first time creating a record.</description>
         <name>Default_AssignValues</name>
         <label>DEFAULT Assign Values</label>
-        <locationX>314</locationX>
-        <locationY>458</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Screen_3__c</assignToReference>
             <operator>Assign</operator>
@@ -287,8 +287,8 @@
         <description>Assign values to the final variable if this is their second or later time filling this out.</description>
         <name>EXISTINGAssignValues</name>
         <label>EXISTING Assign Values</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Screen_3__c</assignToReference>
             <operator>Assign</operator>
@@ -388,8 +388,8 @@
         <description>Assign values to the final variable based on answers to the initial screen.</description>
         <name>UpdateFinalValues</name>
         <label>UpdateFinalValues</label>
-        <locationX>182</locationX>
-        <locationY>1166</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Confirmation_Email_Text__c</assignToReference>
             <operator>Assign</operator>
@@ -458,8 +458,8 @@
     <decisions>
         <name>Confirmation_EmailSend</name>
         <label>Send Confirmation Email?</label>
-        <locationX>182</locationX>
-        <locationY>2090</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Get_Experience_Site</targetReference>
         </defaultConnector>
@@ -483,8 +483,8 @@
     <decisions>
         <name>dec_Org_wide_confirmation_email_sender</name>
         <label>Org wide confirmation email sender</label>
-        <locationX>182</locationX>
-        <locationY>758</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>ass_final_value_of_sender_email_0</targetReference>
         </defaultConnector>
@@ -509,8 +509,8 @@
         <description>Does a setup record exist already</description>
         <name>ExistingRecordSameName_0</name>
         <label>Setup Record Exists?</label>
-        <locationX>182</locationX>
-        <locationY>242</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>CompanyName</targetReference>
         </defaultConnector>
@@ -535,8 +535,8 @@
         <description>Does a setup record exist already</description>
         <name>ExistingRecordSameName_0_0</name>
         <label>Setup Record Exists?</label>
-        <locationX>182</locationX>
-        <locationY>2714</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Record</targetReference>
         </defaultConnector>
@@ -560,8 +560,8 @@
     <decisions>
         <name>Include_screen_1</name>
         <label>Include screen 1</label>
-        <locationX>182</locationX>
-        <locationY>1382</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Screen2PreviewScreen_0</targetReference>
         </defaultConnector>
@@ -585,8 +585,8 @@
     <decisions>
         <name>IncludeScreen3Decision</name>
         <label>Include Email Type In Screen</label>
-        <locationX>182</locationX>
-        <locationY>1790</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Confirmation_EmailSend</targetReference>
         </defaultConnector>
@@ -610,7 +610,7 @@
     <description>Included creating an org wide email address for confirmation email sender. And profile security. 
 
 July 2025 Updates: 
-added progress bar (issue #113)
+added progress bar (issue #113)--activated progress bar (was not active in version connected to pull request)
 added explanation of implications for company name (issue #93)
 resolved unhandled faults related to org-wide email address creation by preventing users to back track to previous screens and updated the record choice set to include non-verified email addresses (issue #114)
 updated final screen to clarify the flow is finished but can be run again if needed (issue #105)
@@ -698,8 +698,8 @@ added explanation text to all preview screens (issue #144)</description>
         <description>Create the Org wide email address used by the confirmation email as the sender.</description>
         <name>Create_Org_Wide_Email_0</name>
         <label>Create Org Wide Sender Email</label>
-        <locationX>50</locationX>
-        <locationY>866</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>ass_final_value_of_sender_email</targetReference>
         </connector>
@@ -734,8 +734,8 @@ added explanation text to all preview screens (issue #144)</description>
         <description>Create the UL record.</description>
         <name>Create_Record</name>
         <label>Create Record</label>
-        <locationX>314</locationX>
-        <locationY>2822</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Public_Ids</targetReference>
         </connector>
@@ -745,8 +745,8 @@ added explanation text to all preview screens (issue #144)</description>
         <description>Collect Experience Site informations</description>
         <name>Get_Experience_Site</name>
         <label>Get Experience Site</label>
-        <locationX>182</locationX>
-        <locationY>2390</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_My_Domain</targetReference>
@@ -759,8 +759,8 @@ added explanation text to all preview screens (issue #144)</description>
         <description>Collect URL from Experience Site</description>
         <name>Get_My_Domain</name>
         <label>Get My Domain</label>
-        <locationX>182</locationX>
-        <locationY>2498</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Assign_Modified_Value</targetReference>
@@ -780,8 +780,8 @@ added explanation text to all preview screens (issue #144)</description>
     <recordLookups>
         <name>getULSetup</name>
         <label>getULSetup</label>
-        <locationX>182</locationX>
-        <locationY>134</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>ExistingRecordSameName_0</targetReference>
@@ -793,8 +793,8 @@ added explanation text to all preview screens (issue #144)</description>
     <recordUpdates>
         <name>Update_existing_record</name>
         <label>Update existing record</label>
-        <locationX>50</locationX>
-        <locationY>2822</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Public_Ids</targetReference>
         </connector>
@@ -803,8 +803,8 @@ added explanation text to all preview screens (issue #144)</description>
     <screens>
         <name>CompanyName</name>
         <label>CompanyName</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -834,8 +834,8 @@ added explanation text to all preview screens (issue #144)</description>
     <screens>
         <name>completeScreen</name>
         <label>completeScreen</label>
-        <locationX>182</locationX>
-        <locationY>3338</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -851,8 +851,8 @@ added explanation text to all preview screens (issue #144)</description>
     <screens>
         <name>ConfirmationEmailPreviewScreen</name>
         <label>Email Confirmation Preview Screen</label>
-        <locationX>50</locationX>
-        <locationY>2198</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -870,8 +870,8 @@ added explanation text to all preview screens (issue #144)</description>
     <screens>
         <name>Create_Public_Ids</name>
         <label>Create Public Ids</label>
-        <locationX>182</locationX>
-        <locationY>3014</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -890,8 +890,8 @@ added explanation text to all preview screens (issue #144)</description>
         <description>A preview of the email with the option to modify the text of the link</description>
         <name>EmailModifyScreen</name>
         <label>Screen Email Preview</label>
-        <locationX>182</locationX>
-        <locationY>1274</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -926,8 +926,8 @@ added explanation text to all preview screens (issue #144)</description>
         <description>Give the option to have a confirmation screen before Opt Out, but this is not recommended.</description>
         <name>Screen1Preview</name>
         <label>Screen 1 Preview</label>
-        <locationX>50</locationX>
-        <locationY>1490</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -1074,8 +1074,8 @@ added explanation text to all preview screens (issue #144)</description>
         <description>This screen will display the confirmation message you want the user to see</description>
         <name>Screen2PreviewScreen_0</name>
         <label>Screen 2</label>
-        <locationX>182</locationX>
-        <locationY>1682</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -1161,8 +1161,8 @@ added explanation text to all preview screens (issue #144)</description>
         <description>This is an optional screen to allow user to enter their email if not found in the database.</description>
         <name>Screen3PreviewScreen</name>
         <label>Screen 3</label>
-        <locationX>50</locationX>
-        <locationY>1898</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -1238,8 +1238,8 @@ added explanation text to all preview screens (issue #144)</description>
         <description>Select informations to set up the unsubscribe link</description>
         <name>Set_Up_Unsubscribe_Link_0</name>
         <label>InitialSetUp</label>
-        <locationX>182</locationX>
-        <locationY>650</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -1513,7 +1513,7 @@ added explanation text to all preview screens (issue #144)</description>
         <stageOrder>4</stageOrder>
     </stages>
     <start>
-        <locationX>56</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>getULSetup</targetReference>
