@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+<ReportType xmlns="https://soap.sforce.com/2006/04/metadata">
     <baseObject>Account</baseObject>
     <category>activities</category>
     <deployed>true</deployed>
@@ -76,18 +76,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Billing State/Province</displayNameOverride>
-            <field>BillingStateCode</field>
-            <table>Account</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Billing Country</displayNameOverride>
-            <field>BillingCountryCode</field>
-            <table>Account</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <displayNameOverride>Billing Latitude</displayNameOverride>
             <field>BillingLatitude</field>
             <table>Account</table>
@@ -138,18 +126,6 @@
             <checkedByDefault>false</checkedByDefault>
             <displayNameOverride>Shipping Country (text only)</displayNameOverride>
             <field>ShippingCountry</field>
-            <table>Account</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Shipping State/Province</displayNameOverride>
-            <field>ShippingStateCode</field>
-            <table>Account</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Shipping Country</displayNameOverride>
-            <field>ShippingCountryCode</field>
             <table>Account</table>
         </columns>
         <columns>
@@ -350,48 +326,7 @@
             <field>OperatingHours</field>
             <table>Account</table>
         </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Customer Priority</displayNameOverride>
-            <field>CustomerPriority__c</field>
-            <table>Account</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>SLA</displayNameOverride>
-            <field>SLA__c</field>
-            <table>Account</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Active</displayNameOverride>
-            <field>Active__c</field>
-            <table>Account</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Number of Locations</displayNameOverride>
-            <field>NumberofLocations__c</field>
-            <table>Account</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Upsell Opportunity</displayNameOverride>
-            <field>UpsellOpportunity__c</field>
-            <table>Account</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>SLA Serial Number</displayNameOverride>
-            <field>SLASerialNumber__c</field>
-            <table>Account</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>SLA Expiration Date</displayNameOverride>
-            <field>SLAExpirationDate__c</field>
-            <table>Account</table>
-        </columns>
+
         <masterLabel>Accounts</masterLabel>
     </sections>
     <sections>
@@ -463,18 +398,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Other State/Province</displayNameOverride>
-            <field>OtherStateCode</field>
-            <table>Account.Contacts</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Other Country</displayNameOverride>
-            <field>OtherCountryCode</field>
-            <table>Account.Contacts</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <displayNameOverride>Other Latitude</displayNameOverride>
             <field>OtherLatitude</field>
             <table>Account.Contacts</table>
@@ -525,18 +448,6 @@
             <checkedByDefault>false</checkedByDefault>
             <displayNameOverride>Mailing Country (text only)</displayNameOverride>
             <field>MailingCountry</field>
-            <table>Account.Contacts</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Mailing State/Province</displayNameOverride>
-            <field>MailingStateCode</field>
-            <table>Account.Contacts</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Mailing Country</displayNameOverride>
-            <field>MailingCountryCode</field>
             <table>Account.Contacts</table>
         </columns>
         <columns>
@@ -765,18 +676,6 @@
             <checkedByDefault>false</checkedByDefault>
             <displayNameOverride>Buyer Attributes</displayNameOverride>
             <field>BuyerAttributes</field>
-            <table>Account.Contacts</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Level</displayNameOverride>
-            <field>Level__c</field>
-            <table>Account.Contacts</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Languages</displayNameOverride>
-            <field>Languages__c</field>
             <table>Account.Contacts</table>
         </columns>
         <columns>

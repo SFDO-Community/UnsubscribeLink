@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+<ReportType xmlns="https://soap.sforce.com/2006/04/metadata">
     <baseObject>Lead</baseObject>
     <category>activities</category>
     <deployed>true</deployed>
@@ -73,16 +73,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Country</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>StateCode</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>CountryCode</field>
             <table>Lead</table>
         </columns>
         <columns>
@@ -288,31 +278,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>GenderIdentity</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>SICCode__c</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>ProductInterest__c</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Primary__c</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>CurrentGenerators__c</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>NumberofLocations__c</field>
             <table>Lead</table>
         </columns>
         <columns>
