@@ -1,9 +1,9 @@
-minimum_cumulusci_version: '3.86.1'
+minimum_cumulusci_version: '3.93.0'
 project:
     name: Unsubscribe-Link
     package:
         name: Unsubscribe-Link
-        namespace: UnsubscribeLink
+        namespace: UnsubscribeLnk
         api_version: '60.0'
     git:
         default_branch: 'main'
