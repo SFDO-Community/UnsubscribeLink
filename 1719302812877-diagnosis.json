@@ -215,7 +215,7 @@
   ],
   "suggestions": [
     "Check https://github.com/forcedotcom/cli/issues for CLI issues posted by the community.",
-    "Check http://status.salesforce.com for general Salesforce availability and performance.",
+    "Check https://status.salesforce.com for general Salesforce availability and performance.",
     "using npm registry https://registry.npmjs.org/ from npm config",
     "The sourceApiVersion in sfdx-project.json doesn't match the max apiVersion of the default target org. As a result, you're not using the latest features available in API version 61.0. The version mismatch isn't a problem, as long as it's the behavior you actually want."
   ],
