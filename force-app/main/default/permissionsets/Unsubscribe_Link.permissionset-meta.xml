@@ -7,13 +7,13 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Contact.Public_Id__c</field>
+        <editable>true</editable>
+        <field>Contact.Part1_Unsubscribe_Link__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Contact.Part1_Unsubscribe_Link__c</field>
+        <editable>false</editable>
+        <field>Contact.Public_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -22,13 +22,13 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Lead.HasOptedOutOfEmail</field>
+        <editable>false</editable>
+        <field>Contact.Unsubscribe_Url_Plain_Text__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Lead.Public_Id__c</field>
+        <editable>true</editable>
+        <field>Lead.HasOptedOutOfEmail</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -38,7 +38,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Lead.Public_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Lead.Unsubscribe_Link_Lead__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Unsubscribe_Url_Plain_Text__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
