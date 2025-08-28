@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unsubscribe_Url_Plain_Text__c</fullName>
+    <description>Holds the plain text value of the url.  This is used to add the url to plain text emails.</description>
+    <externalId>false</externalId>
+    <formula>LEFT(Part1_Unsubscribe_Link__c , FIND(&quot;+&quot;,Part1_Unsubscribe_Link__c ) - 1)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Unsubscribe Url Plain Text</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
