@@ -4,7 +4,7 @@
     <available>true</available>
     <description>Sample template for contact that demonstrates how to use the unsubscribe link visualforce object.</description>
     <encodingKey>UTF-8</encodingKey>
-    <name>Unsubscribe Sample Contact Template</name>
+    <name>Unsubscribe Sample Contact Template </name>
     <style>none</style>
     <subject>Edit this subject</subject>
     <type>visualforce</type>
