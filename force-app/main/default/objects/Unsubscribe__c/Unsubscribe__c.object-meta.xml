@@ -143,7 +143,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Manage unsubscribes from email lists. Part of unmanaged package Unsubscribe Link from Salesforce Labs. Each record represents a time a user attempted to Unsubscribe from commercial email.</description>
+    <description>Manage unsubscribes from email lists. Each record represents a time a user attempted to Unsubscribe from commercial email.</description>
     <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
