@@ -1,5 +1,5 @@
 <messaging:emailTemplate subject="Edit this subject" recipientType="Lead" >
-  <messaging:plainTextEmailBody > <!-- When creating a new visualforce template, the default option is plainTextEmailBody.
+  <messaging:plainTextEmailBody > <!-- When creating a new visualforce template, the default option is plainTextEmailBody. 
   the unsubscribe link will note appear in that case.  Convert any visualforce templates to htmlEmailBody before
   adding the visualforce component -->
 Dear Friend,
