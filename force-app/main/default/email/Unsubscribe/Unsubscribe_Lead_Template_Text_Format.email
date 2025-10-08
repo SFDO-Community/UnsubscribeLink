@@ -9,7 +9,6 @@ Your friend,
 Bob
 
 Copy and paste this in your browser to unsubscribe: 
-{!Recipient.Unsubscribe_Url_Plain_Text__c}  <!-- This field can be 
-added to any plain text contact or lead email to display the url-->
+{!Recipient.Unsubscribe_Url_Plain_Text__c}  <!-- This field can be added to any plain text contact or lead email to display the url-->
 </messaging:plainTextEmailBody>
 </messaging:emailTemplate>
