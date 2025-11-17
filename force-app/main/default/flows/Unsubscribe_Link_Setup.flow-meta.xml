@@ -3,8 +3,8 @@
     <actionCalls>
         <name>Contact_Batch</name>
         <label>Contact Batch</label>
-        <locationX>577</locationX>
-        <locationY>4010</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>UUIDBatchInvocable</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -30,13 +30,12 @@
             </value>
         </inputParameters>
         <nameSegment>UUIDBatchInvocable</nameSegment>
-        <versionSegment>1</versionSegment>
     </actionCalls>
     <actionCalls>
         <name>LeadBatch</name>
         <label>Lead Batch</label>
-        <locationX>577</locationX>
-        <locationY>4118</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>UUIDBatchInvocable</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -62,14 +61,13 @@
             </value>
         </inputParameters>
         <nameSegment>UUIDBatchInvocable</nameSegment>
-        <versionSegment>1</versionSegment>
     </actionCalls>
-    <apiVersion>61.0</apiVersion>
+    <apiVersion>64.0</apiVersion>
     <assignments>
         <name>ass_final_value_of_sender_email</name>
         <label>final value of sender email</label>
-        <locationX>445</locationX>
-        <locationY>1238</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Org_Wide_Email_Address__c</assignToReference>
             <operator>Assign</operator>
@@ -91,8 +89,8 @@
     <assignments>
         <name>ass_final_value_of_sender_email_0</name>
         <label>final value of sender email</label>
-        <locationX>709</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Org_Wide_Email_Address__c</assignToReference>
             <operator>Assign</operator>
@@ -115,8 +113,8 @@
         <description>Assign selections made on previous screens</description>
         <name>Assign_Modified_Value</name>
         <label>Assign Modified Value</label>
-        <locationX>577</locationX>
-        <locationY>3494</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Screen_1_Part_2__c</assignToReference>
             <operator>Assign</operator>
@@ -188,8 +186,8 @@
         <description>Assign values to the default if this is their first time creating a record.</description>
         <name>Default_AssignValues</name>
         <label>DEFAULT Assign Values</label>
-        <locationX>709</locationX>
-        <locationY>506</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Screen_3__c</assignToReference>
             <operator>Assign</operator>
@@ -289,8 +287,8 @@
         <description>Assign values to the final variable if this is their second or later time filling this out.</description>
         <name>EXISTINGAssignValues</name>
         <label>EXISTING Assign Values</label>
-        <locationX>445</locationX>
-        <locationY>398</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Screen_3__c</assignToReference>
             <operator>Assign</operator>
@@ -390,8 +388,8 @@
         <description>Assign values to the final variable based on answers to the initial screen.</description>
         <name>UpdateFinalValues</name>
         <label>UpdateFinalValues</label>
-        <locationX>578</locationX>
-        <locationY>1373</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_FinalRecord.Confirmation_Email_Text__c</assignToReference>
             <operator>Assign</operator>
@@ -460,8 +458,8 @@
     <decisions>
         <name>Confirmation_EmailSend</name>
         <label>Send Confirmation Email?</label>
-        <locationX>577</locationX>
-        <locationY>2978</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Get_Experience_Site</targetReference>
         </defaultConnector>
@@ -485,8 +483,8 @@
     <decisions>
         <name>dec_Org_wide_confirmation_email_sender</name>
         <label>Org wide confirmation email sender</label>
-        <locationX>577</locationX>
-        <locationY>914</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>ass_final_value_of_sender_email_0</targetReference>
         </defaultConnector>
@@ -511,8 +509,8 @@
         <description>Does a setup record exist already</description>
         <name>ExistingRecordSameName_0</name>
         <label>Setup Record Exists?</label>
-        <locationX>577</locationX>
-        <locationY>290</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>CompanyName</targetReference>
         </defaultConnector>
@@ -537,8 +535,8 @@
         <description>Does a setup record exist already</description>
         <name>ExistingRecordSameName_0_0</name>
         <label>Setup Record Exists?</label>
-        <locationX>577</locationX>
-        <locationY>3602</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Record</targetReference>
         </defaultConnector>
@@ -562,8 +560,8 @@
     <decisions>
         <name>Include_screen_1</name>
         <label>Include screen 1</label>
-        <locationX>577</locationX>
-        <locationY>2270</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Screen2PreviewScreen_0</targetReference>
         </defaultConnector>
@@ -587,8 +585,8 @@
     <decisions>
         <name>IncludeScreen3Decision</name>
         <label>Include Email Type In Screen</label>
-        <locationX>577</locationX>
-        <locationY>2678</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Confirmation_EmailSend</targetReference>
         </defaultConnector>
@@ -609,7 +607,14 @@
             <label>Include Confirmation Screen</label>
         </rules>
     </decisions>
-    <description>Included creating an org wide email address for confirmation email sender. And profile security.</description>
+    <description>Included creating an org wide email address for confirmation email sender. And profile security. 
+
+July 2025 Updates: 
+added progress bar (issue #113)--activated progress bar (was not active in version connected to pull request)
+added explanation of implications for company name (issue #93)
+resolved unhandled faults related to org-wide email address creation by preventing users to back track to previous screens and updated the record choice set to include non-verified email addresses (issue #114)
+updated final screen to clarify the flow is finished but can be run again if needed (issue #105)
+added explanation text to all preview screens (issue #144)</description>
     <dynamicChoiceSets>
         <description>Pick another org wide email to get an error message.</description>
         <name>ErrorEmailAddress</name>
@@ -633,27 +638,13 @@
     <dynamicChoiceSets>
         <name>senderOrgWideEmails</name>
         <dataType>String</dataType>
-        <displayField>DisplayName</displayField>
-        <filterLogic>1 AND (2 OR 3)</filterLogic>
-        <filters>
-            <field>IsVerified</field>
-            <operator>EqualTo</operator>
-            <value>
-                <booleanValue>true</booleanValue>
-            </value>
-        </filters>
+        <displayField>Address</displayField>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Purpose</field>
-            <operator>EqualTo</operator>
+            <operator>NotEqualTo</operator>
             <value>
-                <stringValue>DefaultNoreply</stringValue>
-            </value>
-        </filters>
-        <filters>
-            <field>Purpose</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>UserSelectionAndDefaultNoReply</stringValue>
+                <stringValue>UserSelection</stringValue>
             </value>
         </filters>
         <object>OrgWideEmailAddress</object>
@@ -693,7 +684,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -707,8 +698,8 @@
         <description>Create the Org wide email address used by the confirmation email as the sender.</description>
         <name>Create_Org_Wide_Email_0</name>
         <label>Create Org Wide Sender Email</label>
-        <locationX>445</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>ass_final_value_of_sender_email</targetReference>
         </connector>
@@ -743,8 +734,8 @@
         <description>Create the UL record.</description>
         <name>Create_Record</name>
         <label>Create Record</label>
-        <locationX>709</locationX>
-        <locationY>3710</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Public_Ids</targetReference>
         </connector>
@@ -754,8 +745,8 @@
         <description>Collect Experience Site informations</description>
         <name>Get_Experience_Site</name>
         <label>Get Experience Site</label>
-        <locationX>577</locationX>
-        <locationY>3278</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_My_Domain</targetReference>
@@ -768,8 +759,8 @@
         <description>Collect URL from Experience Site</description>
         <name>Get_My_Domain</name>
         <label>Get My Domain</label>
-        <locationX>577</locationX>
-        <locationY>3386</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Assign_Modified_Value</targetReference>
@@ -789,8 +780,8 @@
     <recordLookups>
         <name>getULSetup</name>
         <label>getULSetup</label>
-        <locationX>577</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>ExistingRecordSameName_0</targetReference>
@@ -802,8 +793,8 @@
     <recordUpdates>
         <name>Update_existing_record</name>
         <label>Update existing record</label>
-        <locationX>445</locationX>
-        <locationY>3710</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Public_Ids</targetReference>
         </connector>
@@ -812,8 +803,8 @@
     <screens>
         <name>CompanyName</name>
         <label>CompanyName</label>
-        <locationX>709</locationX>
-        <locationY>398</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -821,43 +812,20 @@
             <targetReference>Default_AssignValues</targetReference>
         </connector>
         <fields>
-            <name>CompanyName_Section1</name>
-            <fieldType>RegionContainer</fieldType>
-            <fields>
-                <name>CompanyName_Section1_Column1</name>
-                <fieldType>Region</fieldType>
-                <fields>
-                    <name>FinalOrgName</name>
-                    <dataType>String</dataType>
-                    <defaultValue>
-                        <elementReference>$Organization.Name</elementReference>
-                    </defaultValue>
-                    <fieldText>What is your organization or company name?</fieldText>
-                    <fieldType>InputField</fieldType>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>false</isRequired>
-                </fields>
-                <inputParameters>
-                    <name>width</name>
-                    <value>
-                        <stringValue>6</stringValue>
-                    </value>
-                </inputParameters>
-                <isRequired>false</isRequired>
-            </fields>
-            <fields>
-                <name>CompanyName_Section1_Column2</name>
-                <fieldType>Region</fieldType>
-                <inputParameters>
-                    <name>width</name>
-                    <value>
-                        <stringValue>6</stringValue>
-                    </value>
-                </inputParameters>
-                <isRequired>false</isRequired>
-            </fields>
+            <name>S01_T01_CompanyNameInstructions</name>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Set Company Name&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;When someone clicks the unsubscribe link they will see a confirmation page that includes your company&apos;s name.&lt;/p&gt;&lt;p&gt;We have pre-populated the text with the name listed in Setup under Company Info but you may customize it here, if desired.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>FinalOrgName</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <elementReference>$Organization.Name</elementReference>
+            </defaultValue>
+            <fieldText>Company name as it will appear on the unsubscribe confirmation page:</fieldText>
+            <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
-            <regionContainerType>SectionWithoutHeader</regionContainerType>
         </fields>
         <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
@@ -866,25 +834,26 @@
     <screens>
         <name>completeScreen</name>
         <label>completeScreen</label>
-        <locationX>577</locationX>
-        <locationY>4226</locationY>
-        <allowBack>true</allowBack>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowPause>false</allowPause>
         <fields>
             <name>DonedisplayText</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;You are done!&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;You are done! &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;If you need to make any changes, click Run Again. &lt;/span&gt;&lt;span style=&quot;font-size: 20px; background-color: rgb(255, 255, 255);&quot;&gt;Otherwise, just close this window.&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
+        <nextOrFinishButtonLabel>Run Again</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
     <screens>
         <name>ConfirmationEmailPreviewScreen</name>
         <label>Email Confirmation Preview Screen</label>
-        <locationX>445</locationX>
-        <locationY>3086</locationY>
-        <allowBack>true</allowBack>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
@@ -892,7 +861,7 @@
         </connector>
         <fields>
             <name>confirmationEmailDisplayText</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;The email recipient receives an email. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;From: {!varT_OrgWideEmailDisplayName}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Email body: {!ConfirmEmailText}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;If you opted to send a confirmation email, the recipient receives a message that looks like this. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;From: {!varT_OrgWideEmailDisplayName}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Email body: {!ConfirmEmailText}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -901,9 +870,9 @@
     <screens>
         <name>Create_Public_Ids</name>
         <label>Create Public Ids</label>
-        <locationX>577</locationX>
-        <locationY>3902</locationY>
-        <allowBack>true</allowBack>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
@@ -921,9 +890,9 @@
         <description>A preview of the email with the option to modify the text of the link</description>
         <name>EmailModifyScreen</name>
         <label>Screen Email Preview</label>
-        <locationX>578</locationX>
-        <locationY>1565</locationY>
-        <allowBack>true</allowBack>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
@@ -931,7 +900,7 @@
         </connector>
         <fields>
             <name>SampleEmailDisplayText_0</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 22px;&quot;&gt;&lt;u&gt;﻿&lt;/u&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;Your email recipient gets an email like this with an unsubscribe link at the bottom. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Dear Friend,&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;It&apos;s Thursday! You love to order a pizza on Thursdays! If you order before 5, I&apos;ll also throw in some free drinks!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Your friend,&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Bob&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;u style=&quot;color: rgb(2, 54, 244); font-size: 20px;&quot;&gt;{!var_FinalRecord.Link_Text__c}&lt;/u&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 22px;&quot;&gt;&lt;u&gt;﻿&lt;/u&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;Your email recipient gets an email like this with an unsubscribe link at the bottom. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Dear Friend,&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;It&apos;s Thursday! You love to order a pizza on Thursdays! If you order before 5, I&apos;ll also throw in some free drinks!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Your friend,&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Bob&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;u style=&quot;font-size: 20px; color: rgb(2, 54, 244);&quot;&gt;{!var_FinalRecord.Link_Text__c}&lt;/u&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -957,9 +926,9 @@
         <description>Give the option to have a confirmation screen before Opt Out, but this is not recommended.</description>
         <name>Screen1Preview</name>
         <label>Screen 1 Preview</label>
-        <locationX>445</locationX>
-        <locationY>2378</locationY>
-        <allowBack>true</allowBack>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
@@ -1105,9 +1074,9 @@
         <description>This screen will display the confirmation message you want the user to see</description>
         <name>Screen2PreviewScreen_0</name>
         <label>Screen 2</label>
-        <locationX>577</locationX>
-        <locationY>2570</locationY>
-        <allowBack>true</allowBack>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
@@ -1115,7 +1084,7 @@
         </connector>
         <fields>
             <name>screen2previewDisplayText_0</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px; color: rgb(0, 0, 0);&quot;&gt;{!var_FinalRecord.Screen_2_Part_1__c} {!frm_screen2part2}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 20px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;em style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;This is what the email recipient will see on the confirmation page after they have been unsubscribed. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 20px;&quot;&gt;{!var_FinalRecord.Screen_2_Part_1__c} {!frm_screen2part2}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1192,11 +1161,11 @@
         <description>This is an optional screen to allow user to enter their email if not found in the database.</description>
         <name>Screen3PreviewScreen</name>
         <label>Screen 3</label>
-        <locationX>445</locationX>
-        <locationY>2786</locationY>
-        <allowBack>true</allowBack>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowPause>false</allowPause>
         <connector>
             <targetReference>Confirmation_EmailSend</targetReference>
         </connector>
@@ -1269,9 +1238,9 @@
         <description>Select informations to set up the unsubscribe link</description>
         <name>Set_Up_Unsubscribe_Link_0</name>
         <label>InitialSetUp</label>
-        <locationX>577</locationX>
-        <locationY>698</locationY>
-        <allowBack>true</allowBack>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
@@ -1515,14 +1484,42 @@
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
+    <stages>
+        <description>Set the company name and unsubscribe configurations and then create the Unsubscribe Link Setup record.</description>
+        <name>STG01_InitialConfiguration</name>
+        <isActive>true</isActive>
+        <label>Configure Unsubscribe Options</label>
+        <stageOrder>1</stageOrder>
+    </stages>
+    <stages>
+        <description>Preview the text for the experience cloud flow pages and the confirmation email.</description>
+        <name>STG02_Previews</name>
+        <isActive>true</isActive>
+        <label>Preview Text</label>
+        <stageOrder>2</stageOrder>
+    </stages>
+    <stages>
+        <description>Stage for creating the required public IDs for the contact and lead objects.</description>
+        <name>STG03_PublicIDs</name>
+        <isActive>true</isActive>
+        <label>Public IDs</label>
+        <stageOrder>3</stageOrder>
+    </stages>
+    <stages>
+        <description>The final confirmation screen.</description>
+        <name>STG04_Done</name>
+        <isActive>true</isActive>
+        <label>Done!</label>
+        <stageOrder>4</stageOrder>
+    </stages>
     <start>
-        <locationX>451</locationX>
-        <locationY>48</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>getULSetup</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <textTemplates>
         <name>horizontalLine1</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
