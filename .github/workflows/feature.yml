@@ -11,6 +11,6 @@ jobs:
    uses: "SFDO-Community/standard-workflows/.github/workflows/feature.yml@main"
    secrets:
     dev-hub-auth-url: "${{ secrets.DEV_HUB_AUTH_URL }}"
-   with:
-    cumulusci-version: '3.93.0'
-    sfdx-version: '7.209.6'
+  #  with:
+  #   cumulusci-version: '3.93.0'
+  #   sfdx-version: '7.209.6'
