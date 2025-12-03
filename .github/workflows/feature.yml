@@ -1,8 +1,6 @@
 name: "Feature Test"
 on:
-  push:
-    branches:
-      - feature/**
+  pull_request:
 
 
 jobs:
