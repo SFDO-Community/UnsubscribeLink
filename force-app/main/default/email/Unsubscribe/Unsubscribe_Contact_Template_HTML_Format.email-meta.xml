@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <available>true</available>
+    <description>Example Visualforce Contact email template.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Unsubscribe Contact Template HTML Format</name>
+    <packageVersions>
+        <majorNumber>3</majorNumber>
+        <minorNumber>23</minorNumber>
+        <namespace>npe01</namespace>
+    </packageVersions>
+    <packageVersions>
+        <majorNumber>3</majorNumber>
+        <minorNumber>26</minorNumber>
+        <namespace>npe03</namespace>
+    </packageVersions>
+    <packageVersions>
+        <majorNumber>3</majorNumber>
+        <minorNumber>16</minorNumber>
+        <namespace>npe4</namespace>
+    </packageVersions>
+    <packageVersions>
+        <majorNumber>3</majorNumber>
+        <minorNumber>14</minorNumber>
+        <namespace>npe5</namespace>
+    </packageVersions>
+    <packageVersions>
+        <majorNumber>3</majorNumber>
+        <minorNumber>19</minorNumber>
+        <namespace>npo02</namespace>
+    </packageVersions>
+    <packageVersions>
+        <majorNumber>3</majorNumber>
+        <minorNumber>235</minorNumber>
+        <namespace>npsp</namespace>
+    </packageVersions>
+    <packageVersions>
+        <majorNumber>1</majorNumber>
+        <minorNumber>24</minorNumber>
+        <namespace>sf_chttr_apps</namespace>
+    </packageVersions>
+    <style>none</style>
+    <subject>Edit this subject</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>
