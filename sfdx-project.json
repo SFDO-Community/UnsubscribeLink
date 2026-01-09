@@ -4,13 +4,13 @@
       "path": "force-app",
       "package": "Unsubscribe Link",
       "versionName": "ver 0.1.NEXT",
-      "versionNumber": "0.1.0.NEXT",
+      "versionNumber": "0.1.1.NEXT",
       "default": true,
       "versionDescription": ""
     },
     {
       "versionName": "ver 0.1",
-      "versionNumber": "0.1.0.NEXT",
+      "versionNumber": "0.1.1.NEXT",
       "definitionFile": "config/scratch-org-def.json",
       "path": "unsubscribe",
       "default": false,
