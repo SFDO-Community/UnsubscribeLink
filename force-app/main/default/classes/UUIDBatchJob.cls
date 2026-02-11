@@ -109,12 +109,12 @@ public with sharing class UUIDBatchJob implements Database.Batchable<SObject> {
       }
     );
 
-    Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-    mail.setToAddresses(new List<String>{ job.CreatedBy.Email });
-    mail.setSubject('UUID Batch Job Complete');
-    mail.setPlainTextBody(emailBody);
-
     try {
+      Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+      mail.setToAddresses(new List<String>{ job.CreatedBy.Email });
+      mail.setSubject('UUID Batch Job Complete');
+      mail.setPlainTextBody(emailBody);
+
       Messaging.sendEmail(new List<Messaging.SingleEmailMessage>{ mail });
     } catch (Exception e) {
       System.debug(
