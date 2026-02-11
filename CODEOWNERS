@@ -1,2 +1,14 @@
-# Comment line immediately above ownership line is reserved for related other information. Please be careful while editing.
+# Python
+*.py                  @SFDO-Community/sfdo-release-engineers
+
+# CumulusCI
+/cumulusci.yml        @SFDO-Community/sfdo-release-engineers
+/tasks/               @SFDO-Community/sfdo-release-engineers
+
+# Actions
+/.github                @SFDO-Community/sfdo-release-engineers
+/scripts                @SFDO-Community/sfdo-release-engineers
+
+
 #ECCN:Open Source
+#GUSINFO:Open Source,Open Source Workflow
