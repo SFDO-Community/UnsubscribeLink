@@ -607,21 +607,7 @@
             <label>Include Confirmation Screen</label>
         </rules>
     </decisions>
-    <description>Included creating an org wide email address for confirmation email sender. And profile security. 
-
-July 2025 Updates: 
-added progress bar (issue #113)--activated progress bar (was not active in version connected to pull request)
-added explanation of implications for company name (issue #93)
-resolved unhandled faults related to org-wide email address creation by preventing users to back track to previous screens and updated the record choice set to include non-verified email addresses (issue #114)
-updated final screen to clarify the flow is finished but can be run again if needed (issue #105)
-added explanation text to all preview screens (issue #144)
-
-Jan 2026 Updates:
-flow usability and design updates, fonts, button labels, flow element sizing consistent for display in Lightning Page (issue #147)
-added welcome screens and instructions depending on first time or re-entry (issue #102)
-added help text on Company Name to describe its use (issue #93)
-next button language is now consistent, this was already resolved (issue #177)
-added progress bar (issue #113)</description>
+    <description>This flow must be run by Administrators prior to using Unsubscribe Link features.  This flow create or modifes the Unsubscribe Link Setup Object. This object holds data that is used to generate content for the Experience Cloud site pages that recipients see when unsubscribing and to configure system emails sent to clients who are unsubscribing. It is also used to call apex actions that id&apos;s which are used to generate secure unsubscribe urls.</description>
     <dynamicChoiceSets>
         <description>Pick another org wide email to get an error message.</description>
         <name>ErrorEmailAddress</name>
