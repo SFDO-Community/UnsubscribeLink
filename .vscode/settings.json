@@ -26,5 +26,6 @@
     "**/.settings": true,
     "**/.exchange_modules_tmp": true,
     ".mule": true
-  }
+  },
+  "xml.preferences.showSchemaDocumentationType": "none"
 }
