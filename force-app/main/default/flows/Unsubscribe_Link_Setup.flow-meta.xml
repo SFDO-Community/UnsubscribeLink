@@ -607,7 +607,7 @@
             <label>Include Confirmation Screen</label>
         </rules>
     </decisions>
-    <description>This flow must be run by Administrators prior to using Unsubscribe Link features.  This flow create or modifes the Unsubscribe Link Setup Object. This object holds data that is used to generate content for the Experience Cloud site pages that recipients see when unsubscribing and to configure system emails sent to clients who are unsubscribing. It is also used to call apex actions that id&apos;s which are used to generate secure unsubscribe urls.</description>
+    <description>This flow must be run by Administrators prior to using Unsubscribe Link features.  This flow creates or modifes the Unsubscribe Link Setup Object. This object holds data that is used to generate content for the Experience Cloud site pages that recipients see when unsubscribing and to configure system emails sent to clients who are unsubscribing. It is also used to call apex actions that id&apos;s which are used to generate secure unsubscribe urls.</description>
     <dynamicChoiceSets>
         <description>Pick another org wide email to get an error message.</description>
         <name>ErrorEmailAddress</name>
