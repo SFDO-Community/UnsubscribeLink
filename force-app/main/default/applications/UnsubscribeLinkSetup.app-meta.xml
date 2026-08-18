@@ -9,7 +9,6 @@
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
-    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
     <label>Unsubscribe Link Setup</label>
     <navType>Standard</navType>
     <tabs>Unsubscribe_Link_Home</tabs>
