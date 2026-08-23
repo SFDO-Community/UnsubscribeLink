@@ -109,9 +109,7 @@
             <label>Yes</label>
         </rules>
     </decisions>
-    <description>Part of the unmanaged packed Unsubscribe Link from Salesforce Labs and loops through all contacts with a particular email address to mark them as email opt out. 
-
-8/12/26: Updated fault path to use the Error Email Recipients field on the Unsubscribe Link Setups object. Added null check for Contacts.</description>
+    <description>Part of the unmanaged packed Unsubscribe Link from Salesforce Labs and loops through all contacts with a particular email address to mark them as email opt out.</description>
     <environments>Default</environments>
     <interviewLabel>Unsubscribe Contacts {!$Flow.CurrentDateTime}</interviewLabel>
     <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
@@ -160,10 +158,17 @@
         </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>Id</field>
+            <field>Email</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>invalidID12345678)</stringValue>
+                <elementReference>Email</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>HasOptedOutOfEmail</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>false</booleanValue>
             </value>
         </filters>
         <object>Contact</object>
