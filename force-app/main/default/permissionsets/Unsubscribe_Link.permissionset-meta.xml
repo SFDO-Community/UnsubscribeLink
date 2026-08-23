@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationVisibilities>
+        <application>UnsubscribeLinkSetup</application>
+        <visible>true</visible>
+    </applicationVisibilities>
     <description>Needed for Unsubscribe Link package</description>
     <fieldPermissions>
         <editable>true</editable>
@@ -191,6 +195,10 @@
         <object>Unsubscribe__c</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
+    <tabSettings>
+        <tab>Unsubscribe_Link_Home</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
     <tabSettings>
         <tab>Unsubscribe_Link_Setup__c</tab>
         <visibility>Visible</visibility>
