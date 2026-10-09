@@ -1,30 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
-        <description>Send error email to alert admin.</description>
+        <description>Send error email to alert admin. Email is passed from Unsubscribe Link Quick Flow.</description>
         <name>Send_Error_Email</name>
         <label>Send Error Email</label>
-        <locationX>681</locationX>
-        <locationY>278</locationY>
+        <locationX>314</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
-            <name>emailBody</name>
-            <value>
-                <elementReference>errorEmailRichText</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
             <name>emailAddresses</name>
             <value>
-                <elementReference>ErrorRecipient</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>sendRichBody</name>
-            <value>
-                <booleanValue>true</booleanValue>
+                <elementReference>Error_Recipient</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
@@ -33,16 +21,27 @@
                 <stringValue>unsubscribe error</stringValue>
             </value>
         </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>errorEmailRichText</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
         <nameSegment>emailSimple</nameSegment>
-        <versionSegment>1</versionSegment>
     </actionCalls>
     <apiVersion>61.0</apiVersion>
     <assignments>
         <description>Add the revised lead to the collection of records to be modified at the end of the loop.</description>
         <name>Add_to_collection</name>
         <label>Add to collection</label>
-        <locationX>526</locationX>
-        <locationY>526</locationY>
+        <locationX>138</locationX>
+        <locationY>566</locationY>
         <assignmentItems>
             <assignToReference>leadCollectionUpdate</assignToReference>
             <operator>Add</operator>
@@ -58,8 +57,8 @@
         <description>Get number of records in the leads list. If there are more than 1 we will email the admin to let them know.</description>
         <name>getLListSize</name>
         <label>getLListSize</label>
-        <locationX>515</locationX>
-        <locationY>146</locationY>
+        <locationX>50</locationX>
+        <locationY>866</locationY>
         <assignmentItems>
             <assignToReference>lListSize</assignToReference>
             <operator>AssignCount</operator>
@@ -72,8 +71,8 @@
         <description>Mark email opt out as true for each lead in the loop.</description>
         <name>Update_Records</name>
         <label>Update Records</label>
-        <locationX>629</locationX>
-        <locationY>641</locationY>
+        <locationX>138</locationX>
+        <locationY>458</locationY>
         <assignmentItems>
             <assignToReference>leadLoopVar.HasOptedOutOfEmail</assignToReference>
             <operator>Assign</operator>
@@ -85,7 +84,32 @@
             <targetReference>Add_to_collection</targetReference>
         </connector>
     </assignments>
-    <description>Part of the unmanaged packed Unsubscribe Link from Salesforce Labs and loops through all leads with a particular email address to mark them as email opt out. This flow is launched by the flow Unsubscribe Link. This version of the flow uses RichText Email.</description>
+    <decisions>
+        <description>Checks if Leads were found. If Yes, then update them.</description>
+        <name>Were_Leads_Found</name>
+        <label>Were Leads Found?</label>
+        <locationX>314</locationX>
+        <locationY>242</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>leadEmailCollection</leftValueReference>
+                <operator>IsEmpty</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>loop</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <description>Part of the unmanaged package Unsubscribe Link and loops through all leads with a particular email address to mark them as email opt out. This flow is launched by the flow Unsubscribe Link Quick. This version of the flow uses RichText Email.
+
+10/9/26: Removed hard-coded email address in Send Emmail Action and passed from parent.</description>
     <environments>Default</environments>
     <interviewLabel>Unsubscribe Leads {!$Flow.CurrentDateTime}</interviewLabel>
     <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
@@ -94,8 +118,8 @@
         <description>Loop through all of the leads that have this email address in the Email field.</description>
         <name>loop</name>
         <label>loop</label>
-        <locationX>432</locationX>
-        <locationY>640</locationY>
+        <locationX>50</locationX>
+        <locationY>350</locationY>
         <assignNextValueToReference>leadLoopVar</assignNextValueToReference>
         <collectionReference>leadEmailCollection</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -115,7 +139,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
@@ -123,14 +147,15 @@
         <description>Look for Leads who have this email in Email and have not already opted out.</description>
         <name>FastLookupEmail</name>
         <label>FastLookupEmail</label>
-        <locationX>100</locationX>
-        <locationY>481</locationY>
+        <locationX>314</locationX>
+        <locationY>134</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>loop</targetReference>
+            <targetReference>Were_Leads_Found</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>Update_Unsubscribe_Record</targetReference>
+            <isGoTo>true</isGoTo>
+            <targetReference>Send_Error_Email</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -155,8 +180,8 @@
         <description>Update all of the modified leads at once.</description>
         <name>Update_Collection</name>
         <label>Update Collection</label>
-        <locationX>269</locationX>
-        <locationY>188</locationY>
+        <locationX>50</locationX>
+        <locationY>758</locationY>
         <connector>
             <targetReference>getLListSize</targetReference>
         </connector>
@@ -169,8 +194,8 @@
         <description>If the Flow faults here, update the Unsubscribe record with Error.</description>
         <name>Update_Unsubscribe_Record</name>
         <label>Update Unsubscribe Record with Error</label>
-        <locationX>535</locationX>
-        <locationY>278</locationY>
+        <locationX>314</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Error_Email</targetReference>
         </connector>
@@ -192,8 +217,8 @@
     </recordUpdates>
     <runInMode>SystemModeWithoutSharing</runInMode>
     <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>FastLookupEmail</targetReference>
         </connector>
@@ -212,15 +237,12 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <description>Update with email address of the user who should be notified when the person who wants to subscribe gets an error.</description>
-        <name>ErrorRecipient</name>
+        <description>Email of the error recipient passed from Unsubscribe Link Quick Flow.</description>
+        <name>Error_Recipient</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
         <isOutput>false</isOutput>
-        <value>
-            <stringValue>jrymph@salesforce.com</stringValue>
-        </value>
     </variables>
     <variables>
         <description>collection of records to be updated at the end of the Loop</description>
