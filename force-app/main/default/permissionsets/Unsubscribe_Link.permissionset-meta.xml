@@ -196,10 +196,6 @@
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <tabSettings>
-        <tab>Unsubscribe_Link_Home</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
-    <tabSettings>
         <tab>Unsubscribe_Link_Setup__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
