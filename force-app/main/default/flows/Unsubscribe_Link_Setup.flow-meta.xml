@@ -30,6 +30,7 @@
             </value>
         </inputParameters>
         <nameSegment>UUIDBatchInvocable</nameSegment>
+        <offset>0</offset>
     </actionCalls>
     <actionCalls>
         <name>LeadBatch</name>
@@ -61,8 +62,10 @@
             </value>
         </inputParameters>
         <nameSegment>UUIDBatchInvocable</nameSegment>
+        <offset>0</offset>
     </actionCalls>
-    <apiVersion>64.0</apiVersion>
+    <apiVersion>68.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
         <name>ass_final_value_of_sender_email</name>
         <label>final value of sender email</label>
@@ -178,6 +181,13 @@
                 <elementReference>getULSetup.Id</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_FinalRecord.Error_Email_Recipient__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Error_Email_Recipient.value</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>ExistingRecordSameName_0_0</targetReference>
         </connector>
@@ -248,7 +258,7 @@
             <assignToReference>var_FinalRecord.Error_Email_Recipient__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>$User.Email</elementReference>
+                <elementReference>getULSetup.Error_Email_Recipient__c</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -455,6 +465,12 @@
             <stringValue>Yes</stringValue>
         </value>
     </choices>
+    <customProperties>
+        <name>ScreenProgressIndicator</name>
+        <value>
+            <stringValue>{&quot;location&quot;:&quot;top&quot;,&quot;type&quot;:&quot;simple&quot;}</stringValue>
+        </value>
+    </customProperties>
     <decisions>
         <name>Confirmation_EmailSend</name>
         <label>Send Confirmation Email?</label>
@@ -607,7 +623,13 @@
             <label>Include Confirmation Screen</label>
         </rules>
     </decisions>
-    <description>This flow must be run by Administrators prior to using Unsubscribe Link features.  This flow creates or modifes the Unsubscribe Link Setup Object. This object holds data that is used to generate content for the Experience Cloud site pages that recipients see when unsubscribing and to configure system emails sent to clients who are unsubscribing. It is also used to call apex actions that id&apos;s which are used to generate secure unsubscribe urls.</description>
+    <description>This flow is run to configure or reconfigure the Unsubscribe link setup object.  It must be run prior to using the unsubscribe link in Emails.
+
+Changed 10/8/26: 
+Added field to specify the Error Email Recipient on the Initial Setup screen.
+Changed the 1st assignment to use the Error Email Recipient from the Get instead of the running user&apos;s email.
+Removed Current User formula.
+Added path Progress Indicator.</description>
     <dynamicChoiceSets>
         <description>Pick another org wide email to get an error message.</description>
         <name>ErrorEmailAddress</name>
@@ -647,14 +669,12 @@
         </outputAssignments>
         <valueField>Address</valueField>
     </dynamicChoiceSets>
+    <ends>
+        <name>END_ELEMENT_2</name>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+    </ends>
     <environments>Default</environments>
-    <formulas>
-        <description>Use currentUser or existing CMDT type value</description>
-        <name>currentUserOrExisting</name>
-        <dataType>String</dataType>
-        <expression>IF(ISBLANK({!getULSetup.Error_Email_Recipient__c}),{!$User.Email},
-{!getULSetup.Error_Email_Recipient__c})</expression>
-    </formulas>
     <formulas>
         <description>The question asks &quot;Do you want to include this confirmation page?&quot; The field says &quot;do you want to enable one click?&quot; so the answers need to be reversed.</description>
         <name>EnableOneClickFormula</name>
@@ -808,6 +828,14 @@
             <name>S01_T01_CompanyNameInstructions</name>
             <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Set Company Name&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;When someone clicks the unsubscribe link they will see a confirmation page that includes your company&apos;s name.&lt;/p&gt;&lt;p&gt;We have pre-populated the text with the name listed in Setup under Company Info but you may customize it here, if desired.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>FinalOrgName</name>
@@ -819,10 +847,21 @@
             <fieldType>InputField</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
+        <stageReference>
+            <elementReference>Initial_Configuration</elementReference>
+        </stageReference>
     </screens>
     <screens>
         <name>completeScreen</name>
@@ -832,14 +871,28 @@
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
+        <connector>
+            <targetReference>END_ELEMENT_2</targetReference>
+        </connector>
         <fields>
             <name>DonedisplayText</name>
             <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;You are done! &lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Click &apos;Finish&apos; to complete setup. If you need to make any changes, you can always come back to this flow and modify your configuration.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <nextOrFinishButtonLabel>Finish</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
+        <stageReference>
+            <elementReference>Complete</elementReference>
+        </stageReference>
     </screens>
     <screens>
         <name>ConfirmationEmailPreviewScreen</name>
@@ -856,9 +909,20 @@
             <name>confirmationEmailDisplayText</name>
             <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;If you opted to send a confirmation email, the recipient receives a message that looks like this. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;From: {!varT_OrgWideEmailDisplayName}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Email body: {!ConfirmEmailText}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
+        <stageReference>
+            <elementReference>Confirmation</elementReference>
+        </stageReference>
     </screens>
     <screens>
         <name>Create_Public_Ids</name>
@@ -875,9 +939,20 @@
             <name>displayPublicIds</name>
             <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Great! That part is done.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Last step&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;The Unsubscribe Link uses a 64 digit random id on each contact and lead, called Public_Id__c.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;This may take a little while. You will receive an email when it is done.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;After this, two record triggered flows will automatically create public ids when new contacts and leads are created.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;Click next to populate the public ids on all your records now.&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
+        <stageReference>
+            <elementReference>Public_IDs</elementReference>
+        </stageReference>
     </screens>
     <screens>
         <description>A preview of the email with the option to modify the text of the link</description>
@@ -895,11 +970,27 @@
             <name>SampleEmailDisplayText_0</name>
             <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;&lt;u&gt;﻿&lt;/u&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;Your email recipient gets an email like this with an unsubscribe link at the bottom. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Dear Friend,&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;It&apos;s Thursday! You love to order a pizza on Thursdays! If you order before 5, I&apos;ll also throw in some free drinks!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Your friend,&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Bob&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;u style=&quot;color: rgb(2, 54, 244); font-size: 20px;&quot;&gt;{!var_FinalRecord.Link_Text__c}&lt;/u&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>DisplayTextforHorizontalLine</name>
             <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!horizontalLine1}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>LinkText</name>
@@ -911,9 +1002,20 @@
             <fieldType>InputField</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
+        <stageReference>
+            <elementReference>Email_Preview</elementReference>
+        </stageReference>
     </screens>
     <screens>
         <description>Give the option to have a confirmation screen before Opt Out, but this is not recommended.</description>
@@ -931,11 +1033,27 @@
             <name>Screen1PreviewDisplayText</name>
             <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;This page allows the recipient to confirm before opting out. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!horizontalLine1}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;{!var_FinalRecord.Screen_1_Part_1__c} georgeB@bbbl.org &lt;/span&gt;&lt;span style=&quot;font-size: 20px; color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;{!var_FinalRecord.Screen_1_Part_2__c} &lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>googlewarning</name>
             <fieldText>&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://blog.google/products/gmail/gmail-security-authentication-spam-protection/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;background-color: transparent; font-size: 14px;&quot;&gt;Gmail wants you to make it easier to unsubscribe&lt;/a&gt;&lt;span style=&quot;background-color: transparent; font-size: 14px;&quot;&gt; with &quot;one click&quot; email opt-out so we advise against adding in this page. &lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>EnableOneClick</name>
@@ -949,6 +1067,14 @@
             <fieldType>DropdownBox</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Screen1Preview_Section1</name>
@@ -966,6 +1092,14 @@
                     <fieldType>InputField</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
                 </fields>
                 <inputParameters>
                     <name>width</name>
@@ -988,6 +1122,14 @@
                     <fieldType>InputField</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
                 </fields>
                 <inputParameters>
                     <name>width</name>
@@ -1010,6 +1152,14 @@
             </fields>
             <isRequired>false</isRequired>
             <regionContainerType>SectionWithoutHeader</regionContainerType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -1023,6 +1173,9 @@
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
+        <stageReference>
+            <elementReference>Confirmation</elementReference>
+        </stageReference>
     </screens>
     <screens>
         <description>This screen will display the confirmation message you want the user to see</description>
@@ -1040,11 +1193,27 @@
             <name>screen2previewDisplayText_0</name>
             <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;em style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;This is what the email recipient will see on the confirmation page after they have been unsubscribed. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px; color: rgb(0, 0, 0);&quot;&gt;{!var_FinalRecord.Screen_2_Part_1__c} {!frm_screen2part2}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>displayTextHozLine</name>
             <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!horizontalLine1}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Screen2PreviewScreen_0_Section1</name>
@@ -1063,6 +1232,14 @@
                     <helpText>&lt;p&gt;Example text: You have successfully unsubscribed from all email from &amp;lt;insert company name here&amp;gt;.&lt;/p&gt;</helpText>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
                 </fields>
                 <inputParameters>
                     <name>width</name>
@@ -1086,6 +1263,14 @@
                     <helpText>&lt;p&gt;Example text: You will get a confirmation email shortly.&lt;/p&gt;</helpText>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
                     <visibilityRule>
                         <conditionLogic>and</conditionLogic>
                         <conditions>
@@ -1107,9 +1292,20 @@
             </fields>
             <isRequired>false</isRequired>
             <regionContainerType>SectionWithoutHeader</regionContainerType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
+        <stageReference>
+            <elementReference>Confirmation</elementReference>
+        </stageReference>
     </screens>
     <screens>
         <description>This is an optional screen to allow user to enter their email if not found in the database.</description>
@@ -1127,6 +1323,14 @@
             <name>screen3previewDisplayText</name>
             <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;If the email recipient&apos;s ID was not found, they can enter their email address here. You can turn off this feature. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Screen3PreviewScreen_Section1</name>
@@ -1138,6 +1342,14 @@
                     <name>screen3preview</name>
                     <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;{!txt_Screen3}&lt;/span&gt;&lt;/p&gt;</fieldText>
                     <fieldType>DisplayText</fieldType>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
                 </fields>
                 <inputParameters>
                     <name>width</name>
@@ -1157,6 +1369,14 @@
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <storeOutputAutomatically>true</storeOutputAutomatically>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
                 </fields>
                 <inputParameters>
                     <name>width</name>
@@ -1168,11 +1388,27 @@
             </fields>
             <isRequired>false</isRequired>
             <regionContainerType>SectionWithoutHeader</regionContainerType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>hozline</name>
             <fieldText>&lt;p&gt;{!horizontalLine1}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>ModifyScreen3Text</name>
@@ -1184,9 +1420,20 @@
             <fieldType>InputField</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
+        <stageReference>
+            <elementReference>Confirmation</elementReference>
+        </stageReference>
     </screens>
     <screens>
         <description>Select informations to set up the unsubscribe link</description>
@@ -1204,6 +1451,14 @@
             <name>dis_BasicSetup</name>
             <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Basic Settings&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Company_Name</name>
@@ -1216,6 +1471,14 @@
             <helpText>&lt;p&gt;When someone clicks the unsubscribe link they will see a confirmation page that includes your company&apos;s name.&lt;/p&gt;</helpText>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -1239,6 +1502,14 @@
             <fieldType>DropdownBox</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>OrgWideEmailQ</name>
@@ -1252,6 +1523,14 @@
             <fieldType>DropdownBox</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -1274,6 +1553,14 @@
             <helpText>&lt;p&gt;Example text: You have successfully unsubscribed from all email from &amp;lt;insert company name&amp;gt;.&lt;/p&gt;</helpText>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -1295,6 +1582,14 @@
                     <name>dis_CreateOrgWide</name>
                     <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Create Organization Wide Email Address&lt;/strong&gt;&lt;/p&gt;</fieldText>
                     <fieldType>DisplayText</fieldType>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
                 </fields>
                 <fields>
                     <name>Display_NameOrgWideEmail</name>
@@ -1303,6 +1598,14 @@
                     <fieldType>InputField</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
                 </fields>
                 <fields>
                     <name>orgWideEmail</name>
@@ -1323,6 +1626,14 @@
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <storeOutputAutomatically>true</storeOutputAutomatically>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
                 </fields>
                 <fields>
                     <name>Purpose</name>
@@ -1333,6 +1644,14 @@
                     <fieldType>DropdownBox</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
                 </fields>
                 <inputParameters>
                     <name>width</name>
@@ -1344,6 +1663,14 @@
             </fields>
             <isRequired>false</isRequired>
             <regionContainerType>SectionWithoutHeader</regionContainerType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -1359,6 +1686,14 @@
             <name>OneClickdisplaytext</name>
             <fieldText>&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Allow Recipients to Type-In Email Address&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;The unsubscribe link passes the contact or lead&apos;s Salesforce id to a flow. Sometimes an email recipient&apos;s security settings block or scramble the ID. You can allow your recipients to type in their email addresses to unsubscribe in that situation. BE CAREFUL! This allows anyone who has the link and knows any email addresses in your database to unsubscribe them. For example, if a bad guy knows that joeschmoe@ymail.com loves your newsletters and that bad guy dislikes your organization, then he could potentially unsubscribe Joe Schmoe from your newsletter!&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>type_in_unsubscribe</name>
@@ -1372,10 +1707,68 @@
             <fieldType>DropdownBox</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Error_Email_Display_Text</name>
+            <fieldText>&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Error Emails&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;The Flows that update records when Contacts or Leads unsubscribe send an email if there is an error. Specify the email these alerts will be sent to.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Error_Email_Recipient</name>
+            <extensionName>flowruntime:email</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Who should receive the error email?</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <elementReference>getULSetup.Error_Email_Recipient__c</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
+        <stageReference>
+            <elementReference>Initial_Configuration</elementReference>
+        </stageReference>
     </screens>
     <screens>
         <name>Welcome_Screen</name>
@@ -1392,9 +1785,20 @@
             <name>S00_T00_Welcome</name>
             <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Welcome to Setup&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Please make sure you review and complete the &lt;strong&gt;Set Up Instructions&lt;/strong&gt; before moving forward with this configuration. Once ready, this flow will walk you through the necessary steps to get started!&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
+        <stageReference>
+            <elementReference>Welcome</elementReference>
+        </stageReference>
     </screens>
     <screens>
         <name>WelcomeBack</name>
@@ -1411,9 +1815,20 @@
             <name>S00_T00_WelcomeBack</name>
             <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Welcome Back to Setup&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;If you would like to update your configuration of Unsubscribe Link, you may continue to reconfigure settings.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>false</showHeader>
+        <showHeader>true</showHeader>
+        <stageReference>
+            <elementReference>Welcome</elementReference>
+        </stageReference>
     </screens>
     <stages>
         <name>Complete</name>
