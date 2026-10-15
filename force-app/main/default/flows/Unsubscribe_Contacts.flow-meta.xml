@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
-        <description>Send email alerting them about the error. Uses the Error Recipient Email from the Get element (specified on Unsubscribe Link Setups record).</description>
+        <description>Send email alerting them about the error. Uses the Error Recipient Email from the Unsubscribe Link Quick (parent) Flow Get element (specified on Unsubscribe Link Setups record).</description>
         <name>Send_Error_Email</name>
         <label>Send Error Email</label>
-        <locationX>460</locationX>
-        <locationY>1058</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>emailAddresses</name>
             <value>
-                <elementReference>Get_Unsubscribe_Error_Email_Recipient.Error_Email_Recipient__c</elementReference>
+                <elementReference>Error_Recipient</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
@@ -35,13 +35,13 @@
         </inputParameters>
         <nameSegment>emailSimple</nameSegment>
     </actionCalls>
-    <apiVersion>61.0</apiVersion>
+    <apiVersion>68.0</apiVersion>
     <assignments>
         <description>Add the record in the loop to a collection of records to be updated.</description>
         <name>Add_to_collection</name>
         <label>Add to collection</label>
-        <locationX>156</locationX>
-        <locationY>566</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>RecordsUpdated</assignToReference>
             <operator>Add</operator>
@@ -56,8 +56,8 @@
     <assignments>
         <name>Get_List_Size</name>
         <label>Get List Size</label>
-        <locationX>176</locationX>
-        <locationY>950</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>getCListSize</assignToReference>
             <operator>AssignCount</operator>
@@ -70,8 +70,8 @@
         <description>Update record in the loop to Email Opt Out equals true.</description>
         <name>Update_Records</name>
         <label>Update Records</label>
-        <locationX>156</locationX>
-        <locationY>458</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>LoopVar.HasOptedOutOfEmail</assignToReference>
             <operator>Assign</operator>
@@ -87,8 +87,8 @@
         <description>Checks if Contacts were found in the Get element</description>
         <name>Were_Contacts_Found</name>
         <label>Were Contacts Found</label>
-        <locationX>176</locationX>
-        <locationY>242</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Update_Collection</targetReference>
         </defaultConnector>
@@ -109,7 +109,10 @@
             <label>Yes</label>
         </rules>
     </decisions>
-    <description>Part of the unmanaged packed Unsubscribe Link from Salesforce Labs and loops through all contacts with a particular email address to mark them as email opt out.</description>
+    <description>Part of the unmanaged package Unsubscribe Link from the AppExchange and loops through all contacts with a particular email address to mark them as email opt out. 
+
+8/12/26: Removed hard-coded error recipient. Updated fault path to use the Error Email Recipients field on the Unsubscribe Link Setups object. Added null check for Contacts.
+10/9/26: Update to use error recipient from Unsubscribe Link Setups flow.</description>
     <environments>Default</environments>
     <interviewLabel>Unsubscribe Contacts {!$Flow.CurrentDateTime}</interviewLabel>
     <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
@@ -118,8 +121,8 @@
         <description>Loop through all contacts with this email address in the Email field.</description>
         <name>loop</name>
         <label>loop</label>
-        <locationX>68</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>LoopVar</assignNextValueToReference>
         <collectionReference>contactCollection</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -147,14 +150,15 @@
         <description>Look for contacts who have this email address as the preferred email and have not opted out of email. NPSP automatically populates the Email field with preferred Email.</description>
         <name>FastLookupEmail</name>
         <label>FastLookupEmail</label>
-        <locationX>176</locationX>
-        <locationY>134</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Were_Contacts_Found</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>Get_Unsubscribe_Error_Email_Recipient</targetReference>
+            <isGoTo>true</isGoTo>
+            <targetReference>Send_Error_Email</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -164,49 +168,17 @@
                 <elementReference>Email</elementReference>
             </value>
         </filters>
-        <filters>
-            <field>HasOptedOutOfEmail</field>
-            <operator>EqualTo</operator>
-            <value>
-                <booleanValue>false</booleanValue>
-            </value>
-        </filters>
         <object>Contact</object>
         <outputReference>contactCollection</outputReference>
         <queriedFields>Id</queriedFields>
         <queriedFields>HasOptedOutOfEmail</queriedFields>
     </recordLookups>
-    <recordLookups>
-        <description>Gets the Error Email Recipient from the Unsubscribe Setup record. This uses the most recent record (there should only be 1).</description>
-        <name>Get_Unsubscribe_Error_Email_Recipient</name>
-        <label>Get Unsubscribe Error Email Recipient</label>
-        <locationX>724</locationX>
-        <locationY>242</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Update_Unsubscribe</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Error_Email_Recipient__c</field>
-            <operator>IsNull</operator>
-            <value>
-                <booleanValue>false</booleanValue>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>Unsubscribe_Link_Setup__c</object>
-        <sortField>LastModifiedDate</sortField>
-        <sortOrder>Desc</sortOrder>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
     <recordUpdates>
         <description>Update all Contacts in collection at once as email opt out equals true.</description>
         <name>Update_Collection</name>
         <label>Update Collection</label>
-        <locationX>176</locationX>
-        <locationY>842</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_List_Size</targetReference>
         </connector>
@@ -219,8 +191,8 @@
         <description>If the Flow faults here, update the unsubscribe record with Error.</description>
         <name>Update_Unsubscribe</name>
         <label>Update Unsubscribe with Error</label>
-        <locationX>460</locationX>
-        <locationY>950</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Error_Email</targetReference>
         </connector>
@@ -242,7 +214,7 @@
     </recordUpdates>
     <runInMode>SystemModeWithoutSharing</runInMode>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>FastLookupEmail</targetReference>
@@ -270,8 +242,8 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <description>Update with email address of the user who should be notified when the person who wants to subscribe gets an error.</description>
-        <name>ErrorRecipient</name>
+        <description>Error Email Recipient from Unsubscribe Link Setup. Passed in from the Unsubscribe Link Quick Flow.</description>
+        <name>Error_Recipient</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
