@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>61.0</apiVersion>
+    <apiVersion>68.0</apiVersion>
     <assignments>
         <description>Assign variables to the email variable from the screen and assign a null value to the recordId variable.</description>
         <name>AssignEmailFromScreenToVar</name>
         <label>AssignEmailFromScreenToVar</label>
-        <locationX>642</locationX>
-        <locationY>312</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>Email</assignToReference>
             <operator>Assign</operator>
@@ -29,8 +29,8 @@
         <description>If the contact isn&apos;t found, it sets the email variable to null. If the contact was found, the sub flow goes back to the main flow.</description>
         <name>reassignEmail</name>
         <label>ReassignEmail</label>
-        <locationX>640</locationX>
-        <locationY>826</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>Email</assignToReference>
             <operator>Assign</operator>
@@ -46,8 +46,8 @@
         <description>Was the contact found when looking it up via email?</description>
         <name>Contact_or_Lead_0_0</name>
         <label>Was Contact Found</label>
-        <locationX>634</locationX>
-        <locationY>634</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>reassignEmail</targetReference>
         </defaultConnector>
@@ -65,7 +65,9 @@
             <label>ContactFound</label>
         </rules>
     </decisions>
-    <description>Part of Unsubscribe Link package from AppExchange 4/4</description>
+    <description>Part of Unsubscribe Link package from AppExchange 4/4
+
+10/8/26: Changed AppExchange link in the text template.</description>
     <environments>Default</environments>
     <formulas>
         <description>Formula resolves to Contact Id if the unsubscribe record is attached to a contact - the original record of the unsubscribe link was a contact.</description>
@@ -97,7 +99,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
@@ -105,8 +107,8 @@
         <description>Look for a contact record with email address from the screen.</description>
         <name>Get_Contact_0</name>
         <label>Get Contact</label>
-        <locationX>642</locationX>
-        <locationY>487</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Contact_or_Lead_0_0</targetReference>
@@ -133,8 +135,8 @@
         <description>Look for a lead record email address from screen.</description>
         <name>Get_Lead_0</name>
         <label>Get Lead</label>
-        <locationX>646</locationX>
-        <locationY>1000</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <filterLogic>or</filterLogic>
         <filters>
@@ -160,8 +162,8 @@
 This screen will appear if a matching record is not found in the database.</description>
         <name>Are_you_sure_0</name>
         <label>NoRecordsScreen</label>
-        <locationX>642</locationX>
-        <locationY>171</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -224,29 +226,21 @@ This screen will appear if a matching record is not found in the database.</desc
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>685</locationX>
-        <locationY>50</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Are_you_sure_0</targetReference>
         </connector>
     </start>
     <status>Active</status>
     <textTemplates>
-        <description>Email sent to administrator(s) when the Flow experiences an error.</description>
+        <description>Email sent to the error recipient  when the Flow experiences an error.</description>
         <name>errorBody</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;Alert: there was an error in running the Flow Unsubscribe Link Blank or &lt;/span&gt;UnsubscribeLinkBlank.&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt; This flow is part of the unmanaged package Unsubscribe Link from the AppExchange.  https://wp.me/p9qPLI-eU.  &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;{!errorTextVar}&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;Here are the variables that were input from the link in the email. &lt;/span&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;recordId (the id passed in the URL)= {!recordId}, &lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;The email entered by the recipient was: {!Emailaddressscreen}.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;About this email: &lt;/strong&gt;&lt;/p&gt;&lt;p&gt;To modify this error email, open the Flow and edit the text template called &lt;strong&gt;errorBody&lt;/strong&gt;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;To modify who receives this email, open the custom metadata type called Unsubscribe Link and the record with Label of &quot;Unsubscribe.&quot; Change the value in &lt;strong&gt;Error Email Recipients. &lt;/strong&gt;&lt;/p&gt;</text>
+        <text>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Alert: there was an error in running the Flow Unsubscribe Link Blank or &lt;/span&gt;UnsubscribeLinkBlank.&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt; This flow is part of the unmanaged package &lt;/span&gt;&lt;a href=&quot;https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FMkfNUAT&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Unsubscribe Link from the AppExchange&lt;/a&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;{!errorTextVar}&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Here are the variables that were input from the link in the email. &lt;/span&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;recordId (the id passed in the URL)= {!recordId}, &lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;The email entered by the recipient was: {!Emailaddressscreen}.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;About this email: &lt;/strong&gt;&lt;/p&gt;&lt;p&gt;To modify this error email, open the Unsubscribe Link No RecordId Flow and edit the text template called &lt;strong&gt;errorBody&lt;/strong&gt;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;To modify who receives this email, run the Unsubscribe Link Setup Flow. Change the value in &lt;strong&gt;Error Email Recipients. &lt;/strong&gt;&lt;/p&gt;</text>
     </textTemplates>
     <variables>
         <name>Email</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>true</isInput>
-        <isOutput>true</isOutput>
-    </variables>
-    <variables>
-        <description>Update default below to user who should be alerted when this error occurs.</description>
-        <name>ErrorRecipient</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
