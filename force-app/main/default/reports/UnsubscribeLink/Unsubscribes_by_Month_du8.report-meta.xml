@@ -9,7 +9,6 @@
             <column>RowCount</column>
         </chartSummaries>
         <chartType>Line</chartType>
-        <enableHoverLabels>false</enableHoverLabels>
         <expandOthers>true</expandOthers>
         <groupingColumn>CUST_CREATED_DATE</groupingColumn>
         <location>CHART_BOTTOM</location>

@@ -9,7 +9,6 @@
             <column>RowCount</column>
         </chartSummaries>
         <chartType>Donut</chartType>
-        <enableHoverLabels>false</enableHoverLabels>
         <expandOthers>false</expandOthers>
         <groupingColumn>Unsubscribe__c.Status__c</groupingColumn>
         <legendPosition>Right</legendPosition>
