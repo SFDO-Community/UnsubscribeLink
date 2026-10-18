@@ -9,6 +9,9 @@
     "mobileSettings": {
       "enableS1EncryptedStoragePref2": false
     },
+    "languageSettings": {
+        "enableTranslationWorkbench": true
+    },
       "communitiesSettings": {
           "enableNetworksEnabled": true
       },
