@@ -21,7 +21,7 @@
         <summaryAxisRange>Auto</summaryAxisRange>
         <textColor>#000000</textColor>
         <textSize>12</textSize>
-        <title>All Unsubscribes by Month</title>
+        <title>All Unsubscribes by Status</title>
         <titleColor>#000000</titleColor>
         <titleSize>18</titleSize>
     </chart>
