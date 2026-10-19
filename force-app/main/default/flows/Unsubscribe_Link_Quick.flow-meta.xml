@@ -664,7 +664,7 @@ Customer facing flow of the Unsubscribe Link managed package from AppExchange. U
             </value>
         </inputAssignments>
         <inputAssignments>
-            <name>ErrorRecipient</name>
+            <name>Error_Recipient</name>
             <value>
                 <elementReference>ErrorRecipient</elementReference>
             </value>
@@ -698,17 +698,14 @@ Customer facing flow of the Unsubscribe Link managed package from AppExchange. U
         </inputAssignments>
         <inputAssignments>
             <name>Error_Recipient</name>
+            <value>
+                <elementReference>ErrorRecipient</elementReference>
+            </value>
         </inputAssignments>
         <inputAssignments>
             <name>UnsubscribeRecord</name>
             <value>
                 <elementReference>UnsubscribeId</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>ErrorRecipient</name>
-            <value>
-                <elementReference>ErrorRecipient</elementReference>
             </value>
         </inputAssignments>
         <outputAssignments>
