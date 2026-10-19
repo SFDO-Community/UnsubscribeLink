@@ -1,6 +1,7 @@
 {
   "orgName": "Unsubscribe-Link@ - Release Test Org",
   "edition": "Enterprise",
+  "language": "en_US",
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
