@@ -140,13 +140,6 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>var_FinalRecord.Screen_3__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>ModifyScreen3Text</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
             <assignToReference>var_FinalRecord.Screen_1_Part_1__c</assignToReference>
             <operator>Assign</operator>
             <value>
@@ -199,24 +192,10 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
-            <assignToReference>var_FinalRecord.Screen_3__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>txt_Screen3</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
             <assignToReference>var_FinalRecord.Confirmation_Page__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <stringValue>Yes</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>var_FinalRecord.Enable_Type_in_Email_Address__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>No</stringValue>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -300,24 +279,10 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
-            <assignToReference>var_FinalRecord.Screen_3__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>getULSetup.Screen_3__c</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
             <assignToReference>var_FinalRecord.Confirmation_Page__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>getULSetup.Confirmation_Page__c</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>var_FinalRecord.Enable_Type_in_Email_Address__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>getULSetup.Enable_Type_in_Email_Address__c</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -412,13 +377,6 @@
             <operator>Assign</operator>
             <value>
                 <elementReference>confirmEmailQ</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>var_FinalRecord.Enable_Type_in_Email_Address__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>type_in_unsubscribe</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -596,31 +554,6 @@
                 <targetReference>Screen1Preview</targetReference>
             </connector>
             <label>Yes</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <name>IncludeScreen3Decision</name>
-        <label>Include Email Type In Screen</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <defaultConnector>
-            <targetReference>Confirmation_EmailSend</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Skip Confirmation Screen</defaultConnectorLabel>
-        <rules>
-            <name>IncludeScreen3Outcome</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>type_in_unsubscribe</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <elementReference>Yes</elementReference>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Screen3PreviewScreen</targetReference>
-            </connector>
-            <label>Include Confirmation Screen</label>
         </rules>
     </decisions>
     <description>This flow is run to configure or reconfigure the Unsubscribe link setup object.  It must be run prior to using the unsubscribe link in Emails.
@@ -1186,7 +1119,7 @@ Added path Progress Indicator.</description>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>IncludeScreen3Decision</targetReference>
+            <targetReference>Confirmation_EmailSend</targetReference>
         </connector>
         <fields>
             <name>screen2previewDisplayText_0</name>
@@ -1291,134 +1224,6 @@ Added path Progress Indicator.</description>
             </fields>
             <isRequired>false</isRequired>
             <regionContainerType>SectionWithoutHeader</regionContainerType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>false</showHeader>
-        <stageReference>
-            <elementReference>Confirmation</elementReference>
-        </stageReference>
-    </screens>
-    <screens>
-        <description>This is an optional screen to allow user to enter their email if not found in the database.</description>
-        <name>Screen3PreviewScreen</name>
-        <label>Screen 3</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>false</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <connector>
-            <targetReference>Confirmation_EmailSend</targetReference>
-        </connector>
-        <fields>
-            <name>screen3previewDisplayText</name>
-            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;PREVIEW&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;If the email recipient&apos;s ID was not found, they can enter their email address here. You can turn off this feature. &lt;/em&gt;&lt;/p&gt;&lt;p&gt;{!horizontalLine1}&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Screen3PreviewScreen_Section1</name>
-            <fieldType>RegionContainer</fieldType>
-            <fields>
-                <name>Screen3PreviewScreen_Section1_Column1</name>
-                <fieldType>Region</fieldType>
-                <fields>
-                    <name>screen3preview</name>
-                    <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;{!txt_Screen3}&lt;/span&gt;&lt;/p&gt;</fieldText>
-                    <fieldType>DisplayText</fieldType>
-                    <styleProperties>
-                        <verticalAlignment>
-                            <stringValue>top</stringValue>
-                        </verticalAlignment>
-                        <width>
-                            <stringValue>12</stringValue>
-                        </width>
-                    </styleProperties>
-                </fields>
-                <inputParameters>
-                    <name>width</name>
-                    <value>
-                        <stringValue>6</stringValue>
-                    </value>
-                </inputParameters>
-                <isRequired>false</isRequired>
-            </fields>
-            <fields>
-                <name>Screen3PreviewScreen_Section1_Column2</name>
-                <fieldType>Region</fieldType>
-                <fields>
-                    <name>RecipientEntersEmail</name>
-                    <extensionName>flowruntime:email</extensionName>
-                    <fieldType>ComponentInstance</fieldType>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>true</isRequired>
-                    <storeOutputAutomatically>true</storeOutputAutomatically>
-                    <styleProperties>
-                        <verticalAlignment>
-                            <stringValue>top</stringValue>
-                        </verticalAlignment>
-                        <width>
-                            <stringValue>12</stringValue>
-                        </width>
-                    </styleProperties>
-                </fields>
-                <inputParameters>
-                    <name>width</name>
-                    <value>
-                        <stringValue>6</stringValue>
-                    </value>
-                </inputParameters>
-                <isRequired>false</isRequired>
-            </fields>
-            <isRequired>false</isRequired>
-            <regionContainerType>SectionWithoutHeader</regionContainerType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>hozline</name>
-            <fieldText>&lt;p&gt;{!horizontalLine1}&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>ModifyScreen3Text</name>
-            <dataType>String</dataType>
-            <defaultValue>
-                <elementReference>txt_Screen3</elementReference>
-            </defaultValue>
-            <fieldText>You can modify the text here:</fieldText>
-            <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -1682,40 +1487,6 @@ Added path Progress Indicator.</description>
             </visibilityRule>
         </fields>
         <fields>
-            <name>OneClickdisplaytext</name>
-            <fieldText>&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Allow Recipients to Type-In Email Address&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;The unsubscribe link passes the contact or lead&apos;s Salesforce id to a flow. Sometimes an email recipient&apos;s security settings block or scramble the ID. You can allow your recipients to type in their email addresses to unsubscribe in that situation. BE CAREFUL! This allows anyone who has the link and knows any email addresses in your database to unsubscribe them. For example, if a bad guy knows that joeschmoe@ymail.com loves your newsletters and that bad guy dislikes your organization, then he could potentially unsubscribe Joe Schmoe from your newsletter!&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>type_in_unsubscribe</name>
-            <choiceReferences>Yes</choiceReferences>
-            <choiceReferences>No</choiceReferences>
-            <dataType>String</dataType>
-            <defaultValue>
-                <elementReference>var_FinalRecord.Enable_Type_in_Email_Address__c</elementReference>
-            </defaultValue>
-            <fieldText>Allow recipient to type in email</fieldText>
-            <fieldType>DropdownBox</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
             <name>Error_Email_Display_Text</name>
             <fieldText>&lt;p&gt;{!horizontalLine1}&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 16px;&quot;&gt;Error Emails&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;The Flows that update records when Contacts or Leads unsubscribe send an email if there is an error. Specify the email these alerts will be sent to.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
@@ -1897,11 +1668,6 @@ Added path Progress Indicator.</description>
         <name>txt_screen2Part1</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>You have successfully unsubscribed from all email from {!FinalOrgName}.</text>
-    </textTemplates>
-    <textTemplates>
-        <name>txt_Screen3</name>
-        <isViewedAsPlainText>true</isViewedAsPlainText>
-        <text>To unsubscribe from all email from {!var_FinalRecord.Our_Organization__c}, enter your email address and click NEXT.</text>
     </textTemplates>
     <variables>
         <description>This record will hold default values for the fields for the initial time through. After the initial set up, the actual values will be used.</description>

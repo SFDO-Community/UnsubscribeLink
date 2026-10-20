@@ -137,10 +137,9 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Blank_Values_Flow</targetReference>
+            <targetReference>Invalid_Link</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>No Record Found</defaultConnectorLabel>
+        <defaultConnectorLabel>Invalid link</defaultConnectorLabel>
         <rules>
             <name>Contact</name>
             <conditionLogic>and</conditionLogic>
@@ -248,16 +247,15 @@
         </rules>
     </decisions>
     <decisions>
-        <description>Was a record found that is either a lead or a contact? If so proceed to the next screen. 
-If not, check if the custom metadata type allows the user to type in their email address.</description>
+        <description>Was a record found that is either a lead or a contact? If so proceed to the confirmation screen. If not, the link is not valid.</description>
         <name>Was_a_Record_Found</name>
         <label>Was a Record Found</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>END_ELEMENT_5</targetReference>
+            <targetReference>Invalid_Link</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>No record found, no type in</defaultConnectorLabel>
+        <defaultConnectorLabel>No record found</defaultConnectorLabel>
         <rules>
             <name>Yes_Record_Found1st</name>
             <conditionLogic>and</conditionLogic>
@@ -273,21 +271,6 @@ If not, check if the custom metadata type allows the user to type in their email
             </connector>
             <label>RecordFound</label>
         </rules>
-        <rules>
-            <name>AllowTypeIn</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Get_Unsubscribe_Link_Setup.Enable_Type_in_Email_Address__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>Yes</stringValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Blank_Values_Flow</targetReference>
-            </connector>
-            <label>No record found. Allow Type-In</label>
-        </rules>
     </decisions>
     <description>Customer facing flow of the Unsubscribe Link managed package from AppExchange. 
 Customer facing flow of the Unsubscribe Link managed package from AppExchange. Updated to set the value of the error email recipient flow. 
@@ -298,7 +281,7 @@ Customer facing flow of the Unsubscribe Link managed package from AppExchange. U
 * Created new text template for error email.
 * Rekoved unused elements.</description>
     <ends>
-        <name>END_ELEMENT_5</name>
+        <name>END_Invalid_Link</name>
         <locationX>0</locationX>
         <locationY>0</locationY>
     </ends>
@@ -496,6 +479,34 @@ Customer facing flow of the Unsubscribe Link managed package from AppExchange. U
     </recordLookups>
     <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
+        <description>Shown when the link has no matching public id. Does not collect an email address.</description>
+        <name>Invalid_Link</name>
+        <label>Invalid Link</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>END_Invalid_Link</targetReference>
+        </connector>
+        <fields>
+            <name>Invalid_Link_Message</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;This unsubscribe link is not valid.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>false</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
         <description>confirmation screen for person to confirm they want to unsubscribe. Update &quot;our organization&quot; in the custom metadata type &quot;Unsubscribe Link.&quot;</description>
         <name>Are_you_sure</name>
         <label>Are you sure</label>
@@ -615,38 +626,6 @@ Customer facing flow of the Unsubscribe Link managed package from AppExchange. U
         </connector>
     </start>
     <status>Active</status>
-    <subflows>
-        <description>This runs if the the varRecId is null. It finds Contacts or Leads using the email.</description>
-        <name>Blank_Values_Flow</name>
-        <label>Blank Values Flow</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Quick_UnsubscribeDecision</targetReference>
-        </connector>
-        <flowName>recordIdBlankFlow</flowName>
-        <inputAssignments>
-            <name>Email</name>
-            <value>
-                <elementReference>Email</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>Screen3</name>
-            <value>
-                <elementReference>Get_Unsubscribe_Link_Setup.Screen_3__c</elementReference>
-            </value>
-        </inputAssignments>
-        <outputAssignments>
-            <assignToReference>Email</assignToReference>
-            <name>Email</name>
-        </outputAssignments>
-        <outputAssignments>
-            <assignToReference>FoundId</assignToReference>
-            <name>FoundId</name>
-        </outputAssignments>
-    </subflows>
     <subflows>
         <description>Launch this additional flow to find all contacts who have this email address and mark them as email opt out.</description>
         <name>Unsubscribe_Contacts</name>
