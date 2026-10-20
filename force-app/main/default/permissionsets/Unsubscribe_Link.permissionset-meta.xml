@@ -63,11 +63,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Unsubscribe_Link_Setup__c.Enable_Type_in_Email_Address__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Unsubscribe_Link_Setup__c.Error_Email_Recipient__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -108,11 +103,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Unsubscribe_Link_Setup__c.Screen_3__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Unsubscribe_Link_Setup__c.Send_Confirmation_Email__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -147,10 +137,6 @@
     <flowAccesses>
         <enabled>true</enabled>
         <flow>Unsubscribe_Link_Quick</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>true</enabled>
-        <flow>recordIdBlankFlow</flow>
     </flowAccesses>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Unsubscribe Link</label>
