@@ -1,6 +1,7 @@
 {
   "orgName": "jessierymph company",
   "edition": "Developer",
+  "language": "en_US",
   "features": ["EnableSetPasswordInApi","Communities"],
   "settings": {
     "lightningExperienceSettings": {
